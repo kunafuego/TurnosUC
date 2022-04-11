@@ -35,3 +35,6 @@
 yarn-debug.log*
 .yarn-integrity
 .env
+
+# Ignore DS_STORE files
+*.DS_STORE
