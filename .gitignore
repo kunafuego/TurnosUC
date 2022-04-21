@@ -38,3 +38,6 @@ yarn-debug.log*
 
 # Ignore DS_STORE files
 *.DS_STORE
+
+# Ignore de coverage directory made by simplecov
+coverage/*
