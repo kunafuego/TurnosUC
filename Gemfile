@@ -59,4 +59,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Devise y SimpleCov
 gem 'devise', '>= 4.7.3'
+gem 'bcrypt', '~> 3.1.7'
 gem 'simplecov', :require => false, :group => :test
