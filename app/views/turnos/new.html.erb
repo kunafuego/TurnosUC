@@ -1,0 +1,36 @@
+<h1>Turnos#new</h1>
+<%= form_with(model: @turno , method: :post) do |form| %>
+
+    <div>
+        <%= form.label :tipo %>
+        <%= form.text_field :tipo %>
+    </div>
+    <div>
+        <%= form.label :limite_personas %>
+        <%= form.text_field :limite_personas %>
+    </div>
+    <div>
+        <%= form.label :direccion_llegada %>
+        <%= form.text_field :direccion_llegada %>
+    </div>
+    <div>
+        <%= form.label :dia_de_la_semana %>
+        <%= form.text_field :dia_de_la_semana %>
+    </div>
+    <div>
+        <%= form.label :direccion_salida %>
+        <%= form.text_field :direccion_salida %>
+    </div>
+    <div>
+        <%= form.label :hora_salida %>
+        <%= form.text_field :hora_salida %>
+    </div>
+    <div>
+        <%= form.label :id_creador %>
+        <%= form.text_field :id_creador %>
+    </div>
+    <div>
+        <%= form.submit 'Crear Turno' %>
+    </div>
+    
+<% end %>

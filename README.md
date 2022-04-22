@@ -4,7 +4,7 @@ El link para ver el proyecto en Heroku, es el siguiente:
 
     https://uc-turnos.herokuapp.com/  
 
-Se le añadió el siguiente Cop al archivo rubocop.yml:  
+Se le añadió los siguientes Cop´s al archivo rubocop.yml:  
 
 Style/Documentation:  
   Enabled: false  
@@ -12,6 +12,11 @@ Style/Documentation:
 Rubocop exigía que todos los archivos comenzaran con un comentario(que la idea era que fuera documentación),
 y con ese Cop ya no se debe cumplir esa condición.  
 
-Los relatos de usuario están disponibles en la carpeta docs!  
+TO DO:
+Crear turno disponible solo para usuario loggeado
+Poner id_creador automáticamente al crear turno
+
+CRUD Solicitudes
+  
 
 Gracias!  

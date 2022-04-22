@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipo: MyString
+  limite_personas: 1
+  direccion_llegada: MyText
+  dia_de_la_semana: MyString
+  direccion_salida: MyText
+  hora_salida: MyString
+  id_creador: 1
+
+two:
+  tipo: MyString
+  limite_personas: 1
+  direccion_llegada: MyText
+  dia_de_la_semana: MyString
+  direccion_salida: MyText
+  hora_salida: MyString
+  id_creador: 1

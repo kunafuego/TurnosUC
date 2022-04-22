@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_22_160817) do
+ActiveRecord::Schema.define(version: 2022_04_22_173450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "turnos", force: :cascade do |t|
+    t.string "tipo"
+    t.integer "limite_personas"
+    t.text "direccion_llegada"
+    t.string "dia_de_la_semana"
+    t.text "direccion_salida"
+    t.string "hora_salida"
+    t.integer "id_creador"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,9 +35,7 @@ ActiveRecord::Schema.define(version: 2022_04_22_160817) do
     t.datetime "remember_created_at"
     t.string "direccion"
     t.string "nombre"
-    t.string "correo"
     t.string "telefono"
-    t.string "contrasena"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_usuarios_on_email", unique: true
