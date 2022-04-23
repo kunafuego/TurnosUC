@@ -1,2 +1,29 @@
 <h1>Turnos#show</h1>
-<p>Find me in app/views/turnos/show.html.erb</p>
+<p>
+    <strong>Dirección de llegada: </strong>
+    <%= @turno.direccion_llegada %>
+</p>
+<p>
+    <strong>Direccion de salida: </strong>
+    <%= @turno.direccion_salida %>
+</p>
+<p>
+    <strong>Hora de salida: </strong>
+    <%= @turno.hora_salida %>
+</p>
+<p>
+    <strong>Día de la semana: </strong>
+    <%= @turno.dia_de_la_semana %>
+</p>
+<p>
+    <strong>Creador del turno: </strong>
+    <%= @creador.nombre %>
+</p>
+
+<! Acá debo agregar el nombre y foto del creador, nombre de los participantes, y cualquier otra cosa que se me ocurra
+#Además, acá va la posible solicitud >
+<%= link_to 'Vuelta a buscar turnos', turnos_index_path %>
+<% if current_usuario.id == @turno.id_creador %>
+<p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id) %></p>
+<p><%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete%></p>
+<% end %>

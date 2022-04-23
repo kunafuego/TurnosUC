@@ -1,2 +1,60 @@
-<h1>Turnos#index</h1>
-<p>Find me in app/views/turnos/index.html.erb</p>
+<h1>Buscador de Turnos</h1>
+
+<table align='center'>
+    <thead>
+        <tr>
+            <th>Día de la semana</th>
+            <th>Dirección de llegada</th>
+            <th>Dirección de salida</th>
+            <th>Hora de salida</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if @turnos_buscador.empty?%>
+            <h3> No hay turnos disponibles <h3>
+        <% else %>
+            <% @turnos_buscador.each do |turno| %>
+            <tr>
+                <td><%= turno.dia_de_la_semana%></td>
+                <td><%= turno.direccion_llegada%></td>
+                <td><%= turno.direccion_salida%></td>
+                <td><%= turno.hora_salida%></td>
+                <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id, :id_creador => turno.id_creador)%>
+                </td>
+            </tr>
+            <% end %>
+        <%  end  %>
+    </tbody>
+</table>
+
+<h1>Mis Turnos</h1>
+
+<table align='center'>
+    <thead>
+        <tr>
+            <th>Día de la semana</th>
+            <th>Dirección de llegada</th>
+            <th>Dirección de salida</th>
+            <th>Hora de salida</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if @mis_turnos.empty?%>
+            <h3> No hay turnos disponibles <h3>
+        <% else %>
+            <% @mis_turnos.each do |turno| %>
+            <tr>
+                <td><%= turno.dia_de_la_semana%></td>
+                <td><%= turno.direccion_llegada%></td>
+                <td><%= turno.direccion_salida%></td>
+                <td><%= turno.hora_salida%></td>
+                <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id, :id_creador => turno.id_creador)%>
+                </td>
+            </tr>
+            <% end %>
+        <%  end  %>
+    </tbody>
+</table>
+
+
+<%= link_to 'Crear un nuevo turno', turnos_new_path %>

@@ -2,8 +2,8 @@
 <%= form_with(model: @turno , method: :post) do |form| %>
 
     <div>
-        <%= form.label :tipo %>
-        <%= form.text_field :tipo %>
+        <%= form.label :tipo_turno %>
+        <%= form.select :tipo, ["Seleccionar", "Ida", "Vuelta"] %>
     </div>
     <div>
         <%= form.label :limite_personas %>
@@ -24,10 +24,6 @@
     <div>
         <%= form.label :hora_salida %>
         <%= form.text_field :hora_salida %>
-    </div>
-    <div>
-        <%= form.label :id_creador %>
-        <%= form.text_field :id_creador %>
     </div>
     <div>
         <%= form.submit 'Crear Turno' %>
