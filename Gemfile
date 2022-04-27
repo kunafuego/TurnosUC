@@ -60,3 +60,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Devise y SimpleCov
 gem 'devise', '>= 4.7.3'
 gem 'simplecov', :require => false, :group => :test
+
+# Instalacion de FactoryBot y Faker
+gem "factory_bot_rails"
+gem 'faker', '~> 1.6', '>= 1.6.6'

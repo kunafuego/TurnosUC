@@ -5,18 +5,29 @@ class TurnosController < ApplicationController
 
   def create
     @turnos_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada, 
-      :dia_de_la_semana, :direccion_salida, :hora_salida)
-    @turnos_params[:id_creador] = current_usuario.id
-    @turno = Turno.create(@turnos_params)
-    if @turno.save
-      redirect_to turnos_index_path, notice: 'Turno Creado'
+      :dia_de_la_semana, :direccion_salida, :hora, :minutos)
+    @turnos_params[:hora_salida] = @turnos_params[:hora] + @turnos_params[:minutos]
+    @turnos_params.delete(:hora)
+    @turnos_params.delete(:minutos)
+    if current_usuario
+      @turnos_params[:id_creador] = current_usuario.id
+      @turno = Turno.create(@turnos_params)
+      if @turno.save
+        redirect_to turnos_index_path, notice: 'Turno Creado'
+      else
+        redirect_to turnos_index_path, notice: 'Turno no Creado'
+      end
     else
-      redirect_to turnos_index_path, notice: 'Turno no Creado'
+      redirect_to usuario_session_path, notice: "Error al crear el turno, el usuario no estaba logeado"
     end
   end
 
   def index
-    @mis_turnos = Turno.where(:id_creador => current_usuario.id).all
+    if current_usuario
+      @mis_turnos = Turno.where(:id_creador => current_usuario.id).all
+    else
+      @mis_turnos = []
+    end
     @turnos_buscador = Turno.all - @mis_turnos
   end
 

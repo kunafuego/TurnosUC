@@ -1,0 +1,63 @@
+<h2>Editar <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "usuarios/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "correo_electronico" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telefono %><br />
+    <%= f.phone_field :telefono, autofocus: true, autocomplete: "numero de telefono" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :direccion %><br />
+    <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :url_de_la_foto_de_perfil %><br />
+    <%= f.text_field :imagen, autofocus: true, autocomplete: "url foto de perfil" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :contraseña %> <i>(Deja esta casilla en blanco si no deseas cambiar la contraseña)</i><br />
+    <%= f.password_field :password, autocomplete: "nueva contraseña" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> caracteres mínimo</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :confirmacion_contraseña %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "confirmacion nueva contraseña" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :contraseña_actual %> <i>(Necesitamos tu contraseña actual para confirmar los cambios)</i><br />
+    <%= f.password_field :current_password, autocomplete: "contraseña actual" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Actualizar" %>
+  </div>
+<% end %>
+
+<h3>Eliminar mi cuenta</h3>
+
+<%= button_to "Eliminar mi cuenta", registration_path(resource_name), data: { confirm: "Estás Segur@?" }, method: :delete %>
+
+<%= link_to "Atrás", :back %>

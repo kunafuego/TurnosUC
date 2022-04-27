@@ -1,4 +1,9 @@
 <h1>Turnos#show</h1>
+<style>
+    .img {
+        float:center
+    }
+</style>
 <p>
     <strong>Dirección de llegada: </strong>
     <%= @turno.direccion_llegada %>
@@ -15,9 +20,10 @@
     <strong>Día de la semana: </strong>
     <%= @turno.dia_de_la_semana %>
 </p>
-<p>
+<p class=img>
     <strong>Creador del turno: </strong>
     <%= @creador.nombre %>
+    <%= image_tag(@creador.imagen, size:"90x90" ) %>
 </p>
 
 <! Acá debo agregar el nombre y foto del creador, nombre de los participantes, y cualquier otra cosa que se me ocurra
