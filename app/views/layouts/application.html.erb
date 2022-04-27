@@ -14,8 +14,9 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <% if current_usuario %>
+    <% if usuario_signed_in? %>
       <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete %>
+      <%= link_to "Editar Perfil", edit_usuario_registration_path %>
     <% else %>
       <%= link_to "Iniciar sesion", new_usuario_session_path %>
       <%= link_to "Registrarse", new_usuario_registration_path %>

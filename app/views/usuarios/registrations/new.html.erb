@@ -24,6 +24,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :url_de_la_foto_de_perfil %><br />
+    <%= f.text_field :imagen, autofocus: true, autocomplete: "url foto de perfil" %>
+  </div>
+
+  <div class="field">
     <%= f.label :contraseña %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

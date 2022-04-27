@@ -1,5 +1,21 @@
 <h1>Buscador de Turnos</h1>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 <table align='center'>
     <thead>
         <tr>
@@ -19,14 +35,16 @@
                 <td><%= turno.direccion_llegada%></td>
                 <td><%= turno.direccion_salida%></td>
                 <td><%= turno.hora_salida%></td>
+                <% if usuario_signed_in? %>
                 <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id, :id_creador => turno.id_creador)%>
+                <% end %>
                 </td>
             </tr>
             <% end %>
         <%  end  %>
     </tbody>
 </table>
-
+<% if usuario_signed_in? %>
 <h1>Mis Turnos</h1>
 
 <table align='center'>
@@ -55,6 +73,7 @@
         <%  end  %>
     </tbody>
 </table>
-
-
 <%= link_to 'Crear un nuevo turno', turnos_new_path %>
+<% else %>
+<h2> Bienvenid@ a Turnos UC! </h2>
+<% end %>

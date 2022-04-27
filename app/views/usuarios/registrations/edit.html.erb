@@ -18,21 +18,26 @@
     <%= f.phone_field :telefono, autofocus: true, autocomplete: "numero de telefono" %>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
   <div class="field">
     <%= f.label :direccion %><br />
     <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
   </div>
 
   <div class="field">
-    <%= f.label :contraseña %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :url_de_la_foto_de_perfil %><br />
+    <%= f.text_field :imagen, autofocus: true, autocomplete: "url foto de perfil" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :contraseña %> <i>(Deja esta casilla en blanco si no deseas cambiar la contraseña)</i><br />
     <%= f.password_field :password, autocomplete: "nueva contraseña" %>
     <% if @minimum_password_length %>
       <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <em><%= @minimum_password_length %> caracteres mínimo</em>
     <% end %>
   </div>
 
@@ -42,7 +47,7 @@
   </div>
   
   <div class="field">
-    <%= f.label :contraseña_actual %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :contraseña_actual %> <i>(Necesitamos tu contraseña actual para confirmar los cambios)</i><br />
     <%= f.password_field :current_password, autocomplete: "contraseña actual" %>
   </div>
 
@@ -51,8 +56,8 @@
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Eliminar mi cuenta</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<%= button_to "Eliminar mi cuenta", registration_path(resource_name), data: { confirm: "Estás Segur@?" }, method: :delete %>
 
-<%= link_to "Back", :back %>
+<%= link_to "Atrás", :back %>

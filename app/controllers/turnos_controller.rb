@@ -5,7 +5,10 @@ class TurnosController < ApplicationController
 
   def create
     @turnos_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada, 
-      :dia_de_la_semana, :direccion_salida, :hora_salida)
+      :dia_de_la_semana, :direccion_salida, :hora, :minutos)
+    @turnos_params[:hora_salida] = @turnos_params[:hora] + @turnos_params[:minutos]
+    @turnos_params.delete(:hora)
+    @turnos_params.delete(:minutos)
     if current_usuario
       @turnos_params[:id_creador] = current_usuario.id
       @turno = Turno.create(@turnos_params)
