@@ -1,0 +1,44 @@
+<h2>Registrarse</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "usuarios/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "correo electronico" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telefono %><br />
+    <%= f.phone_field :telefono, autofocus: true, autocomplete: "numero de telefono" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :direccion %><br />
+    <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contraseña %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "nueva contraseña" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :confirmacion_contraseña %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "confirmacion nueva contraseña" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Registrarse" %>
+  </div>
+<% end %>
+
+<%= render "usuarios/shared/links" %>
