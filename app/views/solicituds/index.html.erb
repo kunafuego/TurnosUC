@@ -1,0 +1,50 @@
+<% if @tipo == 'mis solicitudes' %>
+<h1> Solicitudes hechas por mí </h1>
+    <table align='center'>
+    <thead>
+        <tr>
+            <th>id_turno</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if @mis_solicitudes.empty?%>
+            <h3> No hay solicitudes <h3>
+        <% else %>
+            <% @mis_solicitudes.each do |solicitud| %>
+            <tr>
+                <td><%= solicitud.id_turno%></td>
+                <td><%= solicitud.descripcion%></td>
+                <td><%= link_to "Borrar Solicitud", solicituds_delete_path(:id => solicitud.id), method: :delete%></td>
+                <td><%= link_to 'Editar Solicitud', solicituds_edit_path(:id => solicitud.id) %></td>
+            </tr>
+            <% end %>
+        <%  end  %>
+    </tbody>
+    </table>
+<% else %>
+<h1> Solicitudes hechas a mis turnos</h1>
+    <table align='center'>
+    <thead>
+        <tr>
+            <th>id_usuario</th>
+            <th>id_turno</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if @solicitudes_hechas_a_mis_turnos.empty?%>
+            <h3> No hay solicitudes <h3>
+        <% else %>
+            <% @solicitudes_hechas_a_mis_turnos.each do |solicitud| %>
+            <tr>
+                <td><%= solicitud.id_usuario%></td>
+                <td><%= solicitud.id_turno%></td>
+                <td><%= solicitud.descripcion%></td>
+            </tr>
+            <% end %>
+        <%  end  %>
+    </tbody>
+    </table>
+<% end %>
+<%= link_to 'Volver a ver turnos', turnos_index_path %>

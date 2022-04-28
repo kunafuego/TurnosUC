@@ -1,10 +1,17 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'turnos#index'
+  ########################## SOLICITUD ############################
+  get 'solicituds/new'
+  get 'solicituds/index'
+  get 'solicituds/show'
+  get 'solicituds/edit'
+  post 'solicituds', to: 'solicituds#create'
+  delete 'solicituds/delete', to: 'solicituds#delete', as: 'solicituds_delete'
+  patch 'solicituds/update', to: 'solicituds#update', as: 'solicituds_update'
 
-  
   ########################## TURNOS ############################
+  root to: 'turnos#index'
   get 'turnos/new'
   post 'turnos', to: 'turnos#create'
   get 'turnos/index'

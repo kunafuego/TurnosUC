@@ -1,0 +1,12 @@
+<h1>Editar Solicitud</h1>
+<%= form_with(model: @solicitud , method: :patch, url: solicituds_update_path(:id => @solicitud.id)) do |form| %>
+
+    <div>
+        <%= form.label :descripcion_solicitud %>
+        <%= form.text_area :descripcion, :cols => '70', :rows => '5' %>
+        <%= form.hidden_field :id_turno, value: @id_turno%>
+    </div>
+    <div>
+        <%= form.submit 'Enviar Solicitud' %>
+    </div>
+<% end %>

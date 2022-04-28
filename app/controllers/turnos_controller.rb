@@ -9,7 +9,7 @@ class TurnosController < ApplicationController
     @turnos_params[:hora_salida] = @turnos_params[:hora] + ":" + @turnos_params[:minutos]
     @turnos_params.delete(:hora)
     @turnos_params.delete(:minutos)
-    if current_usuario
+    if usuario_signed_in?
       @turnos_params[:id_creador] = current_usuario.id
       @turno = Turno.create(@turnos_params)
       if @turno.save
@@ -44,7 +44,10 @@ class TurnosController < ApplicationController
   def update
     @turno = Turno.find(params[:id])
     @turnos_new_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada, 
-      :dia_de_la_semana, :direccion_salida, :hora_salida, :id_creador)
+      :dia_de_la_semana, :direccion_salida, :hora, :minutos)
+    @turnos_new_params[:hora_salida] = @turnos_new_params[:hora] + ":" + @turnos_new_params[:minutos]
+    @turnos_new_params.delete(:hora)
+    @turnos_new_params.delete(:minutos)
     if @turno.update(@turnos_new_params)
       redirect_to turnos_index_path, notice: 'Turno editado'
     else
