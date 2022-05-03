@@ -15,8 +15,8 @@
             <tr>
                 <td><%= solicitud.id_turno%></td>
                 <td><%= solicitud.descripcion%></td>
-                <td><%= link_to "Borrar Solicitud", solicituds_delete_path(:id => solicitud.id), method: :delete%></td>
-                <td><%= link_to 'Editar Solicitud', solicituds_edit_path(:id => solicitud.id) %></td>
+                <td><%= link_to "Borrar Solicitud", solicitudes_delete_path(:id => solicitud.id), method: :delete%></td>
+                <td><%= link_to 'Editar Solicitud', solicitudes_edit_path(:id => solicitud.id) %></td>
             </tr>
             <% end %>
         <%  end  %>
