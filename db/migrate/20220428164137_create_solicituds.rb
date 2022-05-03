@@ -1,6 +1,6 @@
-class CreateSolicituds < ActiveRecord::Migration[6.0]
+class CreateSolicitudes < ActiveRecord::Migration[6.0]
   def change
-    create_table :solicituds do |t|
+    create_table :solicitudes do |t|
       t.integer :id_usuario
       t.integer :id_turno
       t.text :descripcion

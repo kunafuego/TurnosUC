@@ -1,4 +1,4 @@
-class SolicitudsController < ApplicationController
+class SolicitudesController < ApplicationController
   def new
     @solicitud = Solicitud.new
     @id_turno = params[:id_turno]
@@ -11,9 +11,9 @@ class SolicitudsController < ApplicationController
       @solicitud_params[:id_usuario] = current_usuario.id
       @solicitud = Solicitud.create(@solicitud_params)
       if @solicitud.save
-        redirect_to solicituds_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud Creada'
+        redirect_to solicitudes_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud Creada'
       else
-        redirect_to solicituds_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud no Creada'
+        redirect_to solicitudes_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud no Creada'
       end
     else
       redirect_to usuario_session_path, notice: 'Error al crear turno, el usuario no estaba loggeado'
@@ -42,9 +42,9 @@ class SolicitudsController < ApplicationController
       @solicitud_new_params = params.require(:solicitud).permit(:descripcion, :id_turno)
       @solicitud_new_params[:id_usuario] = current_usuario.id
       if @solicitud.update(@solicitud_new_params)
-        redirect_to solicituds_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud editada'
+        redirect_to solicitudes_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud editada'
       else
-        redirect_to solicituds_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud no editado'
+        redirect_to solicitudes_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud no editado'
       end
     end
 
@@ -55,7 +55,7 @@ class SolicitudsController < ApplicationController
   def delete
     @solicitud = Solicitud.find(params[:id])
     @solicitud.destroy
-    redirect_to solicituds_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud eliminada'
+    redirect_to solicitudes_index_path(:tipo => 'mis solicitudes'), notice: 'Solicitud eliminada'
   end
 
 end
