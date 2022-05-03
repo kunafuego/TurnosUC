@@ -1,5 +1,3 @@
-require 'support/controller_helpers'
-
 require 'simplecov'
 SimpleCov.start 'rails'
 

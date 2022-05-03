@@ -70,7 +70,7 @@ RSpec.describe Turno, type: :request do
 
   describe 'edit' do
     it 'debiera retornar una respuesta existosa' do
-      get "/turnos/edit/#{@turno.id}"
+      get turnos_edit_path(id: @turno.id)
       expect(response).to have_http_status(:ok)
     end
   end
@@ -78,7 +78,7 @@ RSpec.describe Turno, type: :request do
   describe 'update' do
     it 'deberia de cambiar el Turno' do
       expect do
-        patch "/turno/#{@turno.id}", params: { turno: { hora: '11' } }
+        patch turnos_update_path(id: @turno.id), params: { turno: { hora: '11' , minutos: '30'} }
         # Se recarga la instancia de turno nuevamente con los posibles nuevos atributos
         # Luego se revisa si cambió alguno de los atributos del usuario
         @turno.reload
@@ -86,10 +86,22 @@ RSpec.describe Turno, type: :request do
     end
   end
 
+  # En este caso se trata de haer un update pero con atributos que no son válidos por las validaciones hechas.
+  describe 'update' do
+    it 'no deberia de cambiar el Turno' do
+      expect do
+        patch turnos_update_path(id: @turno.id), params: { turno: { dia_de_la_semana: 'hola hola', hora: '10' , minutos: '30'} }
+        # Se recarga la instancia de turno nuevamente con los posibles nuevos atributos
+        # Luego se revisa si cambió alguno de los atributos del turno
+        @turno.reload
+      end.to_not change(@turno, :direccion_salida)
+    end
+  end
+
   describe 'delete' do
     it 'deberia de disminuir la cantidad de Turnos en 1' do
       expect do
-        delete "/turnos/delete/#{@turno.id}"
+        delete turnos_delete_path(id: @turno.id)
       end.to change(Turno, :count).by(-1)
     end
   end
@@ -98,17 +110,7 @@ end
 
 =begin
 
-# En este caso se trata de haer un update pero con atributos que no son válidos por las validaciones hechas.
-describe 'update' do
-  it 'no deberia de cambiar el Turno' do
-    expect do
-      patch "/turno/#{@turno.id}", params: { turno: { direccion_llegada: 'Av. Matta', tipo: 'ida', direccion_salida: 111 } }
-      # Se recarga la instancia de turno nuevamente con los posibles nuevos atributos
-      # Luego se revisa si cambió alguno de los atributos del turno
-      turno.reload
-    end.to_not change(Turno, :attributes)
-  end
-end
+
 
 
 =end
