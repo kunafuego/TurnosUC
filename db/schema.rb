@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2022_05_03_193423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "solicitudes", force: :cascade do |t|
+  create_table "solicituds", force: :cascade do |t|
     t.integer "id_usuario"
     t.integer "id_turno"
     t.text "descripcion"

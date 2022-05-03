@@ -2,13 +2,13 @@
 
 Rails.application.routes.draw do
   ########################## SOLICITUD ############################
-  get 'solicitudes/new'
-  get 'solicitudes/index'
-  get 'solicitudes/show'
-  get 'solicitudes/edit'
-  post 'solicitudes', to: 'solicitudes#create'
-  delete 'solicitudes/delete', to: 'solicitudes#delete', as: 'solicitudes_delete'
-  patch 'solicitudes/update', to: 'solicitudes#update', as: 'solicitudes_update'
+  get 'solicituds/new'
+  get 'solicituds/index'
+  get 'solicituds/show'
+  get 'solicituds/edit'
+  post 'solicituds', to: 'solicituds#create'
+  delete 'solicituds/delete', to: 'solicituds#delete', as: 'solicituds_delete'
+  patch 'solicituds/update', to: 'solicituds#update', as: 'solicituds_update'
 
   ########################## TURNOS ############################
   root to: 'turnos#index'
