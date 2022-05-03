@@ -8,4 +8,6 @@ class Usuario < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: Devise.email_regexp }
   validates :telefono, presence: true
   validates :direccion, presence: true
+  
+  has_many :turnos
 end
