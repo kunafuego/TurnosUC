@@ -20,5 +20,7 @@ por Rails que se pasaban del límite.
 * Se cambió la cantidad mínima de caracteres para los bloques, ya que un bloque que se creó
 automaticamente con rails venía con un bloque de un caracter.
 
+* Se dejó 100 como la máxima cantidad de líneas por bloque. Este error pasaba mucho en los test de los controladores, ya que cada controlador se tomaba como un bloque.
+
 
 Gracias!  
