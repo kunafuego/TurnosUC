@@ -40,4 +40,4 @@ yarn-debug.log*
 *.DS_STORE
 
 # Ignore de coverage directory made by simplecov
-coverage/*
+coverage/
