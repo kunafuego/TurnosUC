@@ -20,7 +20,7 @@ AllCops:
 
 # Layout
 Layout/LineLength:
-  Max: 120
+  Max: 160
   Enabled: true
 Layout/AssignmentIndentation:
   Enabled: true
@@ -51,7 +51,7 @@ Naming/AsciiIdentifiers:
   Enabled: true
 Naming/BlockParameterName:
   Enabled: true
-  MinNameLength: 2
+  MinNameLength: 1
 Naming/VariableName:
   Enabled: true
 
@@ -106,3 +106,9 @@ Lint/ShadowedArgument:
 ### Añade aquí todos los Cops que quieras:
 Style/Documentation:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 100
+
+Metrics/AbcSize:
+  Max: 22

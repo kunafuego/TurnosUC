@@ -20,15 +20,12 @@ Rails.application.routes.draw do
   patch 'turnos/update', to: 'turnos#update', as: 'turnos_update'
   delete 'turnos/delete', to: 'turnos#delete', as: 'turnos_delete'
 
-
-
   devise_for :usuarios, controllers: {
     sessions: 'usuarios/sessions',
     registrations: 'usuarios/registrations'
-    },
-    path: '', path_names: {
-    sign_in: 'login',
-    sign_out: 'logout', sing_up: 'register'
-    }
-
+  },
+                        path: '', path_names: {
+                          sign_in: 'login',
+                          sign_out: 'logout', sing_up: 'register'
+                        }
 end

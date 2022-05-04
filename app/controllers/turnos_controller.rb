@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class TurnosController < ApplicationController
   def new
     @turno = Turno.new
   end
 
   def create
-    @turnos_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada, 
-      :dia_de_la_semana, :direccion_salida, :hora, :minutos)
-    @turnos_params[:hora_salida] = @turnos_params[:hora] + ":" + @turnos_params[:minutos]
+    @turnos_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada,
+                                                   :dia_de_la_semana, :direccion_salida, :hora, :minutos)
+    @turnos_params[:hora_salida] = "#{@turnos_params[:hora]}:#{@turnos_params[:minutos]}"
     @turnos_params.delete(:hora)
     @turnos_params.delete(:minutos)
     if usuario_signed_in?
@@ -18,23 +20,23 @@ class TurnosController < ApplicationController
         redirect_to turnos_index_path, notice: 'Turno no Creado'
       end
     else
-      redirect_to usuario_session_path, notice: "Error al crear el turno, el usuario no estaba logeado"
+      redirect_to usuario_session_path, notice: 'Error al crear el turno, el usuario no estaba logeado'
     end
   end
 
   def index
-    if current_usuario
-      @mis_turnos = Turno.where(:id_creador => current_usuario.id).all
-    else
-      @mis_turnos = []
-    end
+    @mis_turnos = if current_usuario
+                    Turno.where(id_creador: current_usuario.id).all
+                  else
+                    []
+                  end
     @turnos_buscador = Turno.all - @mis_turnos
   end
 
   def show
     @turno = Turno.find(params[:id])
     @creador = Usuario.find(params[:id_creador])
-    #Con esta info debo buscar en las otras tablas los elementos que quiero mandar al show
+    # Con esta info debo buscar en las otras tablas los elementos que quiero mandar al show
   end
 
   def edit
@@ -43,9 +45,9 @@ class TurnosController < ApplicationController
 
   def update
     @turno = Turno.find(params[:id])
-    @turnos_new_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada, 
-      :dia_de_la_semana, :direccion_salida, :hora, :minutos)
-    @turnos_new_params[:hora_salida] = @turnos_new_params[:hora] + ":" + @turnos_new_params[:minutos]
+    @turnos_new_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada,
+                                                       :dia_de_la_semana, :direccion_salida, :hora, :minutos)
+    @turnos_new_params[:hora_salida] = "#{@turnos_new_params[:hora]}:#{@turnos_new_params[:minutos]}"
     @turnos_new_params.delete(:hora)
     @turnos_new_params.delete(:minutos)
     if @turno.update(@turnos_new_params)
@@ -60,7 +62,5 @@ class TurnosController < ApplicationController
     @turno.destroy
 
     redirect_to turnos_index_path, notice: 'Turno eliminado'
-
   end
-
 end
