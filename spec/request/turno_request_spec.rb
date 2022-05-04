@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'faker'
 
 # Se agrupan todos los tests relacionados al controlador de Profiles,
 # con esta línea se le dice a Rails que será testeado
 RSpec.describe Turno, type: :request do
-
   # No se utliza la factory de turnos
   before(:each) do
     @params_turno = {
@@ -34,20 +35,18 @@ RSpec.describe Turno, type: :request do
 
     # Aqui se utiliza la factory de turnos, para crear uno
     @turno = create(:turno)
-
   end
 
   # Aqui comienzan los test
   describe 'index' do
-      it 'debiera retornar una respuesta existosa' do
-        get '/turnos/index'
-        expect(response).to have_http_status(:ok)
-      end
+    it 'debiera retornar una respuesta existosa' do
+      get '/turnos/index'
+      expect(response).to have_http_status(:ok)
+    end
   end
 
   describe 'get new' do
     it 'debiera retornar una respuesta existosa' do
-      
       get '/turnos/new'
       expect(response).to have_http_status(:ok)
     end
@@ -78,7 +77,7 @@ RSpec.describe Turno, type: :request do
   describe 'update' do
     it 'deberia de cambiar el Turno' do
       expect do
-        patch turnos_update_path(id: @turno.id), params: { turno: { hora: '11' , minutos: '30'} }
+        patch turnos_update_path(id: @turno.id), params: { turno: { hora: '11', minutos: '30' } }
         # Se recarga la instancia de turno nuevamente con los posibles nuevos atributos
         # Luego se revisa si cambió alguno de los atributos del usuario
         @turno.reload
@@ -90,7 +89,7 @@ RSpec.describe Turno, type: :request do
   describe 'update' do
     it 'no deberia de cambiar el Turno' do
       expect do
-        patch turnos_update_path(id: @turno.id), params: { turno: { dia_de_la_semana: 'hola hola', hora: '10' , minutos: '30'} }
+        patch turnos_update_path(id: @turno.id), params: { turno: { dia_de_la_semana: 'hola hola', hora: '10', minutos: '30' } }
         # Se recarga la instancia de turno nuevamente con los posibles nuevos atributos
         # Luego se revisa si cambió alguno de los atributos del turno
         @turno.reload
@@ -105,5 +104,4 @@ RSpec.describe Turno, type: :request do
       end.to change(Turno, :count).by(-1)
     end
   end
-  
 end
