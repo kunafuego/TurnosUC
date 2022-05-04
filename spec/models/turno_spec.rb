@@ -4,7 +4,6 @@ RSpec.describe Turno, type: :model do
   # Similar al before each, pero ahora usando los métodos let y create de FactoryBot
   # Además, usamos la factory de perfiles que definimos
   let(:turno) { create(:turno) }
-  let(:segundo_turno) { create(:turno) }
 
   it 'is valid with valid attributes' do
     expect(turno).to be_valid
