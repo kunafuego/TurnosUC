@@ -107,10 +107,3 @@ RSpec.describe Turno, type: :request do
   end
   
 end
-
-=begin
-
-
-
-
-=end
