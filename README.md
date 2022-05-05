@@ -1,7 +1,8 @@
-README
-======
+# README
 
-# Flujo de la Aplicacion
+---
+
+## Flujo de la Aplicacion
 
 Haciendo uso de devise creo el CRUD de "Usuarios". Al que solo se le modifico el hecho de que  
 tenga asocidados otros atributos como: numero de telefono, direccion y url de imagen.
@@ -20,17 +21,17 @@ ligado al turno a traves de una relacion (tabla) "Pertence_A".
 
 ---
 
-# Heroku y diagrama
+## Heroku y diagrama
 
-El link para ver el proyecto en Heroku, es el siguiente:
+* El link para ver el proyecto en Heroku, es el siguiente:
 
     https://uc-turnos.herokuapp.com/  
 
-El diagrama E/R se encuentra en la carpeta `docs`.
+* El diagrama E/R se encuentra en la carpeta `docs`.
 
 ---
 
-# Cambios al RuboCop
+## Cambios al RuboCop
 
 Se le añadió los siguientes Cop's al archivo rubocop.yml:  
 
@@ -50,5 +51,6 @@ automaticamente con rails venía con un bloque de un caracter.
 
 * Se dejó 100 como la máxima cantidad de líneas por bloque. Este error pasaba mucho en los test de los controladores, ya que cada controlador se tomaba como un bloque.
 
+---
 
 Gracias!  
