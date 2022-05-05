@@ -1,12 +1,28 @@
 <h1>Editar Solicitud</h1>
+<% if @tipo == "Completo" %>
 <%= form_with(model: @solicitud , method: :patch, url: solicituds_update_path(:id => @solicitud.id)) do |form| %>
 
     <div>
         <%= form.label :descripcion_solicitud %>
         <%= form.text_area :descripcion, :cols => '70', :rows => '5' %>
-        <%= form.hidden_field :id_turno, value: @id_turno%>
+        <%= form.hidden_field :id_turno, value: @solicitud.id_turno%>
     </div>
     <div>
         <%= form.submit 'Enviar Solicitud' %>
     </div>
+<% end %>
+<% else %>
+<%= form_with(model: @solicitud , method: :patch, url: solicituds_update_path(:id => @solicitud.id)) do |form| %>
+
+    <div>
+        <%= form.label :Aceptar_o_Rechazar_solicitud %>
+    <%=form.select :estado, ['Pendiente', 'Aceptada', 'Rechazada'] %>
+    <%= form.hidden_field :id_turno, value: @solicitud.id_turno%>
+    <%= form.hidden_field :descripcion, value: @solicitud.descripcion%>
+    <%= form.hidden_field :id_usuario, value: @solicitud.id_usuario%>
+    </div>
+    <div>
+        <%= form.submit 'Enviar' %>
+    </div>
+    <% end  %>
 <% end %>

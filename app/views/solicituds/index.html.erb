@@ -5,6 +5,7 @@
         <tr>
             <th>id_turno</th>
             <th>Descripcion</th>
+            <th>Estado</th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +16,9 @@
             <tr>
                 <td><%= solicitud.id_turno%></td>
                 <td><%= solicitud.descripcion%></td>
+                <td><%= solicitud.estado%></td>
                 <td><%= link_to "Borrar Solicitud", solicituds_delete_path(:id => solicitud.id), method: :delete%></td>
-                <td><%= link_to 'Editar Solicitud', solicituds_edit_path(:id => solicitud.id) %></td>
+                <td><%= link_to 'Editar Solicitud', solicituds_edit_path(:id => solicitud.id, :tipo_edit => "completo") %></td>
             </tr>
             <% end %>
         <%  end  %>
@@ -30,6 +32,7 @@
             <th>id_usuario</th>
             <th>id_turno</th>
             <th>Descripcion</th>
+            <th>Estado</th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +44,10 @@
                 <td><%= solicitud.id_usuario%></td>
                 <td><%= solicitud.id_turno%></td>
                 <td><%= solicitud.descripcion%></td>
+                <td><%= solicitud.estado%></td>
+                <% if solicitud.estado != "Aceptada" %>
+                    <td><%= link_to "Aceptar/Rechazar Solicitud", solicituds_edit_path(:id => solicitud.id, :tipo_edit => "A/R") %></td>
+                <% end %>
             </tr>
             <% end %>
         <%  end  %>

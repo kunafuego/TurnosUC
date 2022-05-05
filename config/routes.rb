@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  post 'pertenece_as', to: 'pertenece_as#create'
+  get 'pertenece_as/new', to: 'pertenece_as#new', as: 'pertenece_as_new'
   ########################## SOLICITUD ############################
   get 'solicituds/new'
   get 'solicituds/index'

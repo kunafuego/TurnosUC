@@ -65,3 +65,5 @@ gem 'simplecov', require: false, group: :test
 # Instalacion de FactoryBot y Faker
 gem 'factory_bot_rails'
 gem 'faker', '~> 1.6', '>= 1.6.6'
+
+gem 'repost'
