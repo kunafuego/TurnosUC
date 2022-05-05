@@ -15,8 +15,10 @@ Asi tambien, se creo el CRUD de solicitudes. En el que dentro del "show" de un t
 puede enviar una solicitud de union al creador de este. Y, dentro del index de turnos, el usuario creador tiene la opcion de dirigirse
 a otra pagina que le permite vizualizar todas las solicitudes que le han llegado, con el fin de aceptarlas o rechazarlas.
 
-Si el creador acepta la solicitud, el usuario que la envio va a ser incorporado en el turno, es decir, el usuario queda
+Si el creador acepta la solicitud, el usuario que la envió va a ser incorporado en el turno, es decir, el usuario queda
 ligado al turno a traves de una relacion (tabla) "Pertence_A".
+
+Luego podrá ver los turnos en los que participa en la sección Turnos en los que estoy
 
 ---
 
