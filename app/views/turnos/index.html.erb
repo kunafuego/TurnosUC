@@ -46,7 +46,7 @@ tr:nth-child(even) {
 </table>
 <% if usuario_signed_in? %>
 <%= link_to 'Ver mis solicitudes a nuevos turnos', solicituds_index_path(:tipo => 'mis solicitudes') %>
-<h1>Mis Turnos</h1>
+<h1>Turnos creados por mí</h1>
 
 <table align='center'>
     <thead>
@@ -62,6 +62,33 @@ tr:nth-child(even) {
             <h3> No hay turnos disponibles <h3>
         <% else %>
             <% @mis_turnos.each do |turno| %>
+            <tr>
+                <td><%= turno.dia_de_la_semana%></td>
+                <td><%= turno.direccion_llegada%></td>
+                <td><%= turno.direccion_salida%></td>
+                <td><%= turno.hora_salida%></td>
+                <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id, :id_creador => turno.id_creador)%>
+                </td>
+            </tr>
+            <% end %>
+        <%  end  %>
+    </tbody>
+</table>
+<h1>Turnos en los que estoy </h1>
+<table align='center'>
+    <thead>
+        <tr>
+            <th>Día de la semana</th>
+            <th>Dirección de llegada</th>
+            <th>Dirección de salida</th>
+            <th>Hora de salida</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if @turnos_que_estoy.empty?%>
+            <h3> No hay turnos disponibles <h3>
+        <% else %>
+            <% @turnos_que_estoy.each do |turno| %>
             <tr>
                 <td><%= turno.dia_de_la_semana%></td>
                 <td><%= turno.direccion_llegada%></td>

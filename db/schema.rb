@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_03_193423) do
+ActiveRecord::Schema.define(version: 2022_05_05_021522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pertenece_as", force: :cascade do |t|
+    t.integer "id_usuario"
+    t.integer "id_turno"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "solicituds", force: :cascade do |t|
     t.integer "id_usuario"
@@ -22,13 +29,6 @@ ActiveRecord::Schema.define(version: 2022_05_03_193423) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "estado"
-  end
-
-  create_table "turno_usuarios", force: :cascade do |t|
-    t.integer "id_turno"
-    t.integer "id_usuario"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "turnos", force: :cascade do |t|

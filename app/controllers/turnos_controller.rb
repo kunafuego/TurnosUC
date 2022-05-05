@@ -30,7 +30,17 @@ class TurnosController < ApplicationController
                   else
                     []
                   end
-    @turnos_buscador = Turno.all - @mis_turnos
+    if current_usuario
+      @pertenezco = PerteneceA.where(id_usuario: current_usuario.id).all
+      @ids_turnos_que_pertenezco = []
+      @pertenezco.each do |turno|
+        @ids_turnos_que_pertenezco << turno.id_turno
+      end
+      @turnos_que_estoy = Turno.where(id: @ids_turnos_que_pertenezco).all
+    else 
+      @turnos_que_estoy = []
+    end
+    @turnos_buscador = Turno.all - @mis_turnos - @turnos_que_estoy
   end
 
   def show

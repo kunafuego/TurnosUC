@@ -1,0 +1,21 @@
+<%= form_with(model: @tupla , method: :post) do |form| %>
+    
+    <div>
+        <h2> ID USUARIO </h2>
+        <%= @params[:id_usuario] %>
+    </div>
+
+    <div>
+        <h2> ID TURNO </h2>
+        <%= @params[:id_turno] %>
+    </div>
+    
+        <%= form.label :Seguro_que_quieres_aceptarlo_en_tu_turno? %>
+        <%= form.hidden_field :id_turno, value: @params[:id_turno]%>
+        <%= form.hidden_field :id_usuario, value: @params[:id_usuario]%>
+
+    <div>
+        <%= form.submit 'Aceptar' %>
+    </div>
+    
+<% end %>

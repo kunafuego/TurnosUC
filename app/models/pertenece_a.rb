@@ -1,0 +1,2 @@
+class PerteneceA < ApplicationRecord
+end
