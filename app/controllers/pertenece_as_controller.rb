@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PerteneceAsController < ApplicationController
   def create
     @tupla_params = params.require(:pertenece_a).permit(:id_usuario, :id_turno)

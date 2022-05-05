@@ -37,7 +37,7 @@ class TurnosController < ApplicationController
         @ids_turnos_que_pertenezco << turno.id_turno
       end
       @turnos_que_estoy = Turno.where(id: @ids_turnos_que_pertenezco).all
-    else 
+    else
       @turnos_que_estoy = []
     end
     @turnos_buscador = Turno.all - @mis_turnos - @turnos_que_estoy

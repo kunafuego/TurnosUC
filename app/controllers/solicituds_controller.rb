@@ -11,7 +11,7 @@ class SolicitudsController < ApplicationController
     @solicitud_params = params.require(:solicitud).permit(:descripcion, :id_turno)
     if usuario_signed_in?
       @solicitud_params[:id_usuario] = current_usuario.id
-      @solicitud_params[:estado] = "Pendiente"
+      @solicitud_params[:estado] = 'Pendiente'
       @solicitud = Solicitud.create(@solicitud_params)
       if @solicitud.save
         redirect_to solicituds_index_path(tipo: 'mis solicitudes'), notice: 'Solicitud Creada'
@@ -41,14 +41,14 @@ class SolicitudsController < ApplicationController
   end
 
   def update
-    puts "Se entró al update"
+    puts 'Se entró al update'
     @solicitud = Solicitud.find(params[:id])
     @solicitud_new_params = params.require(:solicitud).permit(:descripcion, :id_turno, :estado, :id_usuario)
     if @solicitud.update(@solicitud_new_params)
-      puts "Se guardó la nueva solicitud con su estado"
-      if @solicitud_new_params[:estado] == "Aceptada"
-        puts "Había sido aceptada"
-        redirect_to pertenece_as_new_path(:id_usuario => @solicitud_new_params[:id_usuario], :id_turno => @solicitud_new_params[:id_turno])
+      puts 'Se guardó la nueva solicitud con su estado'
+      if @solicitud_new_params[:estado] == 'Aceptada'
+        puts 'Había sido aceptada'
+        redirect_to pertenece_as_new_path(id_usuario: @solicitud_new_params[:id_usuario], id_turno: @solicitud_new_params[:id_turno])
       else
         redirect_to solicituds_index_path(tipo: 'solicitudes hechas a mis turnos'), notice: 'Solicitud editada'
       end
@@ -56,7 +56,6 @@ class SolicitudsController < ApplicationController
       redirect_to solicituds_index_path(tipo: 'solicitudes hechas a mis turnos'), notice: 'Solicitud no editado'
     end
   end
-
 
   def edit
     @tipo = params[:tipo_edit]
