@@ -1,8 +1,7 @@
 # README
+===
 
----
-
-## Flujo de la Aplicacion
+# Flujo de la Aplicacion
 
 Haciendo uso de devise creo el CRUD de "Usuarios". Al que solo se le modifico el hecho de que  
 tenga asocidados otros atributos como: numero de telefono, direccion y url de imagen.
@@ -21,17 +20,21 @@ ligado al turno a traves de una relacion (tabla) "Pertence_A".
 
 ---
 
-## Heroku y diagrama
+# Heroku
 
-* El link para ver el proyecto en Heroku, es el siguiente:
+El link para ver el proyecto en Heroku, es el siguiente:
 
-    https://uc-turnos.herokuapp.com/  
+https://uc-turnos.herokuapp.com/  
+
+---
+
+# Diagrama E/R
 
 * El diagrama E/R se encuentra en la carpeta `docs`.
 
 ---
 
-## Cambios al RuboCop
+# Cambios al RuboCop
 
 Se le añadió los siguientes Cop's al archivo rubocop.yml:  
 
