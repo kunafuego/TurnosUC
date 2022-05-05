@@ -1,10 +1,36 @@
-# README
+README
+======
+
+# Flujo de la Aplicacion
+
+Haciendo uso de devise creo el CRUD de "Usuarios". Al que solo se le modifico el hecho de que  
+tenga asocidados otros atributos como: numero de telefono, direccion y url de imagen.
+
+Luego, se creo el CRUD de turnos, donde todos los usuarios (registrados y no registrados) pueden visualizar los turnos ofrecidos. 
+Pero, sololos usuarios registrados pueden ver los turnos que ellos han creado, entrar al "show" del turno para ver los detalles 
+especificos, editarlos y eliminarlos. Mientras que los usuarios no registrados, al tratar de ver los detalles del turno, van a ser 
+redirigidos al registro.
+
+Asi tambien, se creo el CRUD de solicitudes. En el que dentro del "show" de un turno, un usuario registrado (que no es el creador), 
+puede enviar una solicitud de union al creador de este. Y, dentro del index de turnos, el usuario creador tiene la opcion de dirigirse
+a otra pagina que le permite vizualizar todas las solicitudes que le han llegado, con el fin de aceptarlas o rechazarlas.
+
+Si el creador acepta la solicitud, el usuario que la envio va a ser incorporado en el turno, es decir, el usuario queda
+ligado al turno a traves de una relacion (tabla) "Pertence_A".
+
+---
+
+# Heroku y diagrama
 
 El link para ver el proyecto en Heroku, es el siguiente:
 
     https://uc-turnos.herokuapp.com/  
 
 El diagrama E/R se encuentra en la carpeta `docs`.
+
+---
+
+# Cambios al RuboCop
 
 Se le añadió los siguientes Cop's al archivo rubocop.yml:  
 
