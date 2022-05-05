@@ -4,7 +4,9 @@ El link para ver el proyecto en Heroku, es el siguiente:
 
     https://uc-turnos.herokuapp.com/  
 
-Se le añadió los siguientes Cop´s al archivo rubocop.yml:  
+El diagrama E/R se encuentra en la carpeta `docs`.
+
+Se le añadió los siguientes Cop's al archivo rubocop.yml:  
 
 * Rubocop exigía que todos los archivos comenzaran con un comentario(que la idea era que fuera documentación),
 y con ese Cop ya no se debe cumplir esa condición.  
