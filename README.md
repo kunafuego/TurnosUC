@@ -20,17 +20,13 @@ ligado al turno a traves de una relacion (tabla) "Pertence_A".
 
 ---
 
-# Heroku
+# Heroku y Diagrama E/R
 
-El link para ver el proyecto en Heroku, es el siguiente:
+* El link para ver el proyecto en Heroku, es el siguiente:
 
 https://uc-turnos.herokuapp.com/  
 
----
-
-# Diagrama E/R
-
-* El diagrama E/R se encuentra en la carpeta `docs`.
+* Por otro lado, el diagrama E/R se encuentra en la carpeta `docs`.
 
 ---
 
