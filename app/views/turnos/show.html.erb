@@ -33,7 +33,7 @@
 <p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id) %></p>
 <p><%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete%></p>
 <p><%= link_to "Ver Solicitudes de mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos')%></p>
-<% else #Aca despues se debe considerar que si es que el usuario ya es participante del turno o ya le envió una solicitud
+<% elsif @mostrar_solicitar_unirse #Aca despues se debe considerar que si es que el usuario ya es participante del turno o ya le envió una solicitud
         #no se le tiene que mostrar este mensaje%>
 <%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id) %>
 <% end %>

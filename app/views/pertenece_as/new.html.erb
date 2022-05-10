@@ -1,15 +1,17 @@
 <%= form_with(model: @tupla , method: :post) do |form| %>
     
     <div>
-        <h2> ID USUARIO </h2>
-        <%= @params[:id_usuario] %>
+        <h2> Usuario Solicitando unirse </h2>
+        <%= Usuario.find(@params[:id_usuario]).nombre %>
     </div>
 
     <div>
-        <h2> ID TURNO </h2>
-        <%= @params[:id_turno] %>
+        <h2> Turno al que se quiere unir </h2>
+        <% turno = Turno.find(@params[:id_turno]) %>
+        <p> Turno de los días <%= turno.dia_de_la_semana%></p>
+        <p> Con dirección de llegada <%= turno.direccion_llegada%></p>
     </div>
-    
+    <br>
         <%= form.label :Seguro_que_quieres_aceptarlo_en_tu_turno? %>
         <%= form.hidden_field :id_turno, value: @params[:id_turno]%>
         <%= form.hidden_field :id_usuario, value: @params[:id_usuario]%>

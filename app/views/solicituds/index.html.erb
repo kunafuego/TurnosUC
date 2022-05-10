@@ -3,7 +3,9 @@
     <table align='center'>
     <thead>
         <tr>
-            <th>id_turno</th>
+            <th>Creador Turno</th>
+            <th>Día de la Semana</th>
+            <th>Dirección Llegada</th>            
             <th>Descripcion</th>
             <th>Estado</th>
         </tr>
@@ -14,11 +16,17 @@
         <% else %>
             <% @mis_solicitudes.each do |solicitud| %>
             <tr>
-                <td><%= solicitud.id_turno%></td>
+                <% turno = Turno.find(solicitud.id_turno)%>
+                <% creador = Usuario.find(turno.id_creador) %>
+                <td><%= creador.nombre %></td>
+                <td><%= turno.dia_de_la_semana%></td>
+                <td><%= turno.direccion_llegada%></td>
                 <td><%= solicitud.descripcion%></td>
                 <td><%= solicitud.estado%></td>
+                <% if solicitud.estado == "pendiente"%>
                 <td><%= link_to "Borrar Solicitud", solicituds_delete_path(:id => solicitud.id), method: :delete%></td>
                 <td><%= link_to 'Editar Solicitud', solicituds_edit_path(:id => solicitud.id, :tipo_edit => "completo") %></td>
+                <% end %>
             </tr>
             <% end %>
         <%  end  %>

@@ -47,6 +47,17 @@ class TurnosController < ApplicationController
     @turno = Turno.find(params[:id])
     @creador = Usuario.find(params[:id_creador])
     # Con esta info debo buscar en las otras tablas los elementos que quiero mandar al show
+    @mostrar_solicitar_unirse = mostrar_solicitar_unirse(@turno.id, current_usuario.id)
+  end
+
+  def mostrar_solicitar_unirse(idt, idu)
+    if PerteneceA.exists?(:id_usuario => idu, :id_turno => idt)
+      return false
+    elsif Solicitud.exists?(:id_usuario => idu, :id_turno => idt, :estado => "pendiente")
+      return false
+    else
+      return true
+    end
   end
 
   def edit
