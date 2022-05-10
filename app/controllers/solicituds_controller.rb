@@ -10,16 +10,26 @@ class SolicitudsController < ApplicationController
   def create
     @solicitud_params = params.require(:solicitud).permit(:descripcion, :id_turno)
     if usuario_signed_in?
+
+      # Si el usuario ya habia hecho una solicitud a ese turno, queremos buscar el id de dicha solicitud
+      @id_turno = @solicitud_params[:id_turno]
+      @solicitud_anterior_id = Solicitud.where(id_usuario: current_usuario.id, id_turno: @id_turno).ids
+    
       @solicitud_params[:id_usuario] = current_usuario.id
       @solicitud_params[:estado] = "Pendiente"
       @solicitud = Solicitud.create(@solicitud_params)
+
       if @solicitud.save
+        # Eliminamos la solicitud hecha con anterioridad
+        if @solicitud_anterior_id != []
+          Solicitud.find(@solicitud_anterior_id[0]).destroy
+        end
         redirect_to solicituds_index_path(tipo: 'mis solicitudes'), notice: 'Solicitud Creada'
       else
         redirect_to solicituds_index_path(tipo: 'mis solicitudes'), notice: 'Solicitud no Creada'
       end
     else
-      redirect_to usuario_session_path, notice: 'Error al crear turno, el usuario no estaba loggeado'
+      redirect_to usuario_session_path, notice: 'Error al crear la solicitud, el usuario no estaba loggeado'
     end
   end
 

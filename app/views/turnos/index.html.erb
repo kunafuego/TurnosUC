@@ -46,6 +46,7 @@ tr:nth-child(even) {
 </table>
 <% if usuario_signed_in? %>
 <%= link_to 'Ver mis solicitudes a nuevos turnos', solicituds_index_path(:tipo => 'mis solicitudes') %>
+<% end %>
 <h1>Turnos creados por mí</h1>
 
 <table align='center'>
@@ -74,6 +75,9 @@ tr:nth-child(even) {
         <%  end  %>
     </tbody>
 </table>
+<% if usuario_signed_in? %>
+<p><%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos')%></p>
+<% end %>
 <h1>Turnos en los que estoy </h1>
 <table align='center'>
     <thead>
@@ -101,6 +105,7 @@ tr:nth-child(even) {
         <%  end  %>
     </tbody>
 </table>
+<% if usuario_signed_in? %>
 <%= link_to 'Crear un nuevo turno', turnos_new_path %>
 <% else %>
 <h2> Bienvenid@ a Turnos UC! </h2>
