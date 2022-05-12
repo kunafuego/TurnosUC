@@ -47,4 +47,11 @@ RSpec.describe PerteneceA, type: :request do
     end
   end
 
+  describe 'delete' do
+    it 'deberia disminuir en 1 la cantidad de pertenece a' do
+      expect do
+        delete pertenece_as_delete_path(id_pertenece_a: @pertenece_a.id)
+      end.to change(PerteneceA, :count).by(-1)
+    end
+  end
 end
