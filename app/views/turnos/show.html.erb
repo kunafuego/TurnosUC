@@ -28,11 +28,13 @@
 
 <! Acá debo agregar el nombre y foto del creador, nombre de los participantes, y cualquier otra cosa que se me ocurra
 #Además, acá va la posible solicitud >
+
 <%= link_to 'Vuelta a buscar turnos', turnos_index_path %>
 <% if current_usuario.id == @turno.id_creador %>
 <p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id) %></p>
-<p><%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete%></p>
-<% elsif @mostrar_solicitar_unirse #Aca despues se debe considerar que si es que el usuario ya es participante del turno o ya le envió una solicitud
-        #no se le tiene que mostrar este mensaje%>
-<%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id) %>
+<p><%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete %></p>
+<% elsif @mostrar_solicitar_unirse %>
+<p><%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id) %></p>
+<% elsif @mostrar_salirse_del_turno %>
+<p><%= link_to 'Salirse del Turno', pertenece_as_delete_path(:id_pertenece_a => @id_pertenece_a), method: :delete %></p>
 <% end %>

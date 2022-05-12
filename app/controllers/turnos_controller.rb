@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TurnosController < ApplicationController
+  include TurnosHelper
+
   def new
     @turno = Turno.new
   end
@@ -48,16 +50,12 @@ class TurnosController < ApplicationController
     @creador = Usuario.find(params[:id_creador])
     # Con esta info debo buscar en las otras tablas los elementos que quiero mandar al show
     @mostrar_solicitar_unirse = mostrar_solicitar_unirse(@turno.id, current_usuario.id)
-  end
-
-  def mostrar_solicitar_unirse(idt, idu)
-    if PerteneceA.exists?(:id_usuario => idu, :id_turno => idt)
-      return false
-    elsif Solicitud.exists?(:id_usuario => idu, :id_turno => idt, :estado => "pendiente")
-      return false
-    else
-      return true
+    @mostrar_salirse_del_turno = mostrar_salirse_del_turno(@turno.id, current_usuario.id)
+    
+    if @mostrar_salirse_del_turno
+      @id_pertenece_a = PerteneceA.find_by(id_turno: @turno.id, id_usuario: current_usuario.id)
     end
+
   end
 
   def edit

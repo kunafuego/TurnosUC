@@ -15,4 +15,10 @@ class PerteneceAsController < ApplicationController
     @tupla = PerteneceA.new
     @params = params
   end
+
+  def delete
+    @pertenece_a = PerteneceA.find(params[:id_pertenece_a])
+    @pertenece_a.destroy
+    redirect_to turnos_index_path, notice: 'Has salido existosamente del Turno'
+  end
 end
