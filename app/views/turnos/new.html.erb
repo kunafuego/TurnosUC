@@ -7,19 +7,21 @@
     </div>
     <div>
         <%= form.label :limite_personas %>
-        <%= form.text_field :limite_personas %>
+        <%= form.number_field :limite_personas, in: 1..10, step: 1 %>
     </div>
     <div>
         <%= form.label :direccion_llegada %>
         <%= form.text_field :direccion_llegada %>
     </div>
-    <div>
-        <%= form.label :dia_de_la_semana %>
-        <%= form.text_field :dia_de_la_semana %>
-    </div>
+    
     <div>
         <%= form.label :direccion_salida %>
         <%= form.text_field :direccion_salida %>
+    </div>
+
+    <div>
+        <%= form.label :dia_de_la_semana %>
+        <%= form.select :dia_de_la_semana, ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'] %>
     </div>
 
     <div>

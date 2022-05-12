@@ -1,34 +1,38 @@
 <h1>Editar Turno</h1>
 <%= form_with(model: @turno , method: :patch, url: turnos_update_path(:id => @turno.id)) do |form| %>
 
-    <div>
+   <div>
         <%= form.label :tipo_turno %>
         <%= form.select :tipo, ["Seleccionar", "Ida", "Vuelta"] %>
     </div>
     <div>
         <%= form.label :limite_personas %>
-        <%= form.text_field :limite_personas %>
+        <%= form.number_field :limite_personas, in: 1..10, step: 1 %>
     </div>
     <div>
         <%= form.label :direccion_llegada %>
         <%= form.text_field :direccion_llegada %>
     </div>
-    <div>
-        <%= form.label :dia_de_la_semana %>
-        <%= form.text_field :dia_de_la_semana %>
-    </div>
+    
     <div>
         <%= form.label :direccion_salida %>
         <%= form.text_field :direccion_salida %>
     </div>
+
     <div>
-        <%= form.label :hora_salida %>
-        <%= form.text_field :hora_salida %>
+        <%= form.label :dia_de_la_semana %>
+        <%= form.select :dia_de_la_semana, ['Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo'] %>
     </div>
+
     <div>
-        <%= form.label :id_creador %>
-        <%= form.text_field :id_creador %>
+    <%=form.label :hora_de_salida  %>
+    <%=form.select :hora, ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+                                '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
+           '22', '23'] %>
+    <span class="colon">:</span>
+    <%=form.select :minutos, ['00', '15', '30', '45'] %>
     </div>
+
     <div>
         <%= form.submit 'Editar Turno' %>
     </div>
