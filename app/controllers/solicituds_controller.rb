@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SolicitudsController < ApplicationController
+  include SolicitudsHelper
+
   def new
     @solicitud = Solicitud.new
     @id_turno = params[:id_turno]
@@ -70,6 +72,10 @@ class SolicitudsController < ApplicationController
   def edit
     @tipo = params[:tipo_edit]
     @solicitud = Solicitud.find(params[:id])
+    
+    # Ahora llamamos la funcion turno lleno, para usarla en las views
+    @turno_lleno = turno_lleno(@solicitud.id_turno)
+
   end
 
   def delete

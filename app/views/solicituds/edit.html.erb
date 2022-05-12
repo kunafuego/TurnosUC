@@ -14,9 +14,14 @@
 <% else %>
 <%= form_with(model: @solicitud , method: :patch, url: solicituds_update_path(:id => @solicitud.id)) do |form| %>
 
-    <div>
-        <%= form.label :Aceptar_o_Rechazar_solicitud %>
+    <div>    
+    <% if @turno_lleno %>
+    <%= form.label :Rechazar_solicitud %>
+    <%=form.select :estado, ['Pendiente', 'Rechazada'] %>
+    <% else %>
+    <%= form.label :Aceptar_o_Rechazar_solicitud %>
     <%=form.select :estado, ['Pendiente', 'Aceptada', 'Rechazada'] %>
+    <% end %>
     <%= form.hidden_field :id_turno, value: @solicitud.id_turno%>
     <%= form.hidden_field :descripcion, value: @solicitud.descripcion%>
     <%= form.hidden_field :id_usuario, value: @solicitud.id_usuario%>
