@@ -10,4 +10,11 @@ class Turno < ApplicationRecord
     message: 'tiene que ser una sola palabra'
   }
   validates :limite_personas, presence: true, numericality: { only_integer: true }
+
+  # Asociaciones
+  has_many :pertenece_as
+  has_many :usuarios, through: :pertenece_as 
+  has_many :solicituds, inverse_of: :turno, dependent: :destroy, foreign_key: "id_turno"
+
+  belongs_to :usuario, foreign_key: "id_creador"
 end

@@ -4,6 +4,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :usuario do
+    association :solicitud
     email { Faker::Internet.email }
     password { 'holahola' }
     nombre { 'Bob Bobson' }
