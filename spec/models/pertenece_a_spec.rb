@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PerteneceA, type: :model do
-
   before(:each) do
     # Aqui se utiliza la factory de usuarios, para crear uno
     @usuario = create(:usuario)
@@ -11,8 +12,7 @@ RSpec.describe PerteneceA, type: :model do
     @turno = create(:turno, usuario: @usuario)
 
     # Creamos la relacion pertece A
-    @pertenece_a = PerteneceA.create!( {id_usuario: @segundo_usuario.id, id_turno: @turno.id } )
-    
+    @pertenece_a = PerteneceA.create!({ id_usuario: @segundo_usuario.id, id_turno: @turno.id })
   end
 
   it 'es valida con atributos validos' do

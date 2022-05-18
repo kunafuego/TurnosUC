@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'faker'
 
 RSpec.describe Solicitud, type: :request do
-  
   before(:each) do
     # Aqui se utiliza la factory de usuarios, para crear uno
     @usuario = create(:usuario)
@@ -29,7 +28,6 @@ RSpec.describe Solicitud, type: :request do
 
     # Aqui creamos la solicitud
     @solicitud = Solicitud.create!({ id_usuario: @segundo_usuario.id, id_turno: @turno.id, descripcion: 'si si' })
-
   end
 
   # Empiezan los test
@@ -56,7 +54,7 @@ RSpec.describe Solicitud, type: :request do
     it 'no deberia aumentar la cantidad de solicitudes' do
       expect do
         post '/solicituds',
-             params: { solicitud: @params_invalid_solicitud}
+             params: { solicitud: @params_invalid_solicitud }
       end.to change(Solicitud, :count).by(0)
     end
   end

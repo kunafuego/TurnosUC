@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'faker'
 
 RSpec.describe PerteneceA, type: :request do
-
   before(:each) do
     # Aqui se utiliza la factory de usuarios, para crear uno
     @usuario = create(:usuario)
@@ -14,7 +15,7 @@ RSpec.describe PerteneceA, type: :request do
     sign_out @usuario
 
     # Params
-    @params_pertenece_a= {
+    @params_pertenece_a = {
       id_usuario: @segundo_usuario.id,
       id_turno: @turno.id
     }
@@ -25,8 +26,7 @@ RSpec.describe PerteneceA, type: :request do
     }
 
     # Creamos la relacion pertece A
-    @pertenece_a = PerteneceA.create!( {id_usuario: @segundo_usuario.id, id_turno: @turno.id } )
-    
+    @pertenece_a = PerteneceA.create!({ id_usuario: @segundo_usuario.id, id_turno: @turno.id })
   end
 
   # Empiezan los test

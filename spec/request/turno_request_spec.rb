@@ -6,9 +6,7 @@ require 'faker'
 # Se agrupan todos los tests relacionados al controlador de Profiles,
 # con esta línea se le dice a Rails que será testeado
 RSpec.describe Turno, type: :request do
-
   before(:each) do
-
     # Aqui se utiliza la factory de usuarios, para crear uno
     @usuario = create(:usuario)
     # Usamos el metodo definido en support
@@ -38,7 +36,6 @@ RSpec.describe Turno, type: :request do
 
     # Aqui se utiliza la factory de turnos, para crear uno
     @turno = create(:turno, usuario: @usuario)
-
   end
 
   # Aqui comienzan los test

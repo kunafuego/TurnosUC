@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Solicitud, type: :model do
-
   before(:each) do
     # Aqui se utiliza la factory de usuarios, para crear uno
     @usuario = create(:usuario)
@@ -14,7 +13,6 @@ RSpec.describe Solicitud, type: :model do
 
     # Aqui creamos la solicitud
     @solicitud = Solicitud.create!({ id_usuario: @segundo_usuario.id, id_turno: @turno.id, descripcion: 'si si' })
-
   end
 
   it 'es valida con atributos validos' do

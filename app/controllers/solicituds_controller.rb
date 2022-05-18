@@ -16,16 +16,14 @@ class SolicitudsController < ApplicationController
       # Si el usuario ya habia hecho una solicitud a ese turno, queremos buscar el id de dicha solicitud
       @id_turno = @solicitud_params[:id_turno]
       @solicitud_anterior_id = Solicitud.where(id_usuario: current_usuario.id, id_turno: @id_turno).ids
-    
+
       @solicitud_params[:id_usuario] = current_usuario.id
       @solicitud_params[:estado] = 'Pendiente'
       @solicitud = Solicitud.create(@solicitud_params)
 
       if @solicitud.save
         # Eliminamos la solicitud hecha con anterioridad
-        if @solicitud_anterior_id != []
-          Solicitud.find(@solicitud_anterior_id[0]).destroy
-        end
+        Solicitud.find(@solicitud_anterior_id[0]).destroy if @solicitud_anterior_id != []
         redirect_to solicituds_index_path(tipo: 'mis solicitudes'), notice: 'Solicitud Creada'
       else
         redirect_to solicituds_index_path(tipo: 'mis solicitudes'), notice: 'Solicitud no Creada'
@@ -72,10 +70,9 @@ class SolicitudsController < ApplicationController
   def edit
     @tipo = params[:tipo_edit]
     @solicitud = Solicitud.find(params[:id])
-    
+
     # Ahora llamamos la funcion turno lleno, para usarla en las views
     @turno_lleno = turno_lleno(@solicitud.id_turno)
-
   end
 
   def delete

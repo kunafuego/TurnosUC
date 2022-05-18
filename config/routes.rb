@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   ########################## PERTENECE A ############################
 
   post 'pertenece_as', to: 'pertenece_as#create'
