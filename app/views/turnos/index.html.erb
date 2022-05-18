@@ -23,6 +23,7 @@ tr:nth-child(even) {
             <th>Dirección de llegada</th>
             <th>Dirección de salida</th>
             <th>Hora de salida</th>
+            <th>Capacidad</th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@ tr:nth-child(even) {
                 <td><%= turno.direccion_llegada%></td>
                 <td><%= turno.direccion_salida%></td>
                 <td><%= turno.hora_salida%></td>
+                <td><%= "%i/%i" % [(PerteneceA.where(id_turno: turno.id).count + 1), turno.limite_personas] %></td>
                 <% if usuario_signed_in? %>
                 <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id, :id_creador => turno.id_creador)%>
                 <% end %>
