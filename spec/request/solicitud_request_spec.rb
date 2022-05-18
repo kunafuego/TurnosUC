@@ -4,17 +4,32 @@ require 'rails_helper'
 require 'faker'
 
 RSpec.describe Solicitud, type: :request do
+  
   before(:each) do
     # Aqui se utiliza la factory de usuarios, para crear uno
     @usuario = create(:usuario)
-    # Usamos el metodo definido en support
-    sign_in @usuario
+    @segundo_usuario = create(:usuario)
 
-    # Aqui se utiliza la factory de turnos, para crear uno
-    @turno = create(:turno)
+    # Creamos el turno
+    sign_in @usuario
+    @turno = create(:turno, usuario: @usuario)
+
+    # Params
+    @params_solicitud = {
+      id_usuario: @segundo_usuario.id,
+      id_turno: @turno.id,
+      descripcion: 'hola hola hola'
+    }
+
+    @params_invalid_solicitud = {
+      id_usuario: @segundo_usuario.id,
+      id_turno: @turno.id,
+      descripcion: 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola    '
+    }
 
     # Aqui creamos la solicitud
-    @solicitud = Solicitud.create!({ id_usuario: @usuario.id, id_turno: @turno.id, descripcion: 'si si' })
+    @solicitud = Solicitud.create!({ id_usuario: @segundo_usuario.id, id_turno: @turno.id, descripcion: 'si si' })
+
   end
 
   # Empiezan los test
@@ -35,14 +50,13 @@ RSpec.describe Solicitud, type: :request do
   describe 'create' do
     it 'deberia aumentar en 1 la cantidad de solicitudes' do
       expect do
-        post '/solicituds', params: { solicitud: { id_usuario: 1, id_turno: 2, descripcion: 'hola hola' } }
+        post '/solicituds', params: { solicitud: @params_solicitud }
       end.to change(Solicitud, :count).by(1)
     end
     it 'no deberia aumentar la cantidad de solicitudes' do
       expect do
         post '/solicituds',
-             params: { solicitud: { id_usuario: 1, id_turno: 2,
-                                    descripcion: 'mas de 100 caracteres                                                                                ' } }
+             params: { solicitud: @params_invalid_solicitud}
       end.to change(Solicitud, :count).by(0)
     end
   end

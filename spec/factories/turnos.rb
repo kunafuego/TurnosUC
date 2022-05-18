@@ -4,7 +4,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :turno do
-    association :solicitud
+    association :usuario
     tipo { %w[ida vuelta].shuffle!.pop }
     limite_personas { Faker::Number.digit }
     direccion_salida { Faker::Lorem.sentence }
