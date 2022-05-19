@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <title>Grupo20</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -18,8 +20,8 @@
       <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete %>
       <%= link_to "Editar Perfil", edit_usuario_registration_path %>
     <% else %>
-      <%= link_to "Iniciar sesion", new_usuario_session_path %>
-      <%= link_to "Registrarse", new_usuario_registration_path %>
+      <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button"%>
+      <%= link_to "Registrarse", new_usuario_registration_path, :class => "button" %>
     <% end %>
       
     <%= yield %>

@@ -1,23 +1,10 @@
-<h1>Buscador de Turnos</h1>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+<h1 class="title is-4">Buscador de Turnos</h1>
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-<table align='center'>
-    <thead>
+<% if @turnos_buscador.empty?%>
+    <h3 class="subtitle"> No hay turnos disponibles <h3>
+    <% else %>
+<table class="table">
+        <thead>
         <tr>
             <th>Día de la semana</th>
             <th>Dirección de llegada</th>
@@ -27,9 +14,6 @@ tr:nth-child(even) {
         </tr>
     </thead>
     <tbody>
-        <% if @turnos_buscador.empty?%>
-            <h3> No hay turnos disponibles <h3>
-        <% else %>
             <% @turnos_buscador.each do |turno| %>
             <tr>
                 <td><%= turno.dia_de_la_semana%></td>
@@ -49,8 +33,11 @@ tr:nth-child(even) {
 <% if usuario_signed_in? %>
 <%= link_to 'Ver mis solicitudes a nuevos turnos', solicituds_index_path(:tipo => 'mis solicitudes') %>
 <% end %>
-<h1>Turnos creados por mí</h1>
+<h1 class="title is-4">Turnos creados por mí</h1>
 
+<% if @mis_turnos.empty?%>
+    <h3 class="subtitle"> No hay turnos disponibles <h3>
+<% else %>
 <table align='center'>
     <thead>
         <tr>
@@ -61,9 +48,6 @@ tr:nth-child(even) {
         </tr>
     </thead>
     <tbody>
-        <% if @mis_turnos.empty?%>
-            <h3> No hay turnos disponibles <h3>
-        <% else %>
             <% @mis_turnos.each do |turno| %>
             <tr>
                 <td><%= turno.dia_de_la_semana%></td>
@@ -80,7 +64,11 @@ tr:nth-child(even) {
 <% if usuario_signed_in? %>
 <p><%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos')%></p>
 <% end %>
-<h1>Turnos en los que estoy </h1>
+<h1 class="title is-4">Turnos en los que estoy </h1>
+
+<% if @turnos_que_estoy.empty?%>
+    <h3 class = "subtitle"> No hay turnos disponibles <h3>
+<% else %>
 <table align='center'>
     <thead>
         <tr>
@@ -91,9 +79,6 @@ tr:nth-child(even) {
         </tr>
     </thead>
     <tbody>
-        <% if @turnos_que_estoy.empty?%>
-            <h3> No hay turnos disponibles <h3>
-        <% else %>
             <% @turnos_que_estoy.each do |turno| %>
             <tr>
                 <td><%= turno.dia_de_la_semana%></td>
@@ -110,5 +95,5 @@ tr:nth-child(even) {
 <% if usuario_signed_in? %>
 <%= link_to 'Crear un nuevo turno', turnos_new_path %>
 <% else %>
-<h2> Bienvenid@ a Turnos UC! </h2>
+<h2 class = "title"> Bienvenid@ a Turnos UC! </h2>
 <% end %>

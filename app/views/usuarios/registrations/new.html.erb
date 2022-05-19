@@ -4,40 +4,63 @@
   <%= render "usuarios/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+    <%= f.label :nombre, :class => "label"%>
+      <div class="control">
+      <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre", :class => "input", :type => "text" %>
+      </div>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "correo electronico" %>
-  </div>
+    <%= f.label :email, :class => "label" %>
+    <div class="control has-icons-left has-icons-right">
+      <%= f.email_field :email, :class => "input is-danger", :type => "email", :placeholder => "Ingrese Email"%>
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+    </div>
 
   <div class="field">
-    <%= f.label :telefono %><br />
-    <%= f.phone_field :telefono, autofocus: true, autocomplete: "numero de telefono" %>
+    <%= f.label :telefono, :class => "label" %>
+    <a class="button is-static">
+      +569
+    </a>
+    <%= f.phone_field :telefono %>
   </div>
 
+
+
+
+  
+
   <div class="field">
-    <%= f.label :direccion %><br />
+    <%= f.label :direccion , :class => "label"%>
     <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
   </div>
 
   <div class="field">
-    <%= f.label :url_de_la_foto_de_perfil %><br />
+    <%= f.label :url_de_la_foto_de_perfil, :class => "label" %>
     <%= f.text_field :imagen, autofocus: true, autocomplete: "url foto de perfil" %>
   </div>
 
   <div class="field">
-    <%= f.label :contraseña %>
+    <%= f.label :contraseña, :class => "label"%>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "nueva contraseña" %>
+    <p class="control has-icons-left">
+    <%= f.password_field :password, :class => "input", :type => "password", :placeholder => "Contraseña" %>
+    <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
+  </p>
   </div>
 
   <div class="field">
-    <%= f.label :confirmacion_contraseña %><br />
+    <%= f.label :confirmacion_contraseña, :class => "label" %>
+
     <%= f.password_field :password_confirmation, autocomplete: "confirmacion nueva contraseña" %>
   </div>
 
