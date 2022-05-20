@@ -11,17 +11,25 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body align='center'>
+  <body align="center">
     
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%# <p class="notice"><%= notice %> </p>
+    <%# <p class="alert"><%= alert %> </p>
 
     <% if usuario_signed_in? %>
-      <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete %>
-      <%= link_to "Editar Perfil", edit_usuario_registration_path %>
+      <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => "button is-light"%>
+      <%= link_to "Editar Perfil", edit_usuario_registration_path, :class => "button is-light" %>
     <% else %>
-      <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button"%>
-      <%= link_to "Registrarse", new_usuario_registration_path, :class => "button" %>
+      <% if current_page?(new_usuario_registration_path) %>
+        <%= link_to "Inicio", root_path, :class => "button is-light"%>
+        <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
+      <% elsif current_page?(new_usuario_session_path) %>
+        <%= link_to "Inicio", root_path, :class => "button is-light"%>
+        <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
+      <% else %>
+        <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
+        <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
+      <% end %>
     <% end %>
       
     <%= yield %>
