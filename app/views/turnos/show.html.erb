@@ -1,40 +1,50 @@
-<h1>Turnos#show</h1>
-<style>
-    .img {
-        float:center
-    }
-</style>
-<p>
-    <strong>Dirección de llegada: </strong>
-    <%= @turno.direccion_llegada %>
-</p>
-<p>
-    <strong>Direccion de salida: </strong>
-    <%= @turno.direccion_salida %>
-</p>
-<p>
-    <strong>Hora de salida: </strong>
-    <%= @turno.hora_salida %>
-</p>
-<p>
-    <strong>Día de la semana: </strong>
-    <%= @turno.dia_de_la_semana %>
-</p>
-<p class=img>
-    <strong>Creador del turno: </strong>
-    <%= @creador.nombre %>
-    <%= image_tag(@creador.imagen, size:"90x90" ) %>
-</p>
+
+<div class="section">
+    <div class="columns is-centered">
+        <div class="column is-4">
+            <div><h1 class="title is-3 has-background-info-light mb-4">Turno</h1></div>
+
+            <div>
+                <p class="is-size-6 has-text-weight-bold"> Direccion de llegada: <%= @turno.direccion_llegada%></p>
+            </div>
+            <div>
+                <p class="mt-4 is-size-6 has-text-weight-bold "> Direccion de salida: <%= @turno.direccion_llegada%></p>
+            </div>
+
+            <div>
+                <p class="mt-4 is-size-6 has-text-weight-bold"> Hora de salida: <%= @turno.hora_salida%></p>
+            </div>
+
+            <div>
+                <p class="mt-4 is-size-6 has-text-weight-bold"> Dia de la semana: <%= @turno.dia_de_la_semana%></p>
+            </div>
+            
+            <div>
+                <p class="mt-4 is-size-6 has-text-weight-bold mb-2"> Nombre creador: <%= @creador.nombre%></p>
+                <figure class="image is-128x128 is-inline-block"><%= image_tag(@creador.imagen) %></figure>
+            </div>
+        </div>
+    </div>
+</div>
 
 <! Acá debo agregar el nombre y foto del creador, nombre de los participantes, y cualquier otra cosa que se me ocurra
 #Además, acá va la posible solicitud >
 
-<%= link_to 'Vuelta a buscar turnos', turnos_index_path %>
-<% if current_usuario.id == @turno.id_creador %>
-<p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id) %></p>
-<p><%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete %></p>
-<% elsif @mostrar_solicitar_unirse %>
-<p><%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id) %></p>
-<% elsif @mostrar_salirse_del_turno %>
-<p><%= link_to 'Salirse del Turno', pertenece_as_delete_path(:id_pertenece_a => @id_pertenece_a), method: :delete %></p>
-<% end %>
+<div class="columns is-centered">
+  <div class="column is-4">
+    
+    <% if current_usuario.id == @turno.id_creador %>
+        <h3 class="title has-background-info-light is-5">Opciones</h3>
+        <p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id), class: "button is-outlined is-info is-small" %>
+        <%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
+    <% elsif @mostrar_solicitar_unirse %>
+        <h3 class="title has-background-info-light is-5">Solicitar</h3>
+        <p><%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id), class: "button is-outlined is-success is-link is-small" %></p>
+    <% elsif @mostrar_salirse_del_turno %>
+        <h3 class="title has-background-info-light is-5">Salirse</h3>
+        <p><%= link_to 'Salirse del Turno', pertenece_as_delete_path(:id_pertenece_a => @id_pertenece_a), method: :delete, class: "button is-outlined is-danger is-small"%></p>
+    <% end %>
+
+  </div>
+</div>
+<%= link_to 'Volver a buscar turnos', turnos_index_path, class: "mt-6 button is-link is-outlined is-small" %>

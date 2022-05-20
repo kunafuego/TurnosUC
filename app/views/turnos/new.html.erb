@@ -2,7 +2,6 @@
 <%= form_with(model: @turno , method: :post) do |form| %>
 
     <div><h1 class="mt-4 title is-3 has-background-info-light mb-4">Crear turno</h1></div>
-
     <div class="columns is-centered mt-4">
         
         <div class="column is-2">
@@ -65,9 +64,9 @@
     </div>
 
     <div>
-        <%= form.submit 'Crear Turno',class: "button is-light is-success is-focused is-responsive"%>
+        <%= form.submit 'Crear Turno',class: "button is-success is-outlined is-responsive" %>
     </div>
 <% end %>
 <div>
-    <%= link_to 'Volver a ver turnos', turnos_index_path, class: "mt-5 button is-light is-small" %>
+    <%= link_to 'Volver a ver turnos', turnos_index_path, class: "mt-6 button is-link is-outlined is-small" %>
 </div>

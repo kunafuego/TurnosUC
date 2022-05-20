@@ -38,7 +38,7 @@
         </table>
     </div> 
     <% if usuario_signed_in? %>
-    <%= link_to 'Ver mis solicitudes a nuevos turnos', solicituds_index_path(:tipo => 'mis solicitudes'), class: "button is-light is-focused is-small" %>
+    <%= link_to 'Ver mis solicitudes a nuevos turnos', solicituds_index_path(:tipo => 'mis solicitudes'), class: "button is-link is-outlined is-small" %>
     <% end %>
 
 <% if usuario_signed_in? %>
@@ -73,7 +73,7 @@
                 </tbody>
             </table>
         </div>
-        <p><%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos'), class: "button is-small is-light is-focused"%></p>
+        <p><%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos'), class: "button is-link is-outlined is-small"%></p>
 
 
     <h1 class="mt-5 title has-background-info-light is-4">Turnos en los que estoy </h1>
@@ -107,5 +107,5 @@
                 </tbody>
             </table>
         </div>
-        <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-small is-light is-focused" %>
+        <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-link is-outlined is-small" %>
     <% end %>
