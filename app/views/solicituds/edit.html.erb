@@ -1,4 +1,3 @@
-<h1>Editar Solicitud</h1>
 <% if @tipo == "Completo" %>
 <%= form_with(model: @solicitud , method: :patch, url: solicituds_update_path(:id => @solicitud.id)) do |form| %>
 
@@ -13,21 +12,30 @@
 <% end %>
 <% else %>
 <%= form_with(model: @solicitud , method: :patch, url: solicituds_update_path(:id => @solicitud.id)) do |form| %>
+    <div><h1 class="mt-4 title is-3 has-background-info-light mb-4">Aceptar/Rechazar</h1></div>
+    <div class="columns is-centered mt-4">
+        <div class="column is-4">
 
-    <div>    
-    <% if @turno_lleno %>
-    <%= form.label :Rechazar_solicitud %>
-    <%=form.select :estado, ['Pendiente', 'Rechazada'] %>
-    <% else %>
-    <%= form.label :Aceptar_o_Rechazar_solicitud %>
-    <%=form.select :estado, ['Pendiente', 'Aceptada', 'Rechazada'] %>
-    <% end %>
-    <%= form.hidden_field :id_turno, value: @solicitud.id_turno%>
-    <%= form.hidden_field :descripcion, value: @solicitud.descripcion%>
-    <%= form.hidden_field :id_usuario, value: @solicitud.id_usuario%>
-    </div>
-    <div>
-        <%= form.submit 'Enviar' %>
-    </div>
+            <div class="field">    
+                <label class="label">Seleccionar</label>
+                <div class="select is-normal">
+                    <% if @turno_lleno %>
+                        <%=form.select :estado, ['Pendiente', 'Rechazada'] %>
+                    <% else %>
+                        <%=form.select :estado, ['Pendiente', 'Aceptada', 'Rechazada'] %>
+                    <% end %>
+                </div>
+                <%= form.hidden_field :id_turno, value: @solicitud.id_turno%>
+                <%= form.hidden_field :descripcion, value: @solicitud.descripcion%>
+                <%= form.hidden_field :id_usuario, value: @solicitud.id_usuario%>
+            </div>
+            
+            <div>
+                <%= form.submit 'Enviar', class: "button is-success is-outlined is-responsive" %>
+            </div>
+
+            <div>
+            <%= link_to 'Volver a solicitudes', solicituds_index_path(:razon => "Solicitues hechas a mis turnos"), class: "mt-6 button is-outlined is-link is-small" %>
+            </div>
     <% end  %>
 <% end %>

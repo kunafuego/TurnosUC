@@ -1,12 +1,20 @@
-<h1>Solicituds#new</h1>
 <%=  form_with(model: @solicitud, method: :post) do |form| %>
+    <div><h1 class="mt-4 title is-3 has-background-info-light mb-4">Nueva Solicitud</h1></div>
+    <div class="columns is-centered mt-4">
+    
+        <div class="column is-4">
 
-    <div>
-        <%= form.label :descripcion_solicitud %>
-        <%= form.text_area :descripcion, :cols => '70', :rows => '5' %>
-        <%= form.hidden_field :id_turno, value: @id_turno%>
+            <div class="field">
+                <label class="label has-text-left">Descripcion de la solicitud</label>
+                <%= form.text_area :descripcion, class: "textarea"%>
+                <%= form.hidden_field :id_turno, value: @id_turno%>
+            </div>
+            <div>
+                <%= form.submit 'Enviar Solicitud', class: "button is-success is-outlined is-responsive" %>
+                <%= link_to 'Volver', turnos_index_path(:razon => "Buscador de Turnos"), class: "button is-link is-outlined is-responsive" %>
+            </div>
+        
+        </div>
     </div>
-    <div>
-        <%= form.submit 'Enviar Solicitud' %>
-    </div>
+
 <% end %>

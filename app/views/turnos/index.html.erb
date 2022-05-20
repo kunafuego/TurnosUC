@@ -73,9 +73,12 @@
             </table>
         </div>
         <% unless @mis_turnos.empty? %>
-        <p><%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos'), class: "button is-link is-outlined is-small"%></p>
+            <p>
+            <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-success is-outlined is-small" %>
+            <%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos'), class: "button is-link is-outlined is-small"%>
+            </p>
         <% else %>
-        <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-link is-outlined is-small" %>
+            <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-link is-outlined is-small" %>
         <% end %>
 <% elsif params[:razon] = "Turnos en los que estoy" %>
     <h1 class="mt-5 title has-background-info-light is-4">Turnos en los que estoy </h1>
@@ -109,7 +112,4 @@
                 </tbody>
             </table>
         </div>
-        <% if usuario_signed_in? %>
-        <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-link is-outlined is-small" %>
-        <% end %>
 <% end %>

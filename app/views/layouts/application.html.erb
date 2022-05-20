@@ -13,7 +13,7 @@
 
   <body align="center">
     <%# NAVBAR %>
-    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href=<%= edit_usuario_registration_path %>>
         <% if usuario_signed_in? %>
@@ -30,7 +30,7 @@
     <div id="navbarBasicExample" class="navbar-menu">
       <% if usuario_signed_in? %>  
       <div class="navbar-start">
-          <%= link_to 'Turnos Creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), :class => "navbar-item"%>
+          <%= link_to 'Turnos Creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), :class => "navbar-item is-hoverable"%>
 
           <%= link_to 'Buscador de Turnos', turnos_index_path(:razon => "Buscador de Turnos"), :class => "navbar-item"%>
 
@@ -43,18 +43,18 @@
         <div class="navbar-item">
           <div class="buttons">
           <% if usuario_signed_in? %>
-            <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => "button is-light"%>
-            <%= link_to "Editar Perfil", edit_usuario_registration_path, :class => "button is-light" %>
+            <%= link_to "Editar Perfil", edit_usuario_registration_path, :class => "button is-white is-outlined is-responsive" %>
+            <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => "button is-white is-outlined is-responsive"%>
           <% else %>
             <% if current_page?(new_usuario_registration_path) %>
-              <%= link_to "Inicio", root_path, :class => "button is-light"%>
-              <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
+              <%= link_to "Inicio", root_path, :class => "button is-white is-outlined is-responsive"%>
+              <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-white is-outlined is-responsive"%>
             <% elsif current_page?(new_usuario_session_path) %>
-              <%= link_to "Inicio", root_path, :class => "button is-light"%>
-              <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
+              <%= link_to "Inicio", root_path, :class => "button is-white is-outlined is-responsive"%>
+              <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-white is-outlined is-responsive" %>
             <% else %>
-              <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
-              <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
+              <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-white is-outlined is-responsive"%>
+              <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-white is-outlined is-responsive" %>
             <% end %>
           <% end %>
 

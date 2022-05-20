@@ -34,9 +34,8 @@
             </tbody>
         </table>
     </div>
-<%= link_to 'Volver a buscar turnos', turnos_index_path(:razon => "Buscador de Turnos"), class: "button is-light is-small" %>
+<%= link_to 'Volver a buscar turnos', turnos_index_path(:razon => "Buscador de Turnos"), class: "button is-outlined is-link is-small" %>
 <% else %>
-
 <h1 class="mt-4 title has-background-info-light is-3">Solicitudes hechas a mis turnos</h1>
     <div class="columns is-centered is-narrow ">
         <table class="table is-striped is-hoverable ">
@@ -67,5 +66,5 @@
             </tbody>
         </table>
     </div>
-<%= link_to 'Volver a turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "button is-light is-small" %>
+<%= link_to 'Volver a turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "button is-outlined is-link is-small" %>
 <% end %>

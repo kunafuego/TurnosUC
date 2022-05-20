@@ -47,9 +47,11 @@
 
   </div>
 </div>
+
 <% if current_usuario.id == @turno.id_creador %>
-<%= link_to 'Volver a ver turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "mt-6 button is-link is-outlined is-small" %>
+    <%= link_to 'Volver a ver turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "mt-6 button is-link is-outlined is-small" %>
 <% elsif @mostrar_solicitar_unirse %>
-<%= link_to 'Volver a buscar turnos', turnos_index_path(:razon => "Buscador de Turnos"), class: "mt-6 button is-link is-outlined is-small" %>
+    <%= link_to 'Volver a buscar turnos', turnos_index_path(:razon => "Buscador de Turnos"), class: "mt-6 button is-link is-outlined is-small" %>
 <% elsif @mostrar_salirse_del_turno %>
-<%= link_to 'Volver a ver los turnos en los que estoy', turnos_index_path(:razon => "Turnos en los que estoy"), class: "mt-6 button is-link is-outlined is-small" %>
+    <%= link_to 'Volver a ver los turnos en los que estoy', turnos_index_path(:razon => "Turnos en los que estoy"), class: "mt-6 button is-link is-outlined is-small" %>
+<% end %>
