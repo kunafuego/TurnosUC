@@ -1,4 +1,3 @@
-
 <%= form_with(model: @turno , method: :post) do |form| %>
 
     <div><h1 class="mt-4 title is-3 has-background-info-light mb-4">Crear turno</h1></div>
@@ -67,6 +66,3 @@
         <%= form.submit 'Crear Turno',class: "button is-success is-outlined is-responsive" %>
     </div>
 <% end %>
-<div>
-    <%= link_to 'Volver a ver turnos', turnos_index_path, class: "mt-6 button is-link is-outlined is-small" %>
-</div>

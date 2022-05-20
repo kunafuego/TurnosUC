@@ -12,25 +12,59 @@
   </head>
 
   <body align="center">
-    
-    <%# <p class="notice"><%= notice %> </p>
-    <%# <p class="alert"><%= alert %> </p>
+    <%# NAVBAR %>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href=<%= edit_usuario_registration_path %>>
+        <% if usuario_signed_in? %>
+          <figure class="image" id="logo"><%= image_tag(current_usuario.imagen) %></figure>
+        <% end  %>
+      </a>
 
-    <% if usuario_signed_in? %>
-      <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => "button is-light"%>
-      <%= link_to "Editar Perfil", edit_usuario_registration_path, :class => "button is-light" %>
-    <% else %>
-      <% if current_page?(new_usuario_registration_path) %>
-        <%= link_to "Inicio", root_path, :class => "button is-light"%>
-        <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
-      <% elsif current_page?(new_usuario_session_path) %>
-        <%= link_to "Inicio", root_path, :class => "button is-light"%>
-        <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
-      <% else %>
-        <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
-        <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+      <% if usuario_signed_in? %>  
+      <div class="navbar-start">
+          <%= link_to 'Turnos Creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), :class => "navbar-item"%>
+
+          <%= link_to 'Buscador de Turnos', turnos_index_path(:razon => "Buscador de Turnos"), :class => "navbar-item"%>
+
+          <%= link_to 'Turnos en los que estoy', turnos_index_path(:razon => "Turnos en los que estoy"), :class => "navbar-item"%>
+
+      </div>
       <% end %>
-    <% end %>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+          <% if usuario_signed_in? %>
+            <%= link_to "Cerrar sesion", destroy_usuario_session_path, method: :delete, :class => "button is-light"%>
+            <%= link_to "Editar Perfil", edit_usuario_registration_path, :class => "button is-light" %>
+          <% else %>
+            <% if current_page?(new_usuario_registration_path) %>
+              <%= link_to "Inicio", root_path, :class => "button is-light"%>
+              <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
+            <% elsif current_page?(new_usuario_session_path) %>
+              <%= link_to "Inicio", root_path, :class => "button is-light"%>
+              <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
+            <% else %>
+              <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-light"%>
+              <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-light" %>
+            <% end %>
+          <% end %>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+  <%# FIN NAVBAR %>
       
     <%= yield %>
     

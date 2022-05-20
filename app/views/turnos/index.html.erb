@@ -1,13 +1,12 @@
-<% if usuario_signed_in? %>
-<% else %>
+<% unless usuario_signed_in? %>
     <h2 class = "mt-4 title has-text-dark has-background-info-light is-3"> Bienvenid@ a Turnos UC! </h2>
 <% end %>
 
-
+<% if params[:razon] == "Buscador de Turnos" %>
 <h1 class="mt-4 title has-background-info-light is-4">Buscador de Turnos</h1>
-<% if @turnos_buscador.empty?%>
-    <h3 class="subtitle"> No hay turnos disponibles <h3>
-<% else %>
+    <% if @turnos_buscador.empty?%>
+        <h3 class="subtitle"> No hay turnos disponibles <h3>
+    <% else %>
     <div class="columns is-centered">
         <table class="table is-striped is-hoverable ">
                 <thead>
@@ -33,7 +32,7 @@
                         </td>
                     </tr>
                     <% end %>
-                <%  end  %>
+    <%  end  %>
             </tbody>
         </table>
     </div> 
@@ -41,7 +40,7 @@
     <%= link_to 'Ver mis solicitudes a nuevos turnos', solicituds_index_path(:tipo => 'mis solicitudes'), class: "button is-link is-outlined is-small" %>
     <% end %>
 
-<% if usuario_signed_in? %>
+<% elsif params[:razon] == "Turnos Creados por mi" %>
     <h1 class="mt-5 title has-background-info-light is-4">Turnos creados por mí</h1>
     <% if @mis_turnos.empty?%>
         <h3 class="subtitle"> No hay turnos disponibles <h3>
@@ -69,13 +68,16 @@
                             </td>
                         </tr>
                         <% end %>
-                    <%  end  %>
+    <%  end  %>
                 </tbody>
             </table>
         </div>
+        <% unless @mis_turnos.empty? %>
         <p><%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos'), class: "button is-link is-outlined is-small"%></p>
-
-
+        <% else %>
+        <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-link is-outlined is-small" %>
+        <% end %>
+<% elsif params[:razon] = "Turnos en los que estoy" %>
     <h1 class="mt-5 title has-background-info-light is-4">Turnos en los que estoy </h1>
     <% if @turnos_que_estoy.empty?%>
         <h3 class = "subtitle"> No hay turnos disponibles <h3>
@@ -107,5 +109,7 @@
                 </tbody>
             </table>
         </div>
+        <% if usuario_signed_in? %>
         <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-link is-outlined is-small" %>
-    <% end %>
+        <% end %>
+<% end %>

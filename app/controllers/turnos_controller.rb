@@ -27,6 +27,9 @@ class TurnosController < ApplicationController
   end
 
   def index
+    unless params.key?(:razon)
+      params[:razon] = "Buscador de Turnos"
+    end
     @mis_turnos = if current_usuario
                     Turno.where(id_creador: current_usuario.id).all
                   else
@@ -43,6 +46,7 @@ class TurnosController < ApplicationController
       @turnos_que_estoy = []
     end
     @turnos_buscador = Turno.all - @mis_turnos - @turnos_que_estoy
+    
   end
 
   def show
