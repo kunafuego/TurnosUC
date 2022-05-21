@@ -1,0 +1,22 @@
+<h1>Resenas#new</h1>
+
+<%= form_with(model: @resena , method: :post) do |form| %>
+
+  <div>
+    <%= form.label :calificacion %>
+    <%= form.number_field :calificacion, in: 1..10, step: 0.1 %>
+  </div>
+  
+  <div>
+    <%= form.label :contenido %>
+    <%= form.text_field :contenido %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :turno_id, value: @id_turno %>
+  </div>
+
+  <div>
+    <%= form.submit 'Crear'%>
+  </div>
+<% end %>

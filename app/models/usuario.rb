@@ -17,4 +17,5 @@ class Usuario < ApplicationRecord
   has_many :solicituds, inverse_of: :usuario, dependent: :destroy, foreign_key: 'id_usuario'
 
   has_many :turnos, foreign_key: 'id_creador', dependent: :destroy
+  has_many :resenas, dependent: :destroy
 end

@@ -15,6 +15,7 @@ class Turno < ApplicationRecord
   has_many :pertenece_as
   has_many :usuarios, through: :pertenece_as
   has_many :solicituds, inverse_of: :turno, dependent: :destroy, foreign_key: 'id_turno'
+  has_many :resenas, dependent: :destroy
 
   belongs_to :usuario, foreign_key: 'id_creador'
 end
