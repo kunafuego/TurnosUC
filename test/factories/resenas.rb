@@ -2,8 +2,10 @@
 
 FactoryBot.define do
   factory :resena do
-    id_usuario { 1 }
-    id_turno { 1 }
+    # usuario_id { 1 }
+    turno_id { 1 }
+    association :usuario
+    association :turno
     calificacion { 1.5 }
     contenido { 'MyText' }
   end

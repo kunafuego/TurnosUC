@@ -1,13 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'resenas/index'
-  get 'resenas/show'
-  get 'resenas/new'
-  get 'resenas/edit'
-  get 'resenas/create'
-  get 'resenas/update'
-  get 'resenas/destroy'
+
   ########################## PERTENECE A ############################
 
   post 'pertenece_as', to: 'pertenece_as#create'
@@ -29,7 +23,6 @@ Rails.application.routes.draw do
   post 'turnos', to: 'turnos#create'
   get 'turnos/index'
   get 'turnos/show'
-  # get 'turnos/:id', to: 'turnos#show', as: 'turno'
   get 'turnos/edit'
   patch 'turnos/update', to: 'turnos#update', as: 'turnos_update'
   delete 'turnos/delete', to: 'turnos#delete', as: 'turnos_delete'
@@ -37,6 +30,7 @@ Rails.application.routes.draw do
   ########################## RESEÑAS ############################
   get 'resenas/new'
   post 'resenas', to: 'resenas#create'
+  delete 'resenas/delete', to: 'resenas#delete'
 
   devise_for :usuarios, controllers: {
     sessions: 'usuarios/sessions',
