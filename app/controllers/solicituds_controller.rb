@@ -51,7 +51,6 @@ class SolicitudsController < ApplicationController
   end
 
   def update
-    puts 'Se entró al update'
     @solicitud = Solicitud.find(params[:id])
     @solicitud_new_params = params.require(:solicitud).permit(:descripcion, :id_turno, :estado, :id_usuario)
     if @solicitud.update(@solicitud_new_params)

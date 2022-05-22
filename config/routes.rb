@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   get 'resenas/new'
   post 'resenas', to: 'resenas#create'
 
-
   devise_for :usuarios, controllers: {
     sessions: 'usuarios/sessions',
     registrations: 'usuarios/registrations'
