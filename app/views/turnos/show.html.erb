@@ -1,8 +1,9 @@
 
 <div class="section">
+    <div><h1 class="title is-3 has-background-info-light mb-4">Turno</h1></div>
     <div class="columns is-centered">
         <div class="column is-4">
-            <div><h1 class="title is-3 has-background-info-light mb-4">Turno</h1></div>
+            <div><h1 class="title is-3 has-background-info-light mb-4">Información</h1></div>
 
             <div>
                 <p class="is-size-6 has-text-weight-bold"> Direccion de llegada: <%= @turno.direccion_llegada%></p>
@@ -22,6 +23,18 @@
             <div>
                 <p class="mt-4 is-size-6 has-text-weight-bold mb-2"> Nombre creador: <%= @creador.nombre%></p>
                 <figure class="image is-128x128 is-inline-block"><%= image_tag(@creador.imagen) %></figure>
+            </div>
+        </div>
+        <div class="column is-4">
+            <div><h1 class="title is-3 has-background-info-light mb-4">Integrantes</h1></div>
+            <% ids_pertenece_a = PerteneceA.where(id_turno: @turno.id).ids %>
+            <% ids_pertenece_a.each do |id_pertenece| %>
+              <div>
+              <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
+                  <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
+                  <figure class="image is-128x128 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
+              </div>
+            <% end %>
             </div>
         </div>
     </div>
