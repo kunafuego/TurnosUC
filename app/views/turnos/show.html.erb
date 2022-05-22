@@ -1,7 +1,6 @@
-
 <div class="section">
     <div class="columns is-centered">
-        <div class="column is-4">
+        <div class="column is-5">
             <div><h1 class="title is-3 has-background-info-light mb-4">Turno</h1></div>
 
             <div>
@@ -27,54 +26,63 @@
     </div>
 </div>
 
-<h2>Reseñas</h2>
-
-<% if @resenas.empty?%>
-  <p> El turno no tiene reseñas </p>
-<% else %>
-  <table align='center'>
-      <tr>
+<section class="section">
+  <div class="content">
+    <h3>Reseñas del turno</h3>
+  </div>
+    
+  <div class="columns is-centered">
+    <table class="table is-striped is-hoverable">
+      <% if @resenas.empty?%>
+        <p> El turno no tiene reseñas </p>
+      <% else %>
         <thead>
-          <th>Usuario</th>
-          <th>Calificación</th>
-          <th>Comentario</th>
-        </thead>
-      </tr>
-        <% @resenas.each do |resena|%>
-      <tr>
-        <td><%= resena.usuario.nombre %></td>
-        <td><%= resena.calificacion %></td>
-        <td><%= resena.contenido %></td>
-        <%# <td>
-          <%= link_to "Eliminar", comments_delete_path(comment.id), method: :delete, data: { confirm: "Desea eliminar este comentario?"} %>
-        <%# </td> %>
-      </tr>
-        <% end %>
-  </table>
-<%  end  %>
+          <tr>
+            <th>Usuario</th>
+            <th>Calificación</th>
+            <th>Comentario</th>
+          </tr>
+      </thead>
 
-<%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id) %>
+      <tbody>
+        <% @resenas.each do |resena| %>
+        <tr>
+          <td><%= resena.usuario.nombre %></td>
+          <td><%= resena.calificacion %></td>
+          <td><%= resena.contenido %></td>
+        </tr>
+        <% end %>
+      </tbody>
+      <%  end  %>
+    </table>
+
+  </div>
+</section>
+
+<%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info is-small" %>
 
 <! Acá debo agregar el nombre y foto del creador, nombre de los participantes, y cualquier otra cosa que se me ocurra
 #Además, acá va la posible solicitud >
 
-<div class="columns is-centered">
-  <div class="column is-4">
-    
-    <% if current_usuario.id == @turno.id_creador %>
-        <h3 class="title has-background-info-light is-5">Opciones</h3>
-        <p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id), class: "button is-outlined is-info is-small" %>
-        <%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
-    <% elsif @mostrar_solicitar_unirse %>
-        <h3 class="title has-background-info-light is-5">Solicitar</h3>
-        <p><%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id), class: "button is-outlined is-success is-link is-small" %></p>
-    <% elsif @mostrar_salirse_del_turno %>
-        <h3 class="title has-background-info-light is-5">Salirse</h3>
-        <p><%= link_to 'Salirse del Turno', pertenece_as_delete_path(:id_pertenece_a => @id_pertenece_a), method: :delete, class: "button is-outlined is-danger is-small"%></p>
-    <% end %>
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-4">
+      
+      <% if current_usuario.id == @turno.id_creador %>
+          <h3 class="title is-5">Opciones</h3>
+          <p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id), class: "button is-outlined is-info is-small" %>
+          <%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
+      <% elsif @mostrar_solicitar_unirse %>
+          <h3 class="title has-background-info-light is-5">Solicitar</h3>
+          <p><%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id), class: "button is-outlined is-success is-link is-small" %></p>
+      <% elsif @mostrar_salirse_del_turno %>
+          <h3 class="title has-background-info-light is-5">Salirse</h3>
+          <p><%= link_to 'Salirse del Turno', pertenece_as_delete_path(:id_pertenece_a => @id_pertenece_a), method: :delete, class: "button is-outlined is-danger is-small"%></p>
+      <% end %>
 
+    </div>
   </div>
-</div>
+</section>
 
 <% if current_usuario.id == @turno.id_creador %>
     <%= link_to 'Volver a ver turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "mt-6 button is-link is-outlined is-small" %>
