@@ -14,6 +14,7 @@ los turnos creados por mí, los turnos a los que pertenezco y el buscador de tur
 Se creó también el CRUD de las reseñas, con las cuales va a ser posible crear las reseñas, y verlas en
 los show de cada turno.
 
+Se crearon los test correspondientes y no hay problemas con el rubocop!
 # Heroku
 
 * El link para ver el proyecto en Heroku, es el siguiente:
