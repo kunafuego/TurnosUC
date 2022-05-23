@@ -41,8 +41,8 @@
         <table class="table is-striped is-hoverable ">
             <thead>
                 <tr>
-                    <th>id_usuario</th>
-                    <th>id_turno</th>
+                    <th>Nombre solicitante</th>
+                    <th>Día/hora Turno</th>
                     <th>Descripcion</th>
                     <th>Estado</th>
                 </tr>
@@ -53,8 +53,10 @@
                 <% else %>
                     <% @solicitudes_hechas_a_mis_turnos.each do |solicitud| %>
                     <tr>
-                        <td><%= solicitud.id_usuario%></td>
-                        <td><%= solicitud.id_turno%></td>
+                        <% usuario = Usuario.find(solicitud.id_usuario) %>
+                        <% turno = Turno.find(solicitud.id_turno) %>
+                        <td><%= usuario.nombre%></td>
+                        <td><%= turno.dia_de_la_semana%> a las <%= turno.hora_salida %></td>
                         <td><%= solicitud.descripcion%></td>
                         <td><%= solicitud.estado%></td>
                         <% if solicitud.estado != "Aceptada" %>
