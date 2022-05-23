@@ -11,23 +11,18 @@ RSpec.describe Resena, type: :request do
 
     @turno = create(:turno, usuario: @usuario)
 
-<<<<<<< HEAD
-    @resena = Resena.create!({ usuario_id: @usuario.id, turno_id: @turno.id,
-                               calificacion: 10.0, contenido: 'Buen turno' })
-=======
-    @pertenece_a = PerteneceA.create!({id_usuario: @segundo_usuario.id, id_turno: @turno.id})
+    @pertenece_a = PerteneceA.create!({ id_usuario: @segundo_usuario.id, id_turno: @turno.id })
 
-    @resena = Resena.create!({usuario_id: @segundo_usuario.id, turno_id: @turno.id,
-                                calificacion: 10.0, contenido: 'Buen turno'})
+    @resena = Resena.create!({ usuario_id: @segundo_usuario.id, turno_id: @turno.id,
+                               calificacion: 10.0, contenido: 'Buen turno' })
 
     # Params
-    @params_resena= {
-      usuario_id: @segundo_usuario.id, 
+    @params_resena = {
+      usuario_id: @segundo_usuario.id,
       turno_id: @turno.id,
-      calificacion: 10.0, 
+      calificacion: 10.0,
       contenido: 'Buen turno'
     }
->>>>>>> e0e96bb0b553c8ad94a96f4234f0d8420f7087bc
   end
 
   describe 'get new' do
@@ -40,12 +35,7 @@ RSpec.describe Resena, type: :request do
   describe 'create' do
     it 'deberia aumentar en 1 la cantidad de resenas' do
       expect do
-<<<<<<< HEAD
-        post '/resenas', params: { resena: { usuario_id: 1, turno_id: 1,
-                                             calificacion: 10.0, contenido: 'Buen turno' } }
-=======
-        post '/resenas', params: {resena: @params_resena}
->>>>>>> e0e96bb0b553c8ad94a96f4234f0d8420f7087bc
+        post '/resenas', params: { resena: @params_resena }
       end.to change(Resena, :count).by(1)
     end
     it 'no deberia aumentar la cantidad de resenas' do
