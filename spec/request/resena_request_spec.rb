@@ -6,12 +6,23 @@ require 'faker'
 RSpec.describe Resena, type: :request do
   before(:each) do
     @usuario = create(:usuario)
+    @segundo_usuario = create(:usuario)
     sign_in @usuario
 
-    @turno = create(:turno)
+    @turno = create(:turno, usuario: @usuario)
 
-    @resena = Resena.create!({usuario_id: @usuario.id, turno_id: @turno.id,
+    @pertenece_a = PerteneceA.create!({id_usuario: @segundo_usuario.id, id_turno: @turno.id})
+
+    @resena = Resena.create!({usuario_id: @segundo_usuario.id, turno_id: @turno.id,
                                 calificacion: 10.0, contenido: 'Buen turno'})
+
+    # Params
+    @params_resena= {
+      usuario_id: @segundo_usuario.id, 
+      turno_id: @turno.id,
+      calificacion: 10.0, 
+      contenido: 'Buen turno'
+    }
   end
 
   describe 'get new' do
@@ -24,8 +35,7 @@ RSpec.describe Resena, type: :request do
   describe 'create' do
     it 'deberia aumentar en 1 la cantidad de resenas' do
       expect do
-        post '/resenas', params: {resena: {usuario_id: 1, turno_id: 1,
-                                    calificacion: 10.0, contenido: 'Buen turno'}}
+        post '/resenas', params: {resena: @params_resena}
       end.to change(Resena, :count).by(1)
     end
     it 'no deberia aumentar la cantidad de resenas' do
