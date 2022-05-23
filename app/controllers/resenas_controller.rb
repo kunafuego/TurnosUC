@@ -18,14 +18,14 @@ class ResenasController < ApplicationController
     if @resena.save
       redirect_to turnos_show_path(id: @resena.turno.id, id_creador: @resena.turno.id_creador)
     else
-      redirect_to resenas_new_path(:turno_id => @resena_params[:turno_id]), notice: 'Error al crear la reseña'
+      redirect_to resenas_new_path(turno_id: @resena_params[:turno_id]), notice: 'Error al crear la reseña'
     end
   end
 
   def delete
     @resena = Resena.find(params[:resena_id])
     @resena.destroy
-    redirect_to turnos_show_path(:id => @resena.turno.id, :id_creador => @resena.turno.id_creador)
+    redirect_to turnos_show_path(id: @resena.turno.id, id_creador: @resena.turno.id_creador)
   end
 
   # def index
@@ -36,5 +36,4 @@ class ResenasController < ApplicationController
 
   # def update
   # end
-
 end

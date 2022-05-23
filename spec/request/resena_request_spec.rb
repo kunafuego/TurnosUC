@@ -10,8 +10,8 @@ RSpec.describe Resena, type: :request do
 
     @turno = create(:turno)
 
-    @resena = Resena.create!({usuario_id: @usuario.id, turno_id: @turno.id,
-                                calificacion: 10.0, contenido: 'Buen turno'})
+    @resena = Resena.create!({ usuario_id: @usuario.id, turno_id: @turno.id,
+                               calificacion: 10.0, contenido: 'Buen turno' })
   end
 
   describe 'get new' do
@@ -24,15 +24,15 @@ RSpec.describe Resena, type: :request do
   describe 'create' do
     it 'deberia aumentar en 1 la cantidad de resenas' do
       expect do
-        post '/resenas', params: {resena: {usuario_id: 1, turno_id: 1,
-                                    calificacion: 10.0, contenido: 'Buen turno'}}
+        post '/resenas', params: { resena: { usuario_id: 1, turno_id: 1,
+                                             calificacion: 10.0, contenido: 'Buen turno' } }
       end.to change(Resena, :count).by(1)
     end
     it 'no deberia aumentar la cantidad de resenas' do
       expect do
         post '/resenas',
-             params: {resena: {usuario_id: 1, turno_id: 2,
-                                contenido: 'Buen turno'}}
+             params: { resena: { usuario_id: 1, turno_id: 2,
+                                 contenido: 'Buen turno' } }
       end.to change(Resena, :count).by(0)
     end
   end
