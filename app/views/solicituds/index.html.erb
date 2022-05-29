@@ -1,104 +1,104 @@
 <% if @tipo == 'mis solicitudes' %>
 <h1 class="mt-4 title has-background-info-light is-3">Solicitudes hechas por mi</h1>
-    <div class="columns is-centered is-narrow">
-        <table class="table is-striped is-hoverable ">
-            <thead>
-                <tr>
-                    <th>Creador Turno</th>
-                    <th>Día de la Semana</th>
-                    <th>Dirección Llegada</th>            
-                    <th>Descripcion</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if @mis_solicitudes.empty?%>
-                    <h3> No hay solicitudes <h3>
-                <% else %>
-                    <% @mis_solicitudes.each do |solicitud| %>
+    <% if @mis_solicitudes.empty?%>
+        <h3 class="subtitle"> No hay solicitudes <h3>
+    <% else %>
+        <div class="columns is-centered is-narrow">
+            <table class="table is-striped is-hoverable ">
+                <thead>
                     <tr>
-                        <% turno = Turno.find(solicitud.id_turno)%>
-                        <% creador = Usuario.find(turno.id_creador) %>
-                        <td><%= creador.nombre %></td>
-                        <td><%= turno.dia_de_la_semana%></td>
-                        <td><%= turno.direccion_llegada%></td>
-                        <td><%= solicitud.descripcion%></td>
-                        <td><%= solicitud.estado%></td>
-                        <% if solicitud.estado == "pendiente"%>
-                        <td><%= link_to "Borrar Solicitud", solicituds_delete_path(:id => solicitud.id), method: :delete%></td>
-                        <td><%= link_to 'Editar Solicitud', solicituds_edit_path(:id => solicitud.id, :tipo_edit => "completo") %></td>
-                        <% end %>
+                        <th>Creador Turno</th>
+                        <th>Día de la Semana</th>
+                        <th>Dirección Llegada</th>            
+                        <th>Descripcion</th>
+                        <th>Estado</th>
                     </tr>
+                </thead>
+                <tbody>
+                    <% @mis_solicitudes.each do |solicitud| %>
+                        <tr>
+                            <% turno = Turno.find(solicitud.id_turno)%>
+                            <% creador = Usuario.find(turno.id_creador) %>
+                            <td><%= creador.nombre %></td>
+                            <td><%= turno.dia_de_la_semana%></td>
+                            <td><%= turno.direccion_llegada%></td>
+                            <td><%= solicitud.descripcion%></td>
+                            <td><%= solicitud.estado%></td>
+                            <% if solicitud.estado == "pendiente"%>
+                            <td><%= link_to "Borrar Solicitud", solicituds_delete_path(:id => solicitud.id), method: :delete%></td>
+                            <td><%= link_to 'Editar Solicitud', solicituds_edit_path(:id => solicitud.id, :tipo_edit => "completo") %></td>
+                            <% end %>
+                        </tr>
                     <% end %>
-                <%  end  %>
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
+    <% end %>
 <%= link_to 'Volver a buscar turnos', turnos_index_path(:razon => "Buscador de Turnos"), class: "button is-outlined is-link is-small" %>
 <% elsif @tipo == 'solicitudes hechas a mis turnos' %>
 <h1 class="mt-4 title has-background-info-light is-3">Solicitudes hechas a mis turnos</h1>
-    <div class="columns is-centered is-narrow ">
-        <table class="table is-striped is-hoverable ">
-            <thead>
-                <tr>
-                    <th>Nombre solicitante</th>
-                    <th>Día/hora Turno</th>
-                    <th>Descripcion</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if @solicitudes_hechas_a_mis_turnos.empty?%>
-                    <h3> No hay solicitudes <h3>
-                <% else %>
-                    <% @solicitudes_hechas_a_mis_turnos.each do |solicitud| %>
+    <% if @solicitudes_hechas_a_mis_turnos.empty?%>
+        <h3 class="subtitle"> No hay solicitudes <h3>
+    <% else %>
+        <div class="columns is-centered is-narrow ">
+            <table class="table is-striped is-hoverable ">
+                <thead>
                     <tr>
-                        <% usuario = Usuario.find(solicitud.id_usuario) %>
-                        <% turno = Turno.find(solicitud.id_turno) %>
-                        <td><%= usuario.nombre%></td>
-                        <td><%= turno.dia_de_la_semana%> a las <%= turno.hora_salida %></td>
-                        <td><%= solicitud.descripcion%></td>
-                        <td><%= solicitud.estado%></td>
-                        <% if solicitud.estado != "Aceptada" %>
-                            <td><%= link_to "Aceptar/Rechazar", solicituds_edit_path(:id => solicitud.id, :tipo_edit => "A/R"), class: "button is-light is-small is-link is-focused" %></td>
-                        <% end %>
+                        <th>Nombre solicitante</th>
+                        <th>Día/hora Turno</th>
+                        <th>Descripcion</th>
+                        <th>Estado</th>
                     </tr>
-                    <% end %>
-                <%  end  %>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>     
+                    <% @solicitudes_hechas_a_mis_turnos.each do |solicitud| %>
+                        <tr>
+                            <% usuario = Usuario.find(solicitud.id_usuario) %>
+                            <% turno = Turno.find(solicitud.id_turno) %>
+                            <td><%= usuario.nombre%></td>
+                            <td><%= turno.dia_de_la_semana%> a las <%= turno.hora_salida %></td>
+                            <td><%= solicitud.descripcion%></td>
+                            <td><%= solicitud.estado%></td>
+                            <% if solicitud.estado == "Pendiente" %>
+                                <td><%= link_to "Aceptar/Rechazar", solicituds_edit_path(:id => solicitud.id, :tipo_edit => "A/R"), class: "button is-light is-small is-link is-focused" %></td>
+                            <% end %>
+                        </tr>
+                <% end %> 
+                </tbody>
+            </table>
+        </div>
+    <% end %>
 <%= link_to 'Volver a turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "button is-outlined is-link is-small" %>
 <% else @tipo == 'solicitudes hechas al turno' %>
 <h1 class="mt-4 title has-background-info-light is-3">Solicitudes hechas al Turno</h1>
-    <div class="columns is-centered is-narrow ">
-        <table class="table is-striped is-hoverable ">
-            <thead>
-                <tr>
-                    <th>Nombre solicitante</th>
-                    <th>Descripcion</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if @solicitudes_hechas_al_turno.empty?%>
-                    <h3> No hay solicitudes <h3>
-                <% else %>
-                    <% @solicitudes_hechas_al_turno.each do |solicitud| %>
+    <% if @solicitudes_hechas_al_turno.empty?%>
+        <h3 class="subtitle"> No hay solicitudes <h3>
+    <% else %>
+        <div class="columns is-centered is-narrow ">
+            <table class="table is-striped is-hoverable ">
+                <thead>
                     <tr>
-                        <% usuario = Usuario.find(solicitud.id_usuario) %>
-                        <% turno = Turno.find(solicitud.id_turno) %>
-                        <td><%= usuario.nombre%></td>
-                        <td><%= solicitud.descripcion%></td>
-                        <td><%= solicitud.estado%></td>
-                        <% if solicitud.estado != "Aceptada" %>
-                            <td><%= link_to "Aceptar/Rechazar", solicituds_edit_path(:id => solicitud.id, :tipo_edit => "A/R"), class: "button is-light is-small is-link is-focused" %></td>
-                        <% end %>
+                        <th>Nombre solicitante</th>
+                        <th>Descripcion</th>
+                        <th>Estado</th>
                     </tr>
-                    <% end %>
-                <%  end  %>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <% @solicitudes_hechas_al_turno.each do |solicitud| %>
+                        <tr>
+                            <% usuario = Usuario.find(solicitud.id_usuario) %>
+                            <% turno = Turno.find(solicitud.id_turno) %>
+                            <td><%= usuario.nombre%></td>
+                            <td><%= solicitud.descripcion%></td>
+                            <td><%= solicitud.estado%></td>
+                            <% if solicitud.estado == "Pendiente" %>
+                                <td><%= link_to "Aceptar/Rechazar", solicituds_edit_path(:id => solicitud.id, :tipo_edit => "A/R"), class: "button is-light is-small is-link is-focused" %></td>
+                            <% end %>
+                        </tr>
+                    <% end %> 
+                </tbody>
+            </table>
+        </div>
+    <% end %>
 <%= link_to 'Volver al turno', turnos_show_path(:id => @turno.id), class: "button is-outlined is-link is-small" %>
 <% end %>
