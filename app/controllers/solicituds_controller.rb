@@ -39,7 +39,7 @@ class SolicitudsController < ApplicationController
     if params[:tipo] == 'mis solicitudes'
       @mis_solicitudes = Solicitud.where(id_usuario: current_usuario.id).all
       @tipo = 'mis solicitudes'
-    else
+    elsif params[:tipo] == 'solicitutes a mis turnos'
       @mis_turnos = Turno.where(id_creador: current_usuario.id).all
       @ids_mis_turnos = []
       @mis_turnos.each do |turno|
@@ -47,6 +47,10 @@ class SolicitudsController < ApplicationController
       end
       @solicitudes_hechas_a_mis_turnos = Solicitud.where(id_turno: @ids_mis_turnos).all
       @tipo = 'solicitudes hechas a mis turnos'
+    else
+      @turno = Turno.find(params[:id_turno])
+      @solicitudes_hechas_al_turno = Solicitud.where(id_turno: @ids_mis_turnos).all
+      @tipo = 'solicitudes hechas al turno'
     end
   end
 

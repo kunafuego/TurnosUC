@@ -48,7 +48,7 @@ class TurnosController < ApplicationController
 
   def show
     @turno = Turno.find(params[:id])
-    @creador = Usuario.find(params[:id_creador])
+    @creador = Usuario.find(@turno.id_creador)
     @resenas = @turno.resenas.all.order(created_at: :desc)
     # Con esta info debo buscar en las otras tablas los elementos que quiero mandar al show
     @mostrar_solicitar_unirse = mostrar_solicitar_unirse(@turno.id, current_usuario.id)

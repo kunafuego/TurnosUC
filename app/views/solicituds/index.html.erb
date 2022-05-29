@@ -35,7 +35,7 @@
         </table>
     </div>
 <%= link_to 'Volver a buscar turnos', turnos_index_path(:razon => "Buscador de Turnos"), class: "button is-outlined is-link is-small" %>
-<% else %>
+<% elsif @tipo == 'solicitudes hechas a mis turnos' %>
 <h1 class="mt-4 title has-background-info-light is-3">Solicitudes hechas a mis turnos</h1>
     <div class="columns is-centered is-narrow ">
         <table class="table is-striped is-hoverable ">
@@ -69,4 +69,36 @@
         </table>
     </div>
 <%= link_to 'Volver a turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "button is-outlined is-link is-small" %>
+<% else @tipo == 'solicitudes hechas al turno' %>
+<h1 class="mt-4 title has-background-info-light is-3">Solicitudes hechas al Turno</h1>
+    <div class="columns is-centered is-narrow ">
+        <table class="table is-striped is-hoverable ">
+            <thead>
+                <tr>
+                    <th>Nombre solicitante</th>
+                    <th>Descripcion</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if @solicitudes_hechas_al_turno.empty?%>
+                    <h3> No hay solicitudes <h3>
+                <% else %>
+                    <% @solicitudes_hechas_al_turno.each do |solicitud| %>
+                    <tr>
+                        <% usuario = Usuario.find(solicitud.id_usuario) %>
+                        <% turno = Turno.find(solicitud.id_turno) %>
+                        <td><%= usuario.nombre%></td>
+                        <td><%= solicitud.descripcion%></td>
+                        <td><%= solicitud.estado%></td>
+                        <% if solicitud.estado != "Aceptada" %>
+                            <td><%= link_to "Aceptar/Rechazar", solicituds_edit_path(:id => solicitud.id, :tipo_edit => "A/R"), class: "button is-light is-small is-link is-focused" %></td>
+                        <% end %>
+                    </tr>
+                    <% end %>
+                <%  end  %>
+            </tbody>
+        </table>
+    </div>
+<%= link_to 'Volver al turno', turnos_show_path(:id => @turno.id), class: "button is-outlined is-link is-small" %>
 <% end %>
