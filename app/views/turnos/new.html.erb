@@ -1,68 +1,101 @@
-<%= form_with(model: @turno , method: :post) do |form| %>
+<div class="columns">
+    <div class="column is-one-fifth has-background-info-light mt-3 ml-3">
+        <aside class="menu has-text-left margin mt-2 ml-2">
+            
+            <p class="menu-label">
+                Turnos
+            </p>
+            <ul class="menu-list">
+                <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
 
-    <div><h1 class="mt-4 title is-3 has-background-info-light mb-4">Crear turno</h1></div>
-    <div class="columns is-centered mt-4">
-        
-        <div class="column is-2">
-
-            <div class="field">
-                <label class="label">Tipo de viaje</label>
-                <div class="select">
-                    <%= form.select :tipo, ["Ida", "Vuelta"] %>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Limite de Personas</label>
-                <div class="select">
-                    <%= form.select :limite_personas, [2, 3, 4, 5, 6, 7, 8, 9, 10] %>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="column is-2">
-
-            <div class="field">
-                <label class="label">Dia de la semana</label>
-                <div class="select">
-                    <%= form.select :dia_de_la_semana, ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'] %>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Hora de salida</label>
-                <div class="select">
-                    <%=form.select :hora, ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
-                                                '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
-                        '22', '23'] %>
-                </div>
-                <span class="colon">:</span>
-                <div class="select">
-                    <%=form.select :minutos, ['00', '15', '30', '45'] %>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="columns is-centered">
-
-        <div class="column is-4">
-
-            <div class="field">
-                    <label class="label">Direccion de Llegada</label>
-                    <%= form.text_field :direccion_llegada, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de llegada" %>
-                </div>
+            </ul>
+            <p class="menu-label">
+                Solicitudes
+            </p>
+            <ul class="menu-list is-hoverable">
+                <li><a href=<%= solicituds_index_path(:tipo => 'mis solicitudes') %>> Ver Mis Solicitudes </a></li>
+                <li><a href=<%= solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos') %>> Ver Solicitudes a Mis Turnos </a></li>
+            </ul>
                 
-                <div class="field">
-                    <label class="label">Direccion de Salida</label>
-                    <%= form.text_field :direccion_salida, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de salida" %>
+        </aside>
+
+    </div>
+    <div class="column">
+
+        <%= form_with(model: @turno , method: :post) do |form| %>
+
+            <div class="columns is-centered mt-4">
+                <div class="column is-half has-background-info-light">
+                    <h1 class="mt-4 title is-3 mb-4">Crear turno</h1>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div>
-        <%= form.submit 'Crear Turno', class: "button is-success is-outlined is-responsive" %>
+            <div class="columns is-centered">
+                
+                <div class="column is-one-quarter has-background-info-light">
+
+                    <div class="field">
+                        <label class="label">Tipo de viaje</label>
+                        <div class="select">
+                            <%= form.select :tipo, ["Ida", "Vuelta"] %>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Limite de Personas</label>
+                        <div class="select">
+                            <%= form.select :limite_personas, [2, 3, 4, 5, 6, 7, 8, 9, 10] %>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="column is-one-quarter has-background-info-light">
+
+                    <div class="field">
+                        <label class="label">Dia de la semana</label>
+                        <div class="select">
+                            <%= form.select :dia_de_la_semana, ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'] %>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Hora de salida</label>
+                        <div class="select">
+                            <%=form.select :hora, ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+                                                        '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
+                                '22', '23'] %>
+                        </div>
+                        <span class="colon">:</span>
+                        <div class="select">
+                            <%=form.select :minutos, ['00', '15', '30', '45'] %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columns is-centered ">
+
+                <div class="column is-half has-background-info-light">
+
+                    <div class="field">
+                        <label class="label">Direccion de Llegada</label>
+                        <%= form.text_field :direccion_llegada, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de llegada" %>
+                    </div>
+                        
+                    <div class="field">
+                        <label class="label">Direccion de Salida</label>
+                        <%= form.text_field :direccion_salida, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de salida" %>
+                    </div>
+
+                    <div class="field">
+                        <%= form.submit 'Crear Turno', class: "button is-success is-outlined is-responsive" %>
+                    </div>
+                </div>
+            </div>
+            
+        <% end %>
     </div>
-<% end %>
+</div>

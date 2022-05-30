@@ -2,114 +2,127 @@
     <h2 class = "mt-4 title has-text-dark has-background-info-light is-3"> Bienvenid@ a Turnos UC! </h2>
 <% end %>
 
-<% if params[:razon] == "Buscador de Turnos" %>
-<h1 class="mt-4 title has-background-info-light is-4">Buscador de Turnos</h1>
-    <% if @turnos_buscador.empty?%>
-        <h3 class="subtitle"> No hay turnos disponibles <h3>
-    <% else %>
-    <div class="columns is-centered">
-        <table class="table is-striped is-hoverable ">
-                <thead>
-                <tr>
-                    <th>Día de la semana</th>
-                    <th>Dirección de llegada</th>
-                    <th>Dirección de salida</th>
-                    <th>Hora de salida</th>
-                    <th>Capacidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <% @turnos_buscador.each do |turno| %>
-                    <tr>
-                        <td><%= turno.dia_de_la_semana%></td>
-                        <td><%= turno.direccion_llegada%></td>
-                        <td><%= turno.direccion_salida%></td>
-                        <td><%= turno.hora_salida%></td>
-                        <td><%= "%i/%i" % [(PerteneceA.where(id_turno: turno.id).count + 1), turno.limite_personas] %></td>
-                        <% if usuario_signed_in? %>
-                        <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id), class: "button is-small is-link is-light is-focused"%>
-                        <% end %>
-                        </td>
-                    </tr>
-                    <% end %>
-    <%  end  %>
-            </tbody>
-        </table>
-    </div> 
-    <% if usuario_signed_in? %>
-    <%= link_to 'Ver mis solicitudes a nuevos turnos', solicituds_index_path(:tipo => 'mis solicitudes'), class: "button is-link is-outlined is-small" %>
-    <% end %>
-
-<% elsif params[:razon] == "Turnos Creados por mi" %>
-    <h1 class="mt-5 title has-background-info-light is-4">Turnos creados por mí</h1>
-    <% if @mis_turnos.empty?%>
-        <h3 class="subtitle"> No hay turnos disponibles <h3>
-    <% else %>
-        <div class="columns is-centered is-narrow">
-            <table class="table is-striped is-hoverable ">
-                <thead>
-                    <tr>
-                        <th>Día de la semana</th>
-                        <th>Dirección de llegada</th>
-                        <th>Dirección de salida</th>
-                        <th>Hora de salida</th>
-                        <th>Capacidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <% @mis_turnos.each do |turno| %>
-                        <tr>
-                            <td><%= turno.dia_de_la_semana%></td>
-                            <td><%= turno.direccion_llegada%></td>
-                            <td><%= turno.direccion_salida%></td>
-                            <td><%= turno.hora_salida%></td>
-                            <td><%= "%i/%i" % [(PerteneceA.where(id_turno: turno.id).count + 1), turno.limite_personas] %></td>
-                            <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id), class: "button is-small is-link is-light is-focused"%>
-                            </td>
-                        </tr>
-                        <% end %>
-    <%  end  %>
-                </tbody>
-            </table>
-        </div>
-        <% unless @mis_turnos.empty? %>
-            <p>
-            <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-success is-outlined is-small" %>
-            <%= link_to "Ver Solicitudes hechas a mis turnos", solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos'), class: "button is-link is-outlined is-small"%>
+<div class="columns">
+    <div class="column is-one-fifth has-background-info-light mt-3 ml-3">
+        <aside class="menu has-text-left margin mt-2 ml-2">
+            
+            <p class="menu-label">
+                Turnos
             </p>
-        <% else %>
-            <%= link_to 'Crear un nuevo turno', turnos_new_path, class: "button is-link is-outlined is-small" %>
-        <% end %>
-<% elsif params[:razon] = "Turnos en los que estoy" %>
-    <h1 class="mt-5 title has-background-info-light is-4">Turnos en los que estoy </h1>
-    <% if @turnos_que_estoy.empty?%>
-        <h3 class = "subtitle"> No hay turnos disponibles <h3>
-    <% else %>
-        <div class="columns is-centered is-narrow">
-            <table class="table is-striped is-hoverable ">
-                <thead>
-                    <tr>
-                        <th>Día de la semana</th>
-                        <th>Dirección de llegada</th>
-                        <th>Dirección de salida</th>
-                        <th>Hora de salida</th>
-                        <th>Capacidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <% @turnos_que_estoy.each do |turno| %>
+            <ul class="menu-list">
+                <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
+
+            </ul>
+            <p class="menu-label">
+                Solicitudes
+            </p>
+            <ul class="menu-list is-hoverable">
+                <li><a href=<%= solicituds_index_path(:tipo => 'mis solicitudes') %>> Ver Mis Solicitudes </a></li>
+                <li><a href=<%= solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos') %>> Ver Solicitudes a Mis Turnos </a></li>
+            </ul>
+                
+        </aside>
+
+    </div>
+    <div align="center" class="column">
+        <% if params[:razon] == "Buscador de Turnos" %>
+        <h1 class="mt-4 title has-background-info-light is-4">Buscador de Turnos</h1>
+            <% if @turnos_buscador.empty?%>
+                <h3 class="subtitle"> No hay turnos disponibles <h3>
+            <% else %>
+            
+                <table class="table is-striped is-hoverable ">
+                    <thead>
                         <tr>
-                            <td><%= turno.dia_de_la_semana%></td>
-                            <td><%= turno.direccion_llegada%></td>
-                            <td><%= turno.direccion_salida%></td>
-                            <td><%= turno.hora_salida%></td>
-                            <td><%= "%i/%i" % [(PerteneceA.where(id_turno: turno.id).count + 1), turno.limite_personas] %></td>
-                            <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id), class: "button is-small is-link is-light is-focused"%>
-                            </td>
+                            <th>Día de la semana</th>
+                            <th>Dirección de llegada</th>
+                            <th>Dirección de salida</th>
+                            <th>Hora de salida</th>
+                            <th>Capacidad</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                            <% @turnos_buscador.each do |turno| %>
+                            <tr>
+                                <td><%= turno.dia_de_la_semana%></td>
+                                <td><%= turno.direccion_llegada%></td>
+                                <td><%= turno.direccion_salida%></td>
+                                <td><%= turno.hora_salida%></td>
+                                <td><%= "%i/%i" % [(PerteneceA.where(id_turno: turno.id).count + 1), turno.limite_personas] %></td>
+                                <% if usuario_signed_in? %>
+                                <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id), class: "button is-small is-link is-light is-focused"%>
+                                <% end %>
+                                </td>
+                            </tr>
+                            <% end %>
+                    </tbody>
+                </table>
+            <%  end  %>
+
+        <% elsif params[:razon] == "Turnos Creados por mi" %>
+            <h1 class="mt-4 title has-background-info-light is-4">Turnos creados por mí</h1>
+            <% if @mis_turnos.empty?%>
+                <h3 class="subtitle"> No hay turnos disponibles <h3>
+            <% else %>
+                <table class="table is-striped is-hoverable ">
+                    <thead>
+                        <tr>
+                            <th>Día de la semana</th>
+                            <th>Dirección de llegada</th>
+                            <th>Dirección de salida</th>
+                            <th>Hora de salida</th>
+                            <th>Capacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @mis_turnos.each do |turno| %>
+                            <tr>
+                                <td><%= turno.dia_de_la_semana%></td>
+                                <td><%= turno.direccion_llegada%></td>
+                                <td><%= turno.direccion_salida%></td>
+                                <td><%= turno.hora_salida%></td>
+                                <td><%= "%i/%i" % [(PerteneceA.where(id_turno: turno.id).count + 1), turno.limite_personas] %></td>
+                                <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id), class: "button is-small is-link is-light is-focused"%>
+                                </td>
+                            </tr>
                         <% end %>
-                    <%  end  %>
-                </tbody>
-            </table>
-        </div>
-<% end %>
+                    </tbody>
+                </table>
+            <% end %>
+                    
+        <% elsif params[:razon] = "Turnos en los que estoy" %>
+            <h1 class="mt-4 title has-background-info-light is-4">Turnos en los que estoy </h1>
+            <% if @turnos_que_estoy.empty?%>
+                <h3 class = "subtitle"> No hay turnos disponibles <h3>
+            <% else %>
+                <table class="table is-striped is-hoverable ">
+                    <thead>
+                        <tr>
+                            <th>Día de la semana</th>
+                            <th>Dirección de llegada</th>
+                            <th>Dirección de salida</th>
+                            <th>Hora de salida</th>
+                            <th>Capacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @turnos_que_estoy.each do |turno| %>
+                            <tr>
+                                <td><%= turno.dia_de_la_semana%></td>
+                                <td><%= turno.direccion_llegada%></td>
+                                <td><%= turno.direccion_salida%></td>
+                                <td><%= turno.hora_salida%></td>
+                                <td><%= "%i/%i" % [(PerteneceA.where(id_turno: turno.id).count + 1), turno.limite_personas] %></td>
+                                <td><%= link_to "Ver Turno", turnos_show_path(:id => turno.id), class: "button is-small is-link is-light is-focused"%>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            <% end %>
+
+        <% end %>
+    </div>
+</div>

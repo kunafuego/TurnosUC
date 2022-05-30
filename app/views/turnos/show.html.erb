@@ -31,7 +31,7 @@
           <div>
           <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
             <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
-            <figure class="image is-128x128 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
+            <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
           </div>
         <% end %>
         </div>
@@ -84,10 +84,10 @@
 
 <section class="section">
   <div class="columns is-centered">
-    <div class="column is-4">
+    <div class="column is-6">
       
       <% if current_usuario.id == @turno.id_creador %>
-          <h3 class="title is-5">Opciones</h3>
+          <h3 class="title is-5 has-background-info-light">Opciones</h3>
           <p><%= link_to "Ver Solicitudes hechas al Turno", solicituds_index_path(:tipo => 'solicitudes hechas al turno', :id_turno => @turno.id), class: "button is-link is-outlined is-small"%></p>
           <br>
           <p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id), class: "button is-outlined is-info is-small" %>
