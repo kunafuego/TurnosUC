@@ -39,6 +39,10 @@
   </div>
 </div>
 
+<% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
+  <%= link_to "Agregar a Google Calendar", turnos_redirect_path, class: "button is-outlined is-info is-small" %>
+<% end %>
+
 <section class="section">
 
   <div class="columns is-centered">
@@ -75,7 +79,7 @@
   </div>
 </section>
 
-<% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) %>
+<% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
   <%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info is-small" %>
 <% end %>
 

@@ -11,6 +11,7 @@
             </p>
             <ul class="menu-list">
                 <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Buscador de Turnos") %>> Buscador de Turnos </a></li>
                 <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
                 <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
 
@@ -122,7 +123,6 @@
                     </tbody>
                 </table>
             <% end %>
-
         <% end %>
     </div>
 </div>
