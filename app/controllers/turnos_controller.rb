@@ -8,14 +8,26 @@ class TurnosController < ApplicationController
   end
 
   def create
-    @turnos_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada,
-                                                   :dia_de_la_semana, :direccion_salida, :hora, :minutos)
-    @turnos_params[:hora_salida] = "#{@turnos_params[:hora]}:#{@turnos_params[:minutos]}"
-    @turnos_params.delete(:hora)
-    @turnos_params.delete(:minutos)
+    @params = params.require(:turno).permit(:tipo, :limite_personas, :dia_de_la_semana,
+                                                   :calle_salida, :numero_salida, :comuna_salida,
+                                                        :calle_llegada, :numero_llegada, :comuna_llegada, 
+                                                            :hora, :minutos)
+    @params[:hora_salida] = "#{@params[:hora]}:#{@params[:minutos]}"
+    @params.delete(:hora)
+    @params.delete(:minutos)
+
+    @params[:direccion_salida] = "#{@params[:calle_salida]} #{@params[:numero_salida]}, #{@params[:comuna_salida]}"
+    @params.delete(:calle_salida)
+    @params.delete(:numero_salida)
+    @params.delete(:comuna_salida)
+
+    @params[:direccion_llegada] = "#{@params[:calle_llegada]} #{@params[:numero_llegada]}, #{@params[:comuna_llegada]}"
+    @params.delete(:calle_llegada)
+    @params.delete(:numero_llegada)
+    @params.delete(:comuna_llegada)
     if usuario_signed_in?
-      @turnos_params[:id_creador] = current_usuario.id
-      @turno = Turno.create(@turnos_params)
+      @params[:id_creador] = current_usuario.id
+      @turno = Turno.create(@params)
       if @turno.save
         redirect_to turnos_index_path, notice: 'Turno Creado'
       else
@@ -43,7 +55,7 @@ class TurnosController < ApplicationController
     else
       @turnos_que_estoy = []
     end
-    @turnos_buscador = Turno.all - @mis_turnos - @turnos_que_estoy
+    @turnos_buscador = Turno.all
   end
 
   def show
@@ -62,13 +74,24 @@ class TurnosController < ApplicationController
   end
 
   def update
-    @turno = Turno.find(params[:id])
-    @turnos_new_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada,
-                                                       :dia_de_la_semana, :direccion_salida, :hora, :minutos)
-    @turnos_new_params[:hora_salida] = "#{@turnos_new_params[:hora]}:#{@turnos_new_params[:minutos]}"
-    @turnos_new_params.delete(:hora)
-    @turnos_new_params.delete(:minutos)
-    if @turno.update(@turnos_new_params)
+    @new_params = params.require(:turno).permit(:tipo, :limite_personas, :dia_de_la_semana,
+                                              :calle_salida, :numero_salida, :comuna_salida,
+                                                  :calle_llegada, :numero_llegada, :comuna_llegada, 
+                                                      :hora, :minutos)
+    @new_params[:hora_salida] = "#{@new_params[:hora]}:#{@new_params[:minutos]}"
+    @new_params.delete(:hora)
+    @new_params.delete(:minutos)
+
+    @new_params[:direccion_salida] = "#{@new_params[:calle_salida]},#{@new_params[:numero_salida]},#{@new_params[:comuna_salida]}"
+    @new_params.delete(:calle_salida)
+    @new_params.delete(:numero_salida)
+    @new_params.delete(:comuna_salida)
+
+    @new_params[:direccion_llegada] = "#{@new_params[:calle_llegada]},#{@new_params[:numero_llegada]},#{@new_params[:comuna_llegada]}"
+    @new_params.delete(:calle_llegada)
+    @new_params.delete(:numero_llegada)
+    @new_params.delete(:comuna_llegada)
+    if @turno.update(@new_params)
       redirect_to turnos_index_path, notice: 'Turno editado'
     else
       redirect_to turnos_index_path, notice: 'Turno no editado'

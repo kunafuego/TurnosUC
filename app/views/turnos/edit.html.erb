@@ -1,10 +1,14 @@
 <%= form_with(model: @turno , method: :patch, url: turnos_update_path(:id => @turno.id)) do |form| %>
 
-    <div><h1 class="mt-4 title is-3 has-background-info-light mb-4">Editar turno</h1></div>
-    <div class="columns is-centered mt-4"> 
+    <div class="columns is-centered mt-4">
+        <div class="column is-two-fifths has-background-info-light">
+            <h1 class="mt-4 title is-3 mb-4"> Editar Turno </h1>
+        </div>
+    </div>
+
+    <div class="columns is-centered">
         
-        
-        <div class="column is-2">
+        <div class="column is-one-fifth has-background-info-light">
 
             <div class="field">
                 <label class="label">Tipo de viaje</label>
@@ -22,7 +26,7 @@
 
         </div>
 
-        <div class="column is-2">
+        <div class="column is-one-fifth has-background-info-light">
 
             <div class="field">
                 <label class="label">Dia de la semana</label>
@@ -45,29 +49,62 @@
             </div>
         </div>
     </div>
-
     <div class="columns is-centered">
 
-        <div class="column is-4">
+        <div class="column is-two-fifths has-background-info-light">
 
-            <div class="field">
-                    <label class="label">Direccion de Llegada</label>
-                    <%= form.text_field :direccion_llegada, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de llegada" %>
+            <label class="label has-text-left"> Direccion de Salida </label>
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <%# <%= f.label :direccion , :class => "label"%> 
+                        <%= form.text_field :calle_salida, :class => "input", :type => "text", :placeholder => "Calle"%>
+                    </div>
                 </div>
-                
-                <div class="field">
-                    <label class="label">Direccion de Salida</label>
-                    <%= form.text_field :direccion_salida, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de salida" %>
+                <div class="column">
+                    <div class="field">
+                        <%# <%= f.label :direccion , :class => "label"%> 
+                        <%= form.text_field :numero_salida, :class => "input", :type => "text", :placeholder => "Numero"%>
+                    </div>
                 </div>
+                <div class="column">
+                    <div class="field">
+                        <%# <%= f.label :direccion , :class => "label"%> 
+                        <%= form.text_field :comuna_salida, :class => "input", :type => "text", :placeholder => "Comuna" %>
+                    </div>
+                </div>
+            </div>
+
+            <label class="label has-text-left"> Direccion de Llegada </label>
+            <div class="columns">    
+                <div class="column">
+                    <div class="field">
+                        <%# <%= f.label :direccion , :class => "label"%> 
+                        <%= form.text_field :calle_llegada, :class => "input", :type => "text", :placeholder => "Calle"%>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <%# <%= f.label :direccion , :class => "label"%> 
+                        <%= form.text_field :numero_llegada, :class => "input", :type => "text", :placeholder => "Numero"%>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <%# <%= f.label :direccion , :class => "label"%> 
+                        <%= form.text_field :comuna_llegada, :class => "input", :type => "text", :placeholder => "Comuna" %>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <%= form.submit 'Editar Turno', class: "button is-outlined is-warning is-responsive" %>
+            </div>
+            <div>
+                <%= link_to 'Volver a turnos creados por mi', turnos_index_path(:razon => "Turnos Creados por mi"), class: "mt-5 button is-link is-outlined is-small" %>
             </div>
         </div>
     </div>
 
-    <div>
-        <%= form.submit 'Editar Turno', class: "button is-light is-success is-focused is-responsive" %>
-    </div>
+    
 <% end %>
 
-<div>
-    <%= link_to 'Volver a turnos creados por mi', turnos_index_path(:razon => "Turnos Creados por mi"), class: "mt-5 button is-link is-outlined is-small" %>
-</div>

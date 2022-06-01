@@ -75,27 +75,61 @@
                     </div>
                 </div>
             </div>
-
-            <div class="columns is-centered ">
+            <div class="columns is-centered">
 
                 <div class="column is-half has-background-info-light">
 
-                    <div class="field">
-                        <label class="label">Direccion de Llegada</label>
-                        <%= form.text_field :direccion_llegada, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de llegada" %>
-                    </div>
-                        
-                    <div class="field">
-                        <label class="label">Direccion de Salida</label>
-                        <%= form.text_field :direccion_salida, :class => "input", :type => "text", :placeholder => "Ingrese la direccion de salida" %>
+                    <label class="label has-text-left"> Direccion de Salida </label>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <%# <%= f.label :direccion , :class => "label"%> 
+                                <%= form.text_field :calle_salida, :class => "input", :type => "text", :placeholder => "Calle"%>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <%# <%= f.label :direccion , :class => "label"%> 
+                                <%= form.text_field :numero_salida, :class => "input", :type => "text", :placeholder => "Numero"%>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <%# <%= f.label :direccion , :class => "label"%> 
+                                <%= form.text_field :comuna_salida, :class => "input", :type => "text", :placeholder => "Comuna" %>
+                            </div>
+                        </div>
                     </div>
 
+                    <label class="label has-text-left"> Direccion de Llegada </label>
+                    <div class="columns">    
+                        <div class="column">
+                            <div class="field">
+                                <%# <%= f.label :direccion , :class => "label"%> 
+                                <%= form.text_field :calle_llegada, :class => "input", :type => "text", :placeholder => "Calle"%>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <%# <%= f.label :direccion , :class => "label"%> 
+                                <%= form.text_field :numero_llegada, :class => "input", :type => "text", :placeholder => "Numero"%>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <%# <%= f.label :direccion , :class => "label"%> 
+                                <%= form.text_field :comuna_llegada, :class => "input", :type => "text", :placeholder => "Comuna" %>
+                            </div>
+                        </div>
+                    </div>
                     <div class="field">
                         <%= form.submit 'Crear Turno', class: "button is-success is-outlined is-responsive" %>
                     </div>
                 </div>
             </div>
+        
             
         <% end %>
+
     </div>
 </div>

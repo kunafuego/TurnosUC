@@ -35,10 +35,28 @@
         <%= f.phone_field :telefono, :type => "tel", :class => "input" , :placeholder => "Ingrese su Teléfono"%>
       </div>
       </div>
-
-      <div class="field">
-        <%# <%= f.label :direccion , :class => "label"%> 
-        <%= f.text_field :direccion, :class => "input", :type => "text", :placeholder => "Ingrese su Direccion" %>
+      
+      <label class="label has-text-left"> Ingrese su direccion</label>
+      <div class="columns">
+        
+        <div class="column">
+          <div class="field">
+            <%# <%= f.label :direccion , :class => "label"%> 
+            <%= f.text_field :calle, :class => "input", :type => "text", :placeholder => "Calle"%>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <%# <%= f.label :direccion , :class => "label"%> 
+            <%= f.text_field :numero, :class => "input", :type => "text", :placeholder => "Numero"%>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <%# <%= f.label :direccion , :class => "label"%> 
+            <%= f.text_field :comuna, :class => "input", :type => "text", :placeholder => "Comuna" %>
+          </div>
+        </div>
       </div>
 
       <div class="field">
