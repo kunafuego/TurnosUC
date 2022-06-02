@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   patch 'turnos/update', to: 'turnos#update', as: 'turnos_update'
   delete 'turnos/delete', to: 'turnos#delete', as: 'turnos_delete'
 
+  get 'turnos/redirect', to: 'turnos#redirect', as: 'turnos_redirect'
+  get 'turnos/agregar', to: 'turnos#agregar', as: 'turnos_agregar'
+  post 'eventos', to: 'turnos#new_event'
   ########################## RESEÑAS ############################
   get 'resenas/new'
   post 'resenas', to: 'resenas#create'

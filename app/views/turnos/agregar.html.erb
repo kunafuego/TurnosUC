@@ -1,0 +1,68 @@
+<div class="columns">
+    <div class="column is-one-fifth has-background-info-light mt-3 ml-3">
+        <aside class="menu has-text-left margin mt-2 ml-2">
+            
+            <p class="menu-label">
+                Turnos
+            </p>
+            <ul class="menu-list">
+                <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Buscador de Turnos") %>> Buscador de Turnos </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
+    
+            </ul>
+            <p class="menu-label">
+                Solicitudes
+            </p>
+            <ul class="menu-list is-hoverable">
+                <li><a href=<%= solicituds_index_path(:tipo => 'mis solicitudes') %>> Ver Mis Solicitudes </a></li>
+                <li><a href=<%= solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos') %>> Ver Solicitudes a Mis Turnos </a></li>
+            </ul>
+                
+        </aside>
+
+    </div>
+    <div align="center" class="column">
+
+        <h1 class="mt-4 title has-background-info-light is-4">Agregar Turno a Calendario</h1>
+        <table class="table is-striped is-hoverable ">
+            <thead>
+                <tr>
+                    <th>Día de la semana</th>
+                    <th>Dirección de llegada</th>
+                    <th>Dirección de salida</th>
+                    <th>Hora de salida</th>
+                    <th>Duración Estimada Turno</th>
+                </tr>
+            </thead>
+            <tbody>
+        <%
+        @pertenezco = PerteneceA.where(id_usuario: current_usuario.id).all
+        @ids_turnos_que_pertenezco = []
+        @pertenezco.each do |turno|
+        @ids_turnos_que_pertenezco << turno.id_turno
+        end
+        cree = Turno.where(id_creador: current_usuario.id)
+        @turnos_que_estoy = Turno.where(id: @ids_turnos_que_pertenezco).all + cree%>  
+            <%  @turnos_que_estoy.each do |turno|%>
+                        <tr>
+                        <td><%= turno.dia_de_la_semana%></td>
+                        <td><%= turno.direccion_llegada%></td>
+                        <td><%= turno.direccion_salida%></td>
+                        <td><%= turno.hora_salida%></td>
+                        <td>
+                        <%= form_with(model: Evento.new , method: :post) do |form| %>
+                        <%= form.hidden_field :turno_id, value: turno.id%>
+                            <%= form.select :fecha_termino, ['1 mes', '2 meses', '6 meses', '1 año'] %>
+                        </td>
+                        <td>
+                        <%= form.submit 'Agregar a Calendario', class: "button is-success is-outlined is-responsive" %>
+                        <% end %>
+                        </td>
+                        </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

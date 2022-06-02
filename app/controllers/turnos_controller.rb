@@ -81,4 +81,87 @@ class TurnosController < ApplicationController
 
     redirect_to turnos_index_path, notice: 'Turno eliminado'
   end
+
+  def redirect
+    client = Signet::OAuth2::Client.new(client_options)
+    redirect_to client.authorization_uri.to_s
+  end
+
+
+  def client_options
+    {
+      client_id: Rails.application.secrets.google_client_id,
+      client_secret: Rails.application.secrets.google_client_secret,
+      authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+      scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+      redirect_uri: 'http://localhost:3000/turnos/agregar'
+    }
+  end
+
+  def agregar
+    client = Signet::OAuth2::Client.new(client_options)
+    client.code = params[:code]
+    response = client.fetch_access_token!
+    session[:authorization] = response
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+  end
+
+  def new_event
+    @evento_params = params.require(:evento).permit(:fecha_termino, :turno_id)
+    client = Signet::OAuth2::Client.new(client_options)
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+    turno = Turno.find(@evento_params[:turno_id])
+    fecha_salida = Date.today.next_occurring(translate(turno.dia_de_la_semana)).to_s + "T" + turno.hora_salida
+    hora = turno.hora_salida[0,2].to_i + 1
+    fecha_llegada = fecha_salida.gsub(turno.hora_salida, hora.to_s+turno.hora_salida[2,5])
+
+    if @evento_params[:fecha_termino] == "1 mes"
+      hasta = Date.today + 30.days
+    elsif @evento_params[:fecha_termino] == "2 meses"
+      hasta = Date.today + 60.days
+    elsif @evento_params[:fecha_termino] == "6 meses"
+      hasta = Date.today + 180.days
+    elsif @evento_params[:fecha_termino] == "1 año"
+      hasta = Date.today + 360.days
+    end
+    event = Google::Apis::CalendarV3::Event.new(
+      summary: 'Turno',
+      start: {
+        date_time: fecha_salida + ':00.000-04:00',
+        time_zone:  'America/Santiago'
+      },
+      end: {
+        date_time: fecha_llegada + ':00.000-04:00',
+        time_zone: 'America/Santiago'
+      },
+      recurrence: ['RRULE:FREQ=WEEKLY;UNTIL=' + hasta.to_s.tr('-','') + 'T000000Z']
+    )
+    response = service.insert_event('primary', event)
+    Evento.create()
+    redirect_to turnos_index_path, notice: 'Calendario Agregado'
+  end
+
+  def translate (dia)
+    if dia.downcase == "lunes"
+      return :monday
+    elsif dia.downcase == "martes"
+      return :tuesday
+    elsif dia.downcase == "miercoles"
+      return :wednesday
+    elsif dia.downcase == "jueves"
+      return :thursday
+    elsif dia.downcase == "viernes"
+      return :friday
+    elsif dia.downcase == "sabado"
+      return :saturday
+    elsif dia.downcase == "domingo"
+      return :sunday
+    end
+  end
 end
