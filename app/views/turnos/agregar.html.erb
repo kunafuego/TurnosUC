@@ -33,6 +33,7 @@
                     <th>Dirección de llegada</th>
                     <th>Dirección de salida</th>
                     <th>Hora de salida</th>
+                    <th>Duración Estimada Turno</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +54,9 @@
                         <td>
                         <%= form_with(model: Evento.new , method: :post) do |form| %>
                         <%= form.hidden_field :turno_id, value: turno.id%>
-                        <%= form.text_field :direccion_llegada, :class => "input", :type => "date", :placeholder => "Ingrese hasta que fecha lo quiere agregar" %>
+                            <%= form.select :fecha_termino, ['1 mes', '2 meses', '6 meses', '1 año'] %>
+                        </td>
+                        <td>
                         <%= form.submit 'Agregar a Calendario', class: "button is-success is-outlined is-responsive" %>
                         <% end %>
                         </td>
