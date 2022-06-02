@@ -130,7 +130,6 @@ class TurnosController < ApplicationController
     elsif @evento_params[:fecha_termino] == "1 año"
       hasta = Date.today + 360.days
     end
-    puts hasta.to_s.tr('-','') + 'T000000Z'
     event = Google::Apis::CalendarV3::Event.new(
       summary: 'Turno',
       start: {
