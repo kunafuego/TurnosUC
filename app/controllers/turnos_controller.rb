@@ -67,12 +67,16 @@ class TurnosController < ApplicationController
   end
 
   def update
+    @turno = Turno.find(params[:id])
     @new_params = params.require(:turno).permit(:tipo, :limite_personas, :dia_de_la_semana,
                                                 :calle_salida, :numero_salida, :comuna_salida,
                                                 :calle_llegada, :numero_llegada, :comuna_llegada,
                                                 :hora, :minutos)
 
     @new_params = manejar_parametros(@new_params)
+    puts 'wena wena'
+    puts @turno
+    puts 'wena wena'
     if @turno.update(@new_params)
       redirect_to turnos_index_path, notice: 'Turno editado'
     else

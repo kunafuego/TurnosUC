@@ -15,9 +15,13 @@ RSpec.describe Turno, type: :request do
     @params_turno = {
       tipo: 'ida',
       limite_personas: 3,
-      direccion_llegada: 'San Joaquin',
+      calle_llegada: 'Benito Rebolledo',
+      numero_llegada: 10,
+      comuna_llegada: 'San Joaquin',
+      calle_salida: 'Benito Rebolledo',
+      numero_salida: 10,
+      comuna_salida: 'Las Condes',
       dia_de_la_semana: 'lunes',
-      direccion_salida: 'Av. Lo Contador',
       hora: '10',
       minutos: '30',
       id_creador: @usuario.id
@@ -26,9 +30,13 @@ RSpec.describe Turno, type: :request do
     @params_invalid_turno = {
       tipo: 'ida',
       limite_personas: 'a',
-      direccion_llegada: 'San Joaquin',
+      calle_llegada: 'Benito Rebolledo',
+      numero_llegada: '10',
+      comuna_llegada: 'San Joaquin',
+      calle_salida: 'Benito Rebolledo',
+      numero_salida: '10',
+      comuna_salida: 'Las Condes',
       dia_de_la_semana: 'lunes martes',
-      direccion_salida: 'Av. Lo Contador',
       hora: '10',
       minutos: '30',
       id_creador: @usuario.id

@@ -23,11 +23,11 @@ module TurnosHelper
     params.delete(:numero_salida)
     params.delete(:comuna_salida)
 
-    params[:direccion_llegada] = "#{@params[:calle_llegada]} #{params[:numero_llegada]}, #{params[:comuna_llegada]}"
+    params[:direccion_llegada] = "#{params[:calle_llegada]} #{params[:numero_llegada]}, #{params[:comuna_llegada]}"
     params.delete(:calle_llegada)
     params.delete(:numero_llegada)
     params.delete(:comuna_llegada)
 
-    params
+    return params
   end
 end

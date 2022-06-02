@@ -7,7 +7,9 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { 'holahola' }
     nombre { 'Bob Bobson' }
-    direccion { 'Av. Lo Contador' }
+    calle { 'Av. Lo Contador' }
+    numero { 10 }
+    comuna { 'San Joaquin' }
     telefono { '99999999' }
     imagen { Faker::Internet.url }
   end

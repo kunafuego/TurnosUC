@@ -20,7 +20,7 @@
             <div class="field">
                 <label class="label">Limite de Personas</label>
                 <div class="select">
-                    <%= form.select :limite_personas, [2, 3, 4, 5, 6, 7, 8, 9, 10] %>
+                    <%= form.select :limite_personas, [2, 3, 4, 5, 6, 7, 8, 9, 10], :value => @turno.limite_personas %>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
             <div class="field">
                 <label class="label">Dia de la semana</label>
                 <div class="select">
-                    <%= form.select :dia_de_la_semana, ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'] %>
+                    <%= form.select :dia_de_la_semana, ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'], :value => @turno.dia_de_la_semana %>
                 </div>
             </div>
 
@@ -40,11 +40,11 @@
                 <div class="select">
                     <%=form.select :hora, ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
                                                 '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
-                        '22', '23'] %>
+                        '22', '23'], :selected => @turno.hora_salida.split(':')[0]%>
                 </div>
                 <span class="colon">:</span>
                 <div class="select">
-                    <%=form.select :minutos, ['00', '15', '30', '45'] %>
+                    <%=form.select :minutos, ['00', '15', '30', '45'], :selected => @turno.hora_salida.split(':')[1] %>
                 </div>
             </div>
         </div>
@@ -58,19 +58,19 @@
                 <div class="column">
                     <div class="field">
                         <%# <%= f.label :direccion , :class => "label"%> 
-                        <%= form.text_field :calle_salida, :class => "input", :type => "text", :placeholder => "Calle"%>
+                        <%= form.text_field :calle_salida, :class => "input", :type => "text", :placeholder => "Calle", :value => @turno.direccion_salida.split(', ')[0].split(/ (?=\S+$)/)[0] %>
                     </div>
                 </div>
                 <div class="column">
                     <div class="field">
                         <%# <%= f.label :direccion , :class => "label"%> 
-                        <%= form.text_field :numero_salida, :class => "input", :type => "text", :placeholder => "Numero"%>
+                        <%= form.text_field :numero_salida, :class => "input", :type => "text", :placeholder => "Numero", :value => @turno.direccion_salida.split(', ')[0].split(/ (?=\S+$)/)[1] %>
                     </div>
                 </div>
                 <div class="column">
                     <div class="field">
-                        <%# <%= f.label :direccion , :class => "label"%> 
-                        <%= form.text_field :comuna_salida, :class => "input", :type => "text", :placeholder => "Comuna" %>
+                        <%# <%= f.label :direccion , :class => "label"%>
+                        <%= form.text_field :comuna_salida, :class => "input", :type => "text", :placeholder => "Comuna", :value => @turno.direccion_salida.split(', ')[1] %>
                     </div>
                 </div>
             </div>
@@ -80,19 +80,19 @@
                 <div class="column">
                     <div class="field">
                         <%# <%= f.label :direccion , :class => "label"%> 
-                        <%= form.text_field :calle_llegada, :class => "input", :type => "text", :placeholder => "Calle"%>
+                        <%= form.text_field :calle_llegada, :class => "input", :type => "text", :placeholder => "Calle", :value => @turno.direccion_llegada.split(', ')[0].split(/ (?=\S+$)/)[0]%>
                     </div>
                 </div>
                 <div class="column">
                     <div class="field">
                         <%# <%= f.label :direccion , :class => "label"%> 
-                        <%= form.text_field :numero_llegada, :class => "input", :type => "text", :placeholder => "Numero"%>
+                        <%= form.text_field :numero_llegada, :class => "input", :type => "text", :placeholder => "Numero", :value => @turno.direccion_llegada.split(', ')[0].split(/ (?=\S+$)/)[1]%>
                     </div>
                 </div>
                 <div class="column">
                     <div class="field">
                         <%# <%= f.label :direccion , :class => "label"%> 
-                        <%= form.text_field :comuna_llegada, :class => "input", :type => "text", :placeholder => "Comuna" %>
+                        <%= form.text_field :comuna_llegada, :class => "input", :type => "text", :placeholder => "Comuna", :value => @turno.direccion_llegada.split(', ')[1] %>
                     </div>
                 </div>
             </div>
