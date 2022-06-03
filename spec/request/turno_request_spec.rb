@@ -49,7 +49,15 @@ RSpec.describe Turno, type: :request do
   # Aqui comienzan los test
   describe 'index' do
     it 'debiera retornar una respuesta existosa' do
-      get '/turnos/index'
+      get turnos_index_path(razon: 'Buscador de Turnos')
+      expect(response).to have_http_status(:ok)
+    end
+    it 'debiera retornar una respuesta existosa' do
+      get turnos_index_path(razon: 'Mis Turnos')
+      expect(response).to have_http_status(:ok)
+    end
+    it 'debiera retornar una respuesta existosa' do
+      get turnos_index_path(razon: 'Turnos de los que Participo')
       expect(response).to have_http_status(:ok)
     end
   end

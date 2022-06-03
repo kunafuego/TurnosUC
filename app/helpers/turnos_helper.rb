@@ -28,6 +28,6 @@ module TurnosHelper
     params.delete(:numero_llegada)
     params.delete(:comuna_llegada)
 
-    return params
+    params
   end
 end

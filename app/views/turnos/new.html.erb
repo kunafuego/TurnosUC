@@ -1,27 +1,7 @@
 <div class="columns">
-    <div class="column is-one-fifth has-background-info-light mt-3 ml-3">
-        <aside class="menu has-text-left margin mt-2 ml-2">
-            
-            <p class="menu-label">
-                Turnos
-            </p>
-            <ul class="menu-list">
-                <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
-                <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
-                <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
 
-            </ul>
-            <p class="menu-label">
-                Solicitudes
-            </p>
-            <ul class="menu-list is-hoverable">
-                <li><a href=<%= solicituds_index_path(:tipo => 'mis solicitudes') %>> Ver Mis Solicitudes </a></li>
-                <li><a href=<%= solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos') %>> Ver Solicitudes a Mis Turnos </a></li>
-            </ul>
-                
-        </aside>
-
-    </div>
+    <%= render "layouts/menu" %>
+    
     <div class="column">
 
         <%= form_with(model: @turno , method: :post) do |form| %>

@@ -1,0 +1,27 @@
+
+
+<div class="column is-one-fifth has-background-info-light mt-3 ml-3">
+    <div class="container content">
+        <aside class="menu has-text-left margin mt-3 ml-2">
+            
+            <p class="menu-label is-size-6 has-text-black">
+                Turnos
+            </p>
+            <ul class="menu-list has-text-black">
+                <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Buscador de Turnos") %>> Buscador de Turnos </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
+
+            </ul>
+            <p class="menu-label is-size-6 has-text-black">
+                Solicitudes
+            </p>
+            <ul class="menu-list">
+                <li><a href=<%= solicituds_index_path(:tipo => 'mis solicitudes') %>> Ver Mis Solicitudes </a></li>
+                <li><a href=<%= solicituds_index_path(:tipo => 'solicitudes hechas a mis turnos') %>> Ver Solicitudes a Mis Turnos </a></li>
+            </ul>
+                
+        </aside>
+    </div>
+</div>

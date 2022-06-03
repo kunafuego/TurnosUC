@@ -33,7 +33,15 @@ RSpec.describe Solicitud, type: :request do
   # Empiezan los test
   describe 'get index' do
     it 'deberia retornar una respuesta existosa' do
-      get '/solicituds/index'
+      get solicituds_index_path(tipo: 'mis solicitudes')
+      expect(response).to have_http_status(:ok)
+    end
+    it 'deberia retornar una respuesta existosa' do
+      get solicituds_index_path(tipo: 'solicitudes hechas a mis turnos')
+      expect(response).to have_http_status(:ok)
+    end
+    it 'deberia retornar una respuesta existosa' do
+      get solicituds_index_path(tipo: 'solicitudes hechas al turno', id_turno: @turno.id)
       expect(response).to have_http_status(:ok)
     end
   end
