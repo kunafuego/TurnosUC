@@ -1,4 +1,4 @@
-<% if @tipo == 'mis solicitudes' %>
+<% if params[:tipo] == 'mis solicitudes' %>
     <div class = "columns">
         <div class="column is-one-fifth has-background-info-light mt-3 ml-3">
             <aside class="menu has-text-left margin mt-2 ml-2">
@@ -10,6 +10,7 @@
                     <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
                     <li><a href=<%= turnos_index_path(:razon => "Buscador de Turnos") %>> Buscador de Turnos </a></li>
                     <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
+                    <li><a href=<%= turnos_index_path(:razon => "Buscador de Turnos") %>> Buscador de Turnos </a></li>
                     <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
                     <li>
                     <figure class="image is-128x128">
@@ -30,7 +31,7 @@
     
         <div align="center" class="column">
             <h1 class="mt-4 title has-background-info-light is-4">Solicitudes hechas por mi</h1>
-            <% if @mis_solicitudes.empty?%>
+            <% if @solicitudes.empty?%>
                 <h3 class="subtitle"> No hay solicitudes <h3>
             <% else %>
                 <table class="table is-striped is-hoverable ">
@@ -44,7 +45,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @mis_solicitudes.each do |solicitud| %>
+                        <% @solicitudes.each do |solicitud| %>
                             <tr>
                                 <% turno = Turno.find(solicitud.id_turno)%>
                                 <% creador = Usuario.find(turno.id_creador) %>
@@ -64,7 +65,7 @@
             <% end %>
         </div>
     </div>
-<% elsif @tipo == 'solicitudes hechas a mis turnos' %>
+<% elsif params[:tipo] == 'solicitudes hechas a mis turnos' %>
     <div class = "columns">
         <div class="column is-one-fifth has-background-info-light mt-3 ml-3">
             <aside class="menu has-text-left margin mt-2 ml-2">
@@ -91,7 +92,7 @@
         </div>
         <div align="center" class="column">
             <h1 class="mt-4 title has-background-info-light is-4">Solicitudes hechas a mis turnos</h1>
-            <% if @solicitudes_hechas_a_mis_turnos.empty?%>
+            <% if @solicitudes.empty?%>
                 <h3 class="subtitle"> No hay solicitudes <h3>
             <% else %>
                 <table class="table is-striped is-hoverable ">
@@ -104,7 +105,7 @@
                         </tr>
                     </thead>
                     <tbody>     
-                        <% @solicitudes_hechas_a_mis_turnos.each do |solicitud| %>
+                        <% @solicitudes.each do |solicitud| %>
                             <tr>
                                 <% usuario = Usuario.find(solicitud.id_usuario) %>
                                 <% turno = Turno.find(solicitud.id_turno) %>
@@ -122,9 +123,9 @@
             <% end %>
         </div>
     </div>
-<% else @tipo == 'solicitudes hechas al turno' %>
+<% elsif params[:tipo] == 'solicitudes hechas al turno' %>
 <h1 class="mt-4 title has-background-info-light is-4">Solicitudes hechas al Turno</h1>
-    <% if @solicitudes_hechas_al_turno.empty?%>
+    <% if @solicitudes.empty?%>
         <h3 class="subtitle"> No hay solicitudes <h3>
     <% else %>
         <div class="columns is-centered is-narrow ">
@@ -137,7 +138,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @solicitudes_hechas_al_turno.each do |solicitud| %>
+                    <% @solicitudes.each do |solicitud| %>
                         <tr>
                             <% usuario = Usuario.find(solicitud.id_usuario) %>
                             <% turno = Turno.find(solicitud.id_turno) %>

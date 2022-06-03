@@ -8,14 +8,15 @@ class TurnosController < ApplicationController
   end
 
   def create
-    @turnos_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada,
-                                                   :dia_de_la_semana, :direccion_salida, :hora, :minutos)
-    @turnos_params[:hora_salida] = "#{@turnos_params[:hora]}:#{@turnos_params[:minutos]}"
-    @turnos_params.delete(:hora)
-    @turnos_params.delete(:minutos)
+    @params = params.require(:turno).permit(:tipo, :limite_personas, :dia_de_la_semana,
+                                            :calle_salida, :numero_salida, :comuna_salida,
+                                            :calle_llegada, :numero_llegada, :comuna_llegada,
+                                            :hora, :minutos)
+
+    @params = manejar_parametros(@params)
     if usuario_signed_in?
-      @turnos_params[:id_creador] = current_usuario.id
-      @turno = Turno.create(@turnos_params)
+      @params[:id_creador] = current_usuario.id
+      @turno = Turno.create(@params)
       if @turno.save
         redirect_to turnos_index_path, notice: 'Turno Creado'
       else
@@ -27,23 +28,27 @@ class TurnosController < ApplicationController
   end
 
   def index
-    params[:razon] = 'Buscador de Turnos' unless params.key?(:razon)
-    @mis_turnos = if current_usuario
-                    Turno.where(id_creador: current_usuario.id).all
-                  else
-                    []
-                  end
-    if current_usuario
-      @pertenezco = PerteneceA.where(id_usuario: current_usuario.id).all
+    if params[:busqueda_por_direccion]
+      search_term = params[:busqueda_por_direccion].downcase
+      @turnos = Turno.all.select do |turno|
+        turno.direccion_llegada.downcase.include?(search_term) ||
+          turno.direccion_salida.downcase.include?(search_term)
+      end
+    else
+      @turnos = Turno.all
+    end
+
+    case params[:razon]
+    when 'Mis Turnos'
+      @turnos = usuario_signed_in? ? @turnos.where(id_creador: current_usuario.id) : []
+    when 'Turnos de los que Participo'
+      @pertenezco = usuario_signed_in? ? PerteneceA.where(id_usuario: current_usuario.id) : []
       @ids_turnos_que_pertenezco = []
       @pertenezco.each do |turno|
         @ids_turnos_que_pertenezco << turno.id_turno
       end
-      @turnos_que_estoy = Turno.where(id: @ids_turnos_que_pertenezco).all
-    else
-      @turnos_que_estoy = []
+      @turnos = @turnos.where(id: @ids_turnos_que_pertenezco)
     end
-    @turnos_buscador = Turno.all - @mis_turnos - @turnos_que_estoy
   end
 
   def show
@@ -63,12 +68,16 @@ class TurnosController < ApplicationController
 
   def update
     @turno = Turno.find(params[:id])
-    @turnos_new_params = params.require(:turno).permit(:tipo, :limite_personas, :direccion_llegada,
-                                                       :dia_de_la_semana, :direccion_salida, :hora, :minutos)
-    @turnos_new_params[:hora_salida] = "#{@turnos_new_params[:hora]}:#{@turnos_new_params[:minutos]}"
-    @turnos_new_params.delete(:hora)
-    @turnos_new_params.delete(:minutos)
-    if @turno.update(@turnos_new_params)
+    @new_params = params.require(:turno).permit(:tipo, :limite_personas, :dia_de_la_semana,
+                                                :calle_salida, :numero_salida, :comuna_salida,
+                                                :calle_llegada, :numero_llegada, :comuna_llegada,
+                                                :hora, :minutos)
+
+    @new_params = manejar_parametros(@new_params)
+    puts 'wena wena'
+    puts @turno
+    puts 'wena wena'
+    if @turno.update(@new_params)
       redirect_to turnos_index_path, notice: 'Turno editado'
     else
       redirect_to turnos_index_path, notice: 'Turno no editado'

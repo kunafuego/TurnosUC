@@ -9,7 +9,9 @@ class Usuario < ApplicationRecord
   validates :nombre, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: Devise.email_regexp }
   validates :telefono, presence: true
-  validates :direccion, presence: true
+  validates :calle, presence: true
+  validates :numero, presence: true
+  validates :comuna, presence: true
   validates :imagen, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
 
   has_many :pertenece_as

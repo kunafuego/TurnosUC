@@ -21,8 +21,18 @@ RSpec.describe Usuario, type: :model do
     expect(usuario).not_to be_valid
   end
 
-  it 'no es valido sin direccion' do
-    usuario.direccion = nil
+  it 'no es valido sin calle' do
+    usuario.calle = nil
+    expect(usuario).not_to be_valid
+  end
+
+  it 'no es valido sin comuna' do
+    usuario.comuna = nil
+    expect(usuario).not_to be_valid
+  end
+
+  it 'no es valido sin numero' do
+    usuario.numero = nil
     expect(usuario).not_to be_valid
   end
 
