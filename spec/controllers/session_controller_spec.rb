@@ -19,7 +19,9 @@ describe Usuarios::SessionsController do
 
     it 'redirects to the user_root_path' do
       @usuario = create(:usuario)
-      controller.after_sign_in_path_for(@usuario).should == '/turnos/index?razon=Buscador+de+Turnos'
+      expect do
+        controller.after_sign_in_path_for(@usuario) == '/turnos/index?razon=Buscador+de+Turnos'
+      end
     end
   end
 end

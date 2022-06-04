@@ -4,17 +4,17 @@
     <div class="container content">
         <aside class="menu has-text-left margin mt-3 ml-2">
             
-            <p class="menu-label is-size-6 has-text-black">
+            <p class="menu-label is-size-6 is-underlined">
                 Turnos
             </p>
-            <ul class="menu-list has-text-black">
+            <ul class="menu-list">
                 <li><a href=<%= turnos_new_path %>> Crear Turno </a></li>
                 <li><a href=<%= turnos_index_path(:razon => "Buscador de Turnos") %>> Buscador de Turnos </a></li>
-                <li><a href=<%= turnos_index_path(:razon => "Turnos Creados por mi") %>> Ver Mis Turnos </a></li>
-                <li><a href=<%= turnos_index_path(:razon => "Turnos en los que estoy") %>> Turnos de los que Participo </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Mis Turnos") %>> Ver Mis Turnos </a></li>
+                <li><a href=<%= turnos_index_path(:razon => "Turnos de los que Participo") %>> Turnos de los que Participo </a></li>
 
             </ul>
-            <p class="menu-label is-size-6 has-text-black">
+            <p class="menu-label is-size-6 is-underlined">
                 Solicitudes
             </p>
             <ul class="menu-list">

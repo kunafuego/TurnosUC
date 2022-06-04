@@ -6,6 +6,7 @@ FactoryBot.define do
   factory :usuario do
     email { Faker::Internet.email }
     password { 'holahola' }
+    password_confirmation { 'holahola' }
     nombre { 'Bob Bobson' }
     calle { 'Av. Lo Contador' }
     numero { 10 }
