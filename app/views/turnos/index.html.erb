@@ -1,8 +1,10 @@
 
 <div class="columns">
 
+    <% if usuario_signed_in? %>
     <%= render "layouts/menu" %>
-
+    <% end %>
+    
     <div align="center" class="column">
         <% if params[:razon] %>
             <h1 class="mt-4 title has-background-info-light is-4"> <%= params[:razon] %> </h1>
