@@ -69,3 +69,5 @@ gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'repost'
 
 gem 'google-api-client', require: 'google/apis/calendar_v3'
+
+gem "turbo-rails", "~> 1.1"

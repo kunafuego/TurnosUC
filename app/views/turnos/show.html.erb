@@ -39,15 +39,9 @@
   </div>
 </div>
 
-<section class="section">
-
-  <div class="columns is-centered">
-    <div class="column is-6">
-      <div><h3 class="title is-5 has-background-info-light mb-4">Reseñas</h3></div>
-    </div>
-  </div>
-    
-  <div class="columns is-centered">
+<div class="columns">
+  <div class="column is-6">
+      <div><h3 class="title is-5 has-background-info-light mb-4">Reseñas</h3></div>    
     <table class="table is-striped is-hoverable">
       <% if @resenas.empty?%>
         <p> El turno no tiene reseñas </p>
@@ -71,16 +65,25 @@
       </tbody>
       <%  end  %>
     </table>
-
+    <% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
+      <%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info" %>
+    <% end %>
   </div>
-</section>
+  
+  <div class="column is-6">
+    <div><h3 class="title is-5 has-background-info-light mb-4">Mensajes</h3></div>
+    <%= turbo_stream_from @turno %>
+    <div id="mensajes">
+      <%= render @mensajes %>
+    </div>
+    <%= render partial: 'layouts/new_message_form' %>
+  </div>
+</div>
 
-<% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
-  <%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info is-small" %>
-<% end %>
 
-<! Acá debo agregar el nombre y foto del creador, nombre de los participantes, y cualquier otra cosa que se me ocurra
-#Además, acá va la posible solicitud >
+
+
+
 
 <section class="section">
   <div class="columns is-centered">

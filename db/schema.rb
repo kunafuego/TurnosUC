@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_01_191053) do
+ActiveRecord::Schema.define(version: 2022_06_07_152809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2022_06_01_191053) do
     t.integer "turno_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "mensajes", force: :cascade do |t|
+    t.bigint "usuario_id", null: false
+    t.bigint "turno_id", null: false
+    t.text "cuerpo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["turno_id"], name: "index_mensajes_on_turno_id"
+    t.index ["usuario_id"], name: "index_mensajes_on_usuario_id"
   end
 
   create_table "pertenece_as", force: :cascade do |t|
@@ -79,4 +89,6 @@ ActiveRecord::Schema.define(version: 2022_06_01_191053) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "mensajes", "turnos"
+  add_foreign_key "mensajes", "usuarios"
 end

@@ -1,0 +1,7 @@
+<div class="form-group msg-form">
+  <%= form_with(model: [@turno ,@mensaje], remote: true, class: "d-flex" ) do |f| %>
+    <%= f.text_field :cuerpo, id: 'chat-text', class: "form-control msg-content", autocomplete: 'off' %>
+    <%= f.hidden_field :turno_id, value: @turno.id%>
+    <%= f.submit 'Enviar Mensaje', data: { disable_with: false }, style:"height:30px", class: "button is-outlined is-info is-small" %>
+  <% end %>
+</div>

@@ -58,7 +58,8 @@ class TurnosController < ApplicationController
     # Con esta info debo buscar en las otras tablas los elementos que quiero mandar al show
     @mostrar_solicitar_unirse = mostrar_solicitar_unirse(@turno.id, current_usuario.id)
     @mostrar_salirse_del_turno = mostrar_salirse_del_turno(@turno.id, current_usuario.id)
-
+    @mensaje = Mensaje.new
+    @mensajes = @turno.mensajes
     @id_pertenece_a = PerteneceA.find_by(id_turno: @turno.id, id_usuario: current_usuario.id) if @mostrar_salirse_del_turno
   end
 

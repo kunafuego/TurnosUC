@@ -20,4 +20,6 @@ class Usuario < ApplicationRecord
 
   has_many :turnos, foreign_key: 'id_creador', dependent: :destroy
   has_many :resenas, dependent: :destroy
+
+  has_many :mensajes, dependent: :destroy
 end

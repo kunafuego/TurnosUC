@@ -18,4 +18,5 @@ class Turno < ApplicationRecord
   has_many :resenas, dependent: :destroy
 
   belongs_to :usuario, foreign_key: 'id_creador'
+  has_many :mensajes, dependent: :destroy
 end

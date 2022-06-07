@@ -34,6 +34,12 @@ Rails.application.routes.draw do
   post 'resenas', to: 'resenas#create'
   delete 'resenas/delete', to: 'resenas#delete'
 
+  ########################## MENSAJES ############################
+  resources :turnos do
+    resources :mensajes
+  end
+  delete 'mensajes/delete', to: 'mensajes#delete', as: 'mensajes_delete'
+
   devise_for :usuarios, controllers: {
     sessions: 'usuarios/sessions',
     registrations: 'usuarios/registrations'

@@ -1,0 +1,9 @@
+
+
+<div class="cont-<%= mensaje.usuario.id %>">
+  <div class="message-box msg-<%= mensaje.usuario.id %> " >
+    <h6 class="name" style="font-weight: bold"> <%= mensaje.usuario.nombre %> </h6>
+    <%= mensaje.cuerpo %>
+    <%# <%= link_to "Borrar Mensaje", mensajes_delete_path(:id => mensaje.id), method: :delete, class: "button is-outlined is-danger is-small" %> 
+  </div>
+</div>
