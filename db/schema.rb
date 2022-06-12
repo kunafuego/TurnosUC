@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_065504) do
+ActiveRecord::Schema.define(version: 2022_06_12_183551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_admins_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_admins_on_resource_type_and_resource_id"
+  end
 
   create_table "pertenece_as", force: :cascade do |t|
     t.integer "id_usuario"
@@ -68,6 +78,14 @@ ActiveRecord::Schema.define(version: 2022_05_19_065504) do
     t.string "imagen"
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
+  end
+
+  create_table "usuarios_admins", id: false, force: :cascade do |t|
+    t.bigint "usuario_id"
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_usuarios_admins_on_admin_id"
+    t.index ["usuario_id", "admin_id"], name: "index_usuarios_admins_on_usuario_id_and_admin_id"
+    t.index ["usuario_id"], name: "index_usuarios_admins_on_usuario_id"
   end
 
 end

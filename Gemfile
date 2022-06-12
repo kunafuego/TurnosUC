@@ -67,3 +67,6 @@ gem 'factory_bot_rails'
 gem 'faker', '~> 1.6', '>= 1.6.6'
 
 gem 'repost'
+
+# Rolify
+gem "rolify"
