@@ -24,7 +24,7 @@
         <figure class="image is-128x128 is-inline-block"><%= image_tag(@creador.imagen) %></figure>
       </div>
         <div class="field">
-          <% if current_usuario.has_role? :admin %>
+          <% if current_usuario.has_role? :admin and current_usuario.id != @creador.id %>
             <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => @creador.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
           <% end %>
         </div>
@@ -40,7 +40,7 @@
               <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
           </div>
           <div class="field">
-            <% if current_usuario.has_role? :admin %>
+            <% if current_usuario.has_role? :admin and current_usuario.id != integrante.id %>
               <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => integrante.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
             <% end %>
           </div>
