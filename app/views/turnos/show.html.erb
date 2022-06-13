@@ -24,21 +24,24 @@
         <figure class="image is-128x128 is-inline-block"><%= image_tag(@creador.imagen) %></figure>
       </div>
     </div>
-      <div class="column is-5">
-        <div><h3 class="title is-5 has-background-info-light mb-4">Integrantes</h3></div>
-        <% ids_pertenece_a = PerteneceA.where(id_turno: @turno.id).ids %>
-        <% ids_pertenece_a.each do |id_pertenece| %>
-          <div>
-          <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
-            <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
-            <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
+    <div class="column is-5">
+      <div><h3 class="title is-5 has-background-info-light mb-4">Integrantes</h3></div>
+      <% ids_pertenece_a = PerteneceA.where(id_turno: @turno.id).ids %>
+      <% ids_pertenece_a.each do |id_pertenece| %>
+        <div class="columns is-centered">
+          <div class="field">
+            <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
+              <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
+              <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
+          </div>
+          <div class="field">
             <% if current_usuario.has_role? :admin %>
               <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => integrante.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
             <% end %>
           </div>
-        <% end %>
         </div>
-      </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -65,7 +68,7 @@
           <td><%= resena.contenido %></td>
           <% if current_usuario.has_role? :admin %>
           <td>
-            <%= link_to "Eliminar", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
+            <%= link_to "Eliminar reseña", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
           </td>
           <% end %>
         </tr>
