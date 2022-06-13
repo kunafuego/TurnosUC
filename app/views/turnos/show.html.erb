@@ -150,6 +150,9 @@
           <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
             <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
             <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
+            <% if current_usuario.has_role? :admin %>
+              <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => integrante.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
+            <% end %>
           </div>
         <% end %>
         </div>
