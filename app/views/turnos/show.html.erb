@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="section">
   <div><h1 class="title is-3 has-background-info-light mb-4">Turno</h1></div>
   <div class="columns is-centered">
@@ -33,6 +32,9 @@
           <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
             <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
             <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
+            <% if current_usuario.has_role? :admin %>
+              <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => integrante.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
+            <% end %>
           </div>
         <% end %>
         </div>
@@ -61,6 +63,11 @@
           <td><%= resena.usuario.nombre %></td>
           <td><%= resena.calificacion %></td>
           <td><%= resena.contenido %></td>
+          <% if current_usuario.has_role? :admin %>
+          <td>
+            <%= link_to "Eliminar", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
+          </td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>
@@ -115,134 +122,3 @@
 <% elsif @mostrar_salirse_del_turno %>
     <%= link_to 'Volver a ver los turnos en los que estoy', turnos_index_path(:razon => "Turnos en los que estoy"), class: "mt-6 button is-link is-outlined is-small" %>
 <% end %>
-=======
-<div class="section">
-  <div><h1 class="title is-3 has-background-info-light mb-4">Turno</h1></div>
-  <div class="columns is-centered">
-    <div class="column is-5">
-      <div><h3 class="title is-5 has-background-info-light mb-4">Información</h3></div>
-
-      <div>
-        <p class="is-size-6 has-text-weight-bold"> Direccion de llegada: <%= @turno.direccion_llegada%></p>
-      </div>
-      <div>
-        <p class="mt-4 is-size-6 has-text-weight-bold "> Direccion de salida: <%= @turno.direccion_llegada%></p>
-      </div>
-
-      <div>
-        <p class="mt-4 is-size-6 has-text-weight-bold"> Hora de salida: <%= @turno.hora_salida%></p>
-      </div>
-
-      <div>
-        <p class="mt-4 is-size-6 has-text-weight-bold"> Dia de la semana: <%= @turno.dia_de_la_semana%></p>
-      </div>
-      
-      <div>
-        <p class="mt-4 is-size-6 has-text-weight-bold mb-2"> Nombre creador: <%= @creador.nombre%></p>
-        <figure class="image is-128x128 is-inline-block"><%= image_tag(@creador.imagen) %></figure>
-      </div>
-    </div>
-      <div class="column is-5">
-        <div><h3 class="title is-5 has-background-info-light mb-4">Integrantes</h3></div>
-        <% ids_pertenece_a = PerteneceA.where(id_turno: @turno.id).ids %>
-        <% ids_pertenece_a.each do |id_pertenece| %>
-          <div>
-          <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
-            <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
-            <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
-            <% if current_usuario.has_role? :admin %>
-              <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => integrante.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
-            <% end %>
-          </div>
-        <% end %>
-        </div>
-      </div>
-  </div>
-</div>
-
-<section class="section">
-
-  <div class="columns is-centered">
-    <div class="column is-6">
-      <div><h3 class="title is-5 has-background-info-light mb-4">Reseñas</h3></div>
-    </div>
-  </div>
-    
-  <div class="columns is-centered">
-    <table class="table is-striped is-hoverable">
-      <% if @resenas.empty?%>
-        <p> El turno no tiene reseñas </p>
-      <% else %>
-        <thead>
-          <tr>
-            <th>Usuario</th>
-            <th>Calificación</th>
-            <th>Comentario</th>
-          </tr>
-      </thead>
-
-      <tbody>
-        <% @resenas.each do |resena| %>
-        <tr>
-          <td><%= resena.usuario.nombre %></td>
-          <td><%= resena.calificacion %></td>
-          <td><%= resena.contenido %></td>
-          <% if current_usuario.has_role? :admin %>
-          <td>
-            <%= link_to "Eliminar", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
-          </td>
-          <% end %>
-        </tr>
-        <% end %>
-      </tbody>
-      <%  end  %>
-    </table>
-
-  </div>
-</section>
-
-<% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
-  <%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info is-small" %>
-<% end %>
-
-<! Acá debo agregar el nombre y foto del creador, nombre de los participantes, y cualquier otra cosa que se me ocurra
-#Además, acá va la posible solicitud >
-
-<section class="section">
-  <div class="columns is-centered">
-    <div class="column is-6">
-      
-      <% if current_usuario.id == @turno.id_creador %>
-          <h3 class="title is-5 has-background-info-light">Opciones</h3>
-          <p><%= link_to "Ver Solicitudes hechas al Turno", solicituds_index_path(:tipo => 'solicitudes hechas al turno', :id_turno => @turno.id), class: "button is-link is-outlined is-small"%></p>
-          <br>
-          <p><%= link_to 'Editar turno', turnos_edit_path(:id => @turno.id), class: "button is-outlined is-info is-small" %>
-          <%= link_to "Borrar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
-      <% elsif @mostrar_solicitar_unirse %>
-          <h3 class="title has-background-info-light is-5">Solicitar</h3>
-          <p><%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id), class: "button is-outlined is-success is-link is-small" %></p>
-          <% if current_usuario.has_role? :admin %>
-            <br>
-            <%= link_to "Eliminar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
-          <% end %>
-      <% elsif @mostrar_salirse_del_turno %>
-          <h3 class="title has-background-info-light is-5">Salirse</h3>
-          <p><%= link_to 'Salirse del Turno', pertenece_as_delete_path(:id_pertenece_a => @id_pertenece_a), method: :delete, class: "button is-outlined is-danger is-small"%></p>
-          <% if current_usuario.has_role? :admin %>
-            <br>
-            <%= link_to "Eliminar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
-          <% end %>
-      <% end %>
-
-    </div>
-  </div>
-</section>
-
-<% if current_usuario.id == @turno.id_creador %>
-    <%= link_to 'Volver a ver turnos creados por mí', turnos_index_path(:razon => "Turnos Creados por mi"), class: "mt-6 button is-link is-outlined is-small" %>
-<% elsif @mostrar_solicitar_unirse %>
-    <%= link_to 'Volver a buscar turnos', turnos_index_path(:razon => "Buscador de Turnos"), class: "mt-6 button is-link is-outlined is-small" %>
-<% elsif @mostrar_salirse_del_turno %>
-    <%= link_to 'Volver a ver los turnos en los que estoy', turnos_index_path(:razon => "Turnos en los que estoy"), class: "mt-6 button is-link is-outlined is-small" %>
-<% end %>
->>>>>>> 26c382dc35f1ae71d81b4585ff0771484d80fddd
