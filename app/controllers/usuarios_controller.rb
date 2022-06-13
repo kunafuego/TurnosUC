@@ -15,7 +15,7 @@ class UsuariosController < ApplicationController
 
     # puts "222222222222222222222"
     # @usuario_pertenece_a.destroy
-    
+
     redirect_to turnos_show_path(id: @turno.id, id_creador: @turno.id_creador)
   end
 end

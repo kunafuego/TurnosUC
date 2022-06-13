@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'faker'
 
@@ -18,12 +20,12 @@ RSpec.describe Mensaje, type: :request do
     }
 
     @params_invalid = {
-        cuerpo: nil,
-        turno_id: @turno.id,
-        usuario_id: @usuario.id
+      cuerpo: nil,
+      turno_id: @turno.id,
+      usuario_id: @usuario.id
     }
 
-    @mensaje = Mensaje.create!({ turno_id: @turno.id, cuerpo: 'hola hola', usuario_id: @usuario.id})
+    @mensaje = Mensaje.create!({ turno_id: @turno.id, cuerpo: 'hola hola', usuario_id: @usuario.id })
   end
 
   # Empiezan los test

@@ -11,7 +11,7 @@ RSpec.describe Mensaje, type: :model do
     @turno = create(:turno, usuario: @usuario)
 
     # Creamos la relacion pertece A
-    @mensaje = Mensaje.create!({ turno_id: @turno.id, usuario_id: @usuario.id, cuerpo: "hola hola" })
+    @mensaje = Mensaje.create!({ turno_id: @turno.id, usuario_id: @usuario.id, cuerpo: 'hola hola' })
   end
 
   it 'es valida con atributos validos' do
