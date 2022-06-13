@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# module Usuarios
-# class UnlocksController < Devise::UnlocksController
+module Usuarios
+    class UnlocksController < Devise::UnlocksController
 # GET /resource/unlock/new
 # def new
 #   super
@@ -28,5 +28,5 @@
 # def after_unlock_path_for(resource)
 #   super(resource)
 # end
-# end
-# end
+    end
+end

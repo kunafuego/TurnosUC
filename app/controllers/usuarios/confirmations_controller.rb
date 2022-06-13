@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# module Usuarios
-#   class ConfirmationsController < Devise::ConfirmationsController
+module Usuarios
+    class ConfirmationsController < Devise::ConfirmationsController
 # GET /resource/confirmation/new
 # def new
 #   super
@@ -28,5 +28,5 @@
 # def after_confirmation_path_for(resource_name, resource)
 #   super(resource_name, resource)
 # end
-#   end
-# end
+    end
+end
