@@ -23,6 +23,11 @@
         <p class="mt-4 is-size-6 has-text-weight-bold mb-2"> Nombre creador: <%= @creador.nombre%></p>
         <figure class="image is-128x128 is-inline-block"><%= image_tag(@creador.imagen) %></figure>
       </div>
+        <div class="field">
+          <% if current_usuario.has_role? :admin %>
+            <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => @creador.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
+          <% end %>
+        </div>
     </div>
     <div class="column is-5">
       <div><h3 class="title is-5 has-background-info-light mb-4">Integrantes</h3></div>
