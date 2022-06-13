@@ -5,8 +5,8 @@ README
 
 ## E3
 A continuación se presentan las credenciales del usuario administrador:
-    email: `admin@uc.cl`
-    contraseña: `123456`
+* email: `admin@uc.cl`
+* contraseña: `123456`
 
 # Heroku
 
