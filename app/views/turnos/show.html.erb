@@ -95,9 +95,17 @@
       <% elsif @mostrar_solicitar_unirse %>
           <h3 class="title has-background-info-light is-5">Solicitar</h3>
           <p><%= link_to 'Solicitar unirse al turno', solicituds_new_path(:id_turno => @turno.id), class: "button is-outlined is-success is-link is-small" %></p>
+          <% if current_usuario.has_role? :admin %>
+            <br>
+            <%= link_to "Eliminar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
+          <% end %>
       <% elsif @mostrar_salirse_del_turno %>
           <h3 class="title has-background-info-light is-5">Salirse</h3>
           <p><%= link_to 'Salirse del Turno', pertenece_as_delete_path(:id_pertenece_a => @id_pertenece_a), method: :delete, class: "button is-outlined is-danger is-small"%></p>
+          <% if current_usuario.has_role? :admin %>
+            <br>
+            <%= link_to "Eliminar Turno", turnos_delete_path(:id => @turno.id), method: :delete, class: "button is-outlined is-danger is-small" %></p>
+          <% end %>
       <% end %>
 
     </div>
