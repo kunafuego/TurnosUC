@@ -11,7 +11,7 @@ class Usuario < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: Devise.email_regexp }
   validates :telefono, presence: true
   validates :calle, presence: true
-  validates :numero, presence: true
+  validates :numero, presence: true, numericality: { only_integer: true }
   validates :comuna, presence: true
   validates :imagen, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
 
