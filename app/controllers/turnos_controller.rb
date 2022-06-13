@@ -125,7 +125,6 @@ class TurnosController < ApplicationController
     fecha_salida = "#{Date.today.next_occurring(translate[turno.dia_de_la_semana])}T#{turno.hora_salida}"
     hora = turno.hora_salida[0, 2].to_i + 1
     fecha_llegada = fecha_salida.gsub(turno.hora_salida, hora.to_s + turno.hora_salida[2, 5])
-    puts fecha_salida
     hasta = { '1 mes' => Date.today + 30.days, '2 meses' => Date.today + 60.days, '6 meses' => Date.today + 180.days, '1 año' => Date.today + 360.days }
     event = Google::Apis::CalendarV3::Event.new(
       summary: 'Turno',

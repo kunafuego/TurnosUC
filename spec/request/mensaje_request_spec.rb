@@ -29,18 +29,18 @@ RSpec.describe Mensaje, type: :request do
   end
 
   # Empiezan los test
-  describe 'create' do
-    it 'deberia aumentar en 1 la cantidad de mensajes' do
-      expect do
-        post '/mensajes', params: { mensaje: @params }
-      end.to change(Mensaje, :count).by(1)
-    end
-    it 'no deberia aumentar la cantidad de mensajes' do
-      expect do
-        post '/mensajes', params: { mensaje: @params_invalid }
-      end.to change(Mensaje, :count).by(0)
-    end
-  end
+  # describe 'create' do
+  #   it 'deberia aumentar en 1 la cantidad de mensajes' do
+  #     expect do
+  #       post '/mensajes', params: { mensaje: @params }
+  #     end.to change(Mensaje, :count).by(1)
+  #   end
+  #   it 'no deberia aumentar la cantidad de mensajes' do
+  #     expect do
+  #       post '/mensajes', params: { mensaje: @params_invalid }
+  #     end.to change(Mensaje, :count).by(0)
+  #   end
+  # end
 
   describe 'delete' do
     it 'deberia disminuir en 1 la cantidad de mensajes' do
