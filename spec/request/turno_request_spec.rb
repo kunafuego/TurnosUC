@@ -60,6 +60,10 @@ RSpec.describe Turno, type: :request do
       get turnos_index_path(razon: 'Turnos de los que Participo')
       expect(response).to have_http_status(:ok)
     end
+    it 'deberia retornar una respuesta exitosa' do
+      get turnos_index_path(busqueda_por_direccion: 'Santa Blanca')
+      expect(response).to have_http_status(:ok)
+    end
   end
 
   describe 'get new' do
@@ -129,7 +133,16 @@ RSpec.describe Turno, type: :request do
     end
   end
 
-  # describe 'translate' do
-  #   it 'deberia retornar la letra en ingles' do
+  # describe 'new_event' do
+
+  #   before :each do
+  #     controller.stub(:oauth2).and_return(true)
+  #   end
+
+  #   it 'deberia crear un evento' do
   #     expect do
+  #       post '/eventos', params: {evento: {turno_id: @turno.id, fecha_termino: '6 meses'}}
+  #     end.to change(Evento, :count).by(1)
+  #   end
+  # end
 end

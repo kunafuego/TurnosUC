@@ -14,16 +14,12 @@ class TurnosController < ApplicationController
                                             :hora, :minutos)
 
     @params = manejar_parametros(@params)
-    if usuario_signed_in?
-      @params[:id_creador] = current_usuario.id
-      @turno = Turno.create(@params)
-      if @turno.save
-        redirect_to turnos_index_path, notice: 'Turno Creado'
-      else
-        redirect_to turnos_index_path, notice: 'Turno no Creado'
-      end
+    @params[:id_creador] = current_usuario.id
+    @turno = Turno.create(@params)
+    if @turno.save
+      redirect_to turnos_index_path, notice: 'Turno Creado'
     else
-      redirect_to usuario_session_path, notice: 'Error al crear el turno, el usuario no estaba logeado'
+      redirect_to turnos_index_path, notice: 'Turno no Creado'
     end
   end
 
@@ -129,28 +125,19 @@ class TurnosController < ApplicationController
     fecha_salida = "#{Date.today.next_occurring(translate[turno.dia_de_la_semana])}T#{turno.hora_salida}"
     hora = turno.hora_salida[0, 2].to_i + 1
     fecha_llegada = fecha_salida.gsub(turno.hora_salida, hora.to_s + turno.hora_salida[2, 5])
-
-    case @evento_params[:fecha_termino]
-    when '1 mes'
-      hasta = Date.today + 30.days
-    when '2 meses'
-      hasta = Date.today + 60.days
-    when '6 meses'
-      hasta = Date.today + 180.days
-    when '1 año'
-      hasta = Date.today + 360.days
-    end
+    puts fecha_salida
+    hasta = { '1 mes' => Date.today + 30.days, '2 meses' => Date.today + 60.days, '6 meses' => Date.today + 180.days, '1 año' => Date.today + 360.days }
     event = Google::Apis::CalendarV3::Event.new(
       summary: 'Turno',
-      start: {
+      start: Google::Apis::CalendarV3::EventDateTime.new(
         date_time: "#{fecha_salida}:00.000-04:00",
         time_zone: 'America/Santiago'
-      },
-      end: {
+      ),
+      end: Google::Apis::CalendarV3::EventDateTime.new(
         date_time: "#{fecha_llegada}:00.000-04:00",
         time_zone: 'America/Santiago'
-      },
-      recurrence: ["RRULE:FREQ=WEEKLY;UNTIL=#{hasta.to_s.tr('-', '')}T000000Z"]
+      ),
+      recurrence: ["RRULE:FREQ=WEEKLY;UNTIL=#{hasta[@evento_params[:fecha_termino]].to_s.tr('-', '')}T000000Z"]
     )
     service.insert_event('primary', event)
     Evento.create
