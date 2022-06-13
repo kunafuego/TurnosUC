@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   post 'resenas', to: 'resenas#create'
   delete 'resenas/delete', to: 'resenas#delete'
 
+  ########################## USUARIOS ############################
+  delete 'usuarios/delete', to: 'usuarios#delete'
+
   ########################## MENSAJES ############################
   resources :turnos do
     resources :mensajes
