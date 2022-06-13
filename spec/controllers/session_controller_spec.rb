@@ -1,11 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Usuarios::SessionsController do
-  controller do
-    def after_sign_in_path_for(resource)
-      super resource
-    end
-  end
+  # controller do
+  # end
 
   describe 'After user sigin-in' do
     before(:each) do

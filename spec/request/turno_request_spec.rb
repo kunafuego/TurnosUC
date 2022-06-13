@@ -128,4 +128,8 @@ RSpec.describe Turno, type: :request do
       end.to change(Turno, :count).by(-1)
     end
   end
+
+  # describe 'translate' do
+  #   it 'deberia retornar la letra en ingles' do
+  #     expect do
 end

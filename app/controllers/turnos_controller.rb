@@ -112,6 +112,7 @@ class TurnosController < ApplicationController
     session[:authorization] = response
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
+    service
   end
 
   def new_event
@@ -123,51 +124,36 @@ class TurnosController < ApplicationController
     service.authorization = client
 
     turno = Turno.find(@evento_params[:turno_id])
-    fecha_salida = Date.today.next_occurring(translate(turno.dia_de_la_semana)).to_s + 'T' + turno.hora_salida
+    translate = { 'lunes' => :monday, 'martes' => :tuesday, 'miercoles' => :wednesday, 'jueves' => :thursday, 'viernes' => :friday, 'sabado' => :saturday,
+                  'domingo' => :sunday }
+    fecha_salida = "#{Date.today.next_occurring(translate[turno.dia_de_la_semana])}T#{turno.hora_salida}"
     hora = turno.hora_salida[0, 2].to_i + 1
     fecha_llegada = fecha_salida.gsub(turno.hora_salida, hora.to_s + turno.hora_salida[2, 5])
 
-    if @evento_params[:fecha_termino] == '1 mes'
+    case @evento_params[:fecha_termino]
+    when '1 mes'
       hasta = Date.today + 30.days
-    elsif @evento_params[:fecha_termino] == '2 meses'
+    when '2 meses'
       hasta = Date.today + 60.days
-    elsif @evento_params[:fecha_termino] == '6 meses'
+    when '6 meses'
       hasta = Date.today + 180.days
-    elsif @evento_params[:fecha_termino] == '1 año'
+    when '1 año'
       hasta = Date.today + 360.days
     end
     event = Google::Apis::CalendarV3::Event.new(
       summary: 'Turno',
       start: {
-        date_time: fecha_salida + ':00.000-04:00',
+        date_time: "#{fecha_salida}:00.000-04:00",
         time_zone: 'America/Santiago'
       },
       end: {
-        date_time: fecha_llegada + ':00.000-04:00',
+        date_time: "#{fecha_llegada}:00.000-04:00",
         time_zone: 'America/Santiago'
       },
-      recurrence: ['RRULE:FREQ=WEEKLY;UNTIL=' + hasta.to_s.tr('-', '') + 'T000000Z']
+      recurrence: ["RRULE:FREQ=WEEKLY;UNTIL=#{hasta.to_s.tr('-', '')}T000000Z"]
     )
-    response = service.insert_event('primary', event)
+    service.insert_event('primary', event)
     Evento.create
     redirect_to turnos_index_path, notice: 'Calendario Agregado'
-  end
-
-  def translate(dia)
-    if dia.downcase == 'lunes'
-      :monday
-    elsif dia.downcase == 'martes'
-      :tuesday
-    elsif dia.downcase == 'miercoles'
-      :wednesday
-    elsif dia.downcase == 'jueves'
-      :thursday
-    elsif dia.downcase == 'viernes'
-      :friday
-    elsif dia.downcase == 'sabado'
-      :saturday
-    elsif dia.downcase == 'domingo'
-      :sunday
-    end
   end
 end

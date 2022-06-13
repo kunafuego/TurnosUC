@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2022_06_07_152809) do
-=======
 ActiveRecord::Schema.define(version: 2022_06_12_183551) do
->>>>>>> 26c382dc35f1ae71d81b4585ff0771484d80fddd
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,10 +99,6 @@ ActiveRecord::Schema.define(version: 2022_06_12_183551) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
-<<<<<<< HEAD
-  add_foreign_key "mensajes", "turnos"
-  add_foreign_key "mensajes", "usuarios"
-=======
   create_table "usuarios_admins", id: false, force: :cascade do |t|
     t.bigint "usuario_id"
     t.bigint "admin_id"
@@ -115,5 +107,6 @@ ActiveRecord::Schema.define(version: 2022_06_12_183551) do
     t.index ["usuario_id"], name: "index_usuarios_admins_on_usuario_id"
   end
 
->>>>>>> 26c382dc35f1ae71d81b4585ff0771484d80fddd
+  add_foreign_key "mensajes", "turnos"
+  add_foreign_key "mensajes", "usuarios"
 end

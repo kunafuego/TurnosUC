@@ -70,9 +70,6 @@ gem 'repost'
 
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 
-<<<<<<< HEAD
-gem "turbo-rails", "~> 1.1"
-=======
+gem 'turbo-rails', '~> 1.1'
 # Rolify
-gem "rolify"
->>>>>>> 26c382dc35f1ae71d81b4585ff0771484d80fddd
+gem 'rolify'
