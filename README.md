@@ -2,19 +2,12 @@ README
 ===
 
 # Flujo de la Aplicacion
-## E2
 
-Duarnte la entrega se hizo uso de Bulma para embellecer la app. Los principales cambios que pudimos generar
-con este framework fueron en el formato de los forms, de las tablas e hicimos una barra de navegación 
-para que sea más fácil la navegación.
+## E3
+A continuación se presentan las credenciales del usuario administrador:
+    email: `admin@uc.cl`
+    contraseña: `123456`
 
-Cambiamos también el index de los turnos, ahora solamente se va a ver una de las tres secciones. Estas son:
-los turnos creados por mí, los turnos a los que pertenezco y el buscador de turnos.
-
-Se creó también el CRUD de las reseñas, con las cuales va a ser posible crear las reseñas, y verlas en
-los show de cada turno.
-
-Se crearon los test correspondientes y no hay problemas con el rubocop!
 # Heroku
 
 * El link para ver el proyecto en Heroku, es el siguiente:
