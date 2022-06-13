@@ -68,7 +68,7 @@
           <td><%= resena.contenido %></td>
           <% if current_usuario.has_role? :admin %>
           <td>
-            <%= link_to "Eliminar", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
+            <%= link_to "Eliminar reseña", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
           </td>
           <% end %>
         </tr>
