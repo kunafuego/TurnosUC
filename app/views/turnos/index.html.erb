@@ -2,13 +2,22 @@
 <div class="columns">
 
     <% if usuario_signed_in? %>
-    <%= render "layouts/menu" %>
+    <%= render "layouts/menu" %> 
     <% end %>
     
     <div align="center" class="column">
         <% if params[:razon] %>
             <h1 class="mt-4 title has-background-info-light is-4"> <%= params[:razon] %> </h1>
         <% else %>
+            <% if !usuario_signed_in? %>
+                <div class="columns is-centered">
+                    <div  class="mt-5 column is-half is-inline-block">
+                        <figure class="image">
+                            <%= image_tag("landing2.png") %>
+                        </figure>
+                    </div>
+                </div>
+            <% end %>
             <h1 class="mt-4 title has-background-info-light is-4"> Buscador de Turnos </h1>
         <% end %>
 
