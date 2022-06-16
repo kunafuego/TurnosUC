@@ -21,72 +21,92 @@
       
       <div>
         <p class="mt-4 is-size-6 has-text-weight-bold mb-2"> Nombre creador: <%= @creador.nombre%></p>
-        <figure class="image is-128x128 is-inline-block"><%= image_tag(@creador.imagen) %></figure>
+
+        <figure class="image is-128x128 is-inline-block">
+          <img class="is-rounded" src= "<%=@creador.imagen%>" >
+        </figure>
       </div>
-        <div class="field">
-          <% if current_usuario.has_role? :admin and current_usuario.id != @creador.id %>
-            <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => @creador.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
-          <% end %>
-        </div>
+
+      <div class="field">
+        <% if current_usuario.has_role? :admin and current_usuario.id != @creador.id %>
+          <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => @creador.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"}, class: "button is-outlined is-danger is-small" %>
+        <% end %>
+      </div>
     </div>
+
     <div class="column is-5">
       <div><h3 class="title is-5 has-background-info-light mb-4">Integrantes</h3></div>
-      <% ids_pertenece_a = PerteneceA.where(id_turno: @turno.id).ids %>
-      <% ids_pertenece_a.each do |id_pertenece| %>
-        <div class="columns is-centered">
-          <div class="field">
+      <table class="table ml-3">
+        <thead>
+          <tr>
+            <th style="border: none"></th>
+            <th style="border: none"></th>
+            <th style="border: none"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% ids_pertenece_a = PerteneceA.where(id_turno: @turno.id).ids %>
+          <% ids_pertenece_a.each do |id_pertenece| %>
             <% integrante = Usuario.find(PerteneceA.find(id_pertenece).id_usuario) %>
-              <p class="is-size-6 has-text-weight-bold"> Nombre: <%= integrante.nombre %>
-              <figure class="image is-96x96 is-inline-block"><%= image_tag(integrante.imagen) %></figure></p>
-          </div>
-          <div class="field">
-            <% if current_usuario.has_role? :admin and current_usuario.id != integrante.id %>
-              <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => integrante.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"} %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+            <tr>
+              <td style="border: none">
+                <figure class="image is-64x64">
+                  <img class="is-rounded" src= "<%=integrante.imagen%>" >
+                </figure>
+              </td>
+              <td style="border: none">
+                <p class="is-size-6 has-text-weight-bold ml-4 mt-3"> <%=integrante.nombre%> </p>
+              </td>
+              <% if current_usuario.has_role? :admin and current_usuario.id != integrante.id %>
+              <td>
+                <%= link_to "Eliminar usuario", usuarios_delete_path(:id_usuario => integrante.id, turno_id: @turno.id), method: :delete, data: {confirm: "Desea eliminar este usuario?"}, class: "button is-outlined is-danger is-small ml-4 mt-1" %>
+              </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 
-<div class="columns">
-  <div class="column is-6">
+<div class="columns is-centered">
+  <div class="column is-5">
       <div><h3 class="title is-5 has-background-info-light mb-4">Reseñas</h3></div>    
-    <table class="table is-striped is-hoverable">
-      <% if @resenas.empty?%>
-        <p> El turno no tiene reseñas </p>
-      <% else %>
-        <thead>
-          <tr>
-            <th>Usuario</th>
-            <th>Calificación</th>
-            <th>Comentario</th>
-          </tr>
-      </thead>
+      <table class="table is-striped is-hoverable">
+        <% if @resenas.empty?%>
+          <p> El turno no tiene reseñas </p>
+        <% else %>
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Calificación</th>
+              <th>Comentario</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <% @resenas.each do |resena| %>
-        <tr>
-          <td><%= resena.usuario.nombre %></td>
-          <td><%= resena.calificacion %></td>
-          <td><%= resena.contenido %></td>
-          <% if current_usuario.has_role? :admin %>
-          <td>
-            <%= link_to "Eliminar reseña", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
-          </td>
-          <% end %>
-        </tr>
-        <% end %>
-      </tbody>
-      <%  end  %>
-    </table>
-    <% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
-      <%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info" %>
-    <% end %>
+          <tbody>
+            <% @resenas.each do |resena| %>
+            <tr>
+              <td><%= resena.usuario.nombre %></td>
+              <td><%= resena.calificacion %></td>
+              <td><%= resena.contenido %></td>
+              <% if current_usuario.has_role? :admin %>
+              <td>
+                <%= link_to "Eliminar reseña", resenas_delete_path(:resena_id => resena.id), method: :delete, data: {confirm: "Desea eliminar esta reseña?"} %>
+              </td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        <%  end  %>
+      </table>
+      <% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
+        <%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info" %>
+      <% end %>
   </div>
   
-  <div class="column is-6">
+  <div class="column is-3">
     <div><h3 class="title is-5 has-background-info-light mb-4">Mensajes</h3></div>
     <%= turbo_stream_from @turno %>
     <div id="mensajes">
