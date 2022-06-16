@@ -19,17 +19,25 @@
   display: flex;
   justify-content: flex-end
   }
+
+  /* .table td {
+      border: none
+    }
+ 
+    .table th {
+      border: none
+    } */
   </style>
 
   <body align="center">
     <%# NAVBAR %>
     <nav class="navbar is-info" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <% if usuario_signed_in? %>
-        <a class="navbar-item" href=<%= root_path %>>
-          <h1 class="title has-text-white is-4">Turnos UC</h1>
-        </a>
-      <% end  %>
+      <%# <% if usuario_signed_in? %>
+      <a class="navbar-item" href=<%= root_path %>>
+        <h1 class="title has-text-white is-4">Turnos UC</h1>
+      </a>
+      <%# <% end  %>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
@@ -71,12 +79,12 @@
               <div class="buttons">
                 <% if current_page?(new_usuario_registration_path) %>
                   <%= link_to "Inicio", root_path, :class => "button is-white is-outlined is-responsive"%>
-                  <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-white is-outlined is-responsive"%>
+                  <%= link_to "Iniciar sesión", new_usuario_session_path, :class => "button is-white is-outlined is-responsive"%>
                 <% elsif current_page?(new_usuario_session_path) %>
                   <%= link_to "Inicio", root_path, :class => "button is-white is-outlined is-responsive"%>
                   <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-white is-outlined is-responsive" %>
                 <% else %>
-                  <%= link_to "Iniciar sesion", new_usuario_session_path, :class => "button is-white is-outlined is-responsive"%>
+                  <%= link_to "Iniciar sesión", new_usuario_session_path, :class => "button is-white is-outlined is-responsive"%>
                   <%= link_to "Registrarse", new_usuario_registration_path, :class => "button is-white is-outlined is-responsive" %>
                 <% end %>
               </div>
