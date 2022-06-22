@@ -121,7 +121,7 @@ class TurnosController < ApplicationController
 
     turno = Turno.find(@evento_params[:turno_id])
     translate = { 'lunes' => :monday, 'martes' => :tuesday, 'miercoles' => :wednesday, 'jueves' => :thursday, 'viernes' => :friday, 'sabado' => :saturday,
-                  'domingo' => :sunday }
+                  'domingo' => :sunday, 'Sabado' => :saturday }
     fecha_salida = "#{Date.today.next_occurring(translate[turno.dia_de_la_semana])}T#{turno.hora_salida}"
     hora = turno.hora_salida[0, 2].to_i + 1
     fecha_llegada = fecha_salida.gsub(turno.hora_salida, hora.to_s + turno.hora_salida[2, 5])

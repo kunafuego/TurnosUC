@@ -71,7 +71,7 @@
 </div>
 
 <div class="columns is-centered">
-  <div class="column is-5">
+  <div align="center" class="column is-5 ">
       <div><h3 class="title is-5 has-background-info-light mb-4">Reseñas</h3></div>    
       <table class="table is-striped is-hoverable">
         <% if @resenas.empty?%>
@@ -101,18 +101,22 @@
           </tbody>
         <%  end  %>
       </table>
-      <% if  PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador %>
+    <% if PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador  or current_usuario.nombre == "Admin User"%>
         <%= link_to "Crear reseña", resenas_new_path(:turno_id => @turno.id, :creador_id => @creador.id), class: "button is-outlined is-info" %>
       <% end %>
   </div>
   
   <div class="column is-3">
     <div><h3 class="title is-5 has-background-info-light mb-4">Mensajes</h3></div>
+    <% if PerteneceA.exists?(id_usuario: current_usuario.id, id_turno: @turno.id) or current_usuario.id == @turno.id_creador  or current_usuario.nombre == "Admin User"%>
     <%= turbo_stream_from @turno %>
     <div id="mensajes">
       <%= render @mensajes %>
     </div>
     <%= render partial: 'layouts/new_message_form' %>
+    <% else %>
+    <h1 class="title has-background-warning is-danger is-6">Solo los usuarios pertenecientes al turno pueden acceder a los mensajes</h1>
+    <% end %>
   </div>
 </div>
 
